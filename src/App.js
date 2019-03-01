@@ -39,6 +39,7 @@ class NavBar extends Component
         this.handleClick = this.handleClick.bind(this);
   }
 
+  //on refresh make sure navbar highlights the right tab
   componentDidMount()
   {
     let params = window.location.pathname.split("/");
@@ -46,6 +47,7 @@ class NavBar extends Component
 
   }
 
+  //set the current tab of the navbar
   handleClick(str)
   {
     this.setState({current: str});

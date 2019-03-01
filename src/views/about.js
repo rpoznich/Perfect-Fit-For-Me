@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { homedir } from 'os';
 import ryan from './../ryan_poznich.jpeg'
 import jonathan from './../jonathan_nguyen.jpg'
+import daniel from './../daniel_thai.png'
+import dylan from './../dylan_kile.jpg'
 
 class Person extends Component{
     constructor(props){
@@ -10,7 +12,9 @@ class Person extends Component{
 
     render(){
         return (<div className="card border-0 shadow">
-                    <img src={this.props.img} className="card-img-top" height="300" width="100" alt=""></img>
+                    <a href={this.props.website}>
+                        <img src={this.props.img} className="card-img-top" height="300" width="100" alt=""></img>
+                    </a>
                     <div className="card-body text-center">
                         <h5 className="card-title mb-0">{this.props.name}</h5>
                     <div className="card-text text-black-50">{this.props.role}</div>
@@ -35,15 +39,46 @@ class About extends Component {
                 "role" : "Full-stack",
                 "img" : ryan,
                 "commits" : 0,
-                "issues" : 0
+                "issues" : 0,
+                "website" : "https://www.linkedin.com/in/ryan-poznich-670293154"
             },
             "Jonathan Nguyen" :
             {
                 "name" : "Jonathan Nguyen",
                 "alias" : ["Jonathan Nguyen"],
                 "username" : "GammaJohn", 
-                "role" : "Full-stack",
+                "role" : "Front-end",
                 "img" : jonathan,
+                "commits" : 0,
+                "issues" : 0
+            },
+            "Ozone Kafley" :
+            {
+                "name" : "Ozone Kafley",
+                "alias" : ["Ozone Kafley", ""],
+                "username" : "kafleyozone", 
+                "role" : "Full-stack",
+                "img" : "",
+                "commits" : 0,
+                "issues" : 0
+            },
+            "Dylan Kile" :
+            {
+                "name" : "Dylan Kile",
+                "alias" : ["Dylan Kile"],
+                "username" : "dylankile", 
+                "role" : "Back-end",
+                "img" : dylan,
+                "commits" : 0,
+                "issues" : 0
+            },
+            "Daniel Thai" :
+            {
+                "name" : "Daniel Thai",
+                "alias" : ["Daniel Thai"],
+                "username" : "danielthai", 
+                "role" : "Back-end",
+                "img" : daniel,
                 "commits" : 0,
                 "issues" : 0
             }
