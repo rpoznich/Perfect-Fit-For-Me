@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { homedir } from 'os';
+import ryan from './../ryan_poznich.jpeg'
+import jonathan from './../jonathan_nguyen.jpg'
 
 class Person extends Component{
     constructor(props){
@@ -8,11 +10,12 @@ class Person extends Component{
 
     render(){
         return (<div className="card border-0 shadow">
-                    <img src={this.props.img} class="card-img-top" alt=""></img>
+                    <img src={this.props.img} className="card-img-top" height="300" width="100" alt=""></img>
                     <div className="card-body text-center">
                         <h5 className="card-title mb-0">{this.props.name}</h5>
                     <div className="card-text text-black-50">{this.props.role}</div>
                     <div className="card-text text-black-50">Commits: {this.props.commits}</div>
+                    <div className="card-text text-black-50">Issues: {this.props.issues}</div>
                 </div>
                 </div>);
     }
@@ -27,18 +30,20 @@ class About extends Component {
             "Ryan Poznich" :
             {
                 "name" : "Ryan Poznich",
-                "alias": ["Ryan Poznich"],
+                "alias" : ["Ryan Poznich"],
+                "username" : "rpoznich",
                 "role" : "Full-stack",
-                "img" : "",
+                "img" : ryan,
                 "commits" : 0,
                 "issues" : 0
             },
             "Jonathan Nguyen" :
             {
                 "name" : "Jonathan Nguyen",
-                "alias": ["Jonathan Nguyen"],
+                "alias" : ["Jonathan Nguyen"],
+                "username" : "GammaJohn", 
                 "role" : "Full-stack",
-                "img" : "",
+                "img" : jonathan,
                 "commits" : 0,
                 "issues" : 0
             }
@@ -48,7 +53,7 @@ class About extends Component {
     componentDidMount()
     {
         //get # commits and issues 
-        let memData = this.state.memData
+        let memData = this.state.memData;
         //fetch call
         //for each member, populate # issues and #committes
         fetch("https://gitlab.com/api/v4/projects/11069679/repository/contributors?sort=desc")
@@ -66,14 +71,18 @@ class About extends Component {
                     }
                 }
             }
-            this.setState({memData: memData});
+            this.setState({memData : memData}); 
         })
         .catch(e =>
         {
                 console.log(e);
         })
 
-    
+        fetch("https://gitlab.com/api/v4/projects/11069679/issues?state=closed")
+        .then(issues => issues.json())
+        .then(issues => {
+
+        })
     }
     
 
