@@ -81,7 +81,16 @@ class About extends Component {
         fetch("https://gitlab.com/api/v4/projects/11069679/issues?state=closed")
         .then(issues => issues.json())
         .then(issues => {
-
+            for(let mem in this.state.memData){
+                let num_issues = issues.filter(issue =>{
+                    return issue.closed_by.username === this.state.memData[mem].username;
+                });
+                let new_issues = num_issues.length;
+                if(new_issues > 0){
+                    this.state.memData[mem].issues = new_issues;
+                }
+            }
+            this.setState({memData : memData});
         })
     }
     
