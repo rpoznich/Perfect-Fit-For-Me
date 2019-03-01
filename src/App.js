@@ -42,7 +42,7 @@ class NavBar extends Component
   componentDidMount()
   {
     let params = window.location.pathname.split("/");
-    this.setState({current: params.length > 1 && params[1] != ""? params[1] : "home"});
+    this.setState({current: params.length > 1 && params[1] !== ""? params[1] : "home"});
 
   }
 
@@ -56,27 +56,27 @@ class NavBar extends Component
     return(
     <div>
         <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <Link className="navbar-brand" to="/" onClick={() => this.handleClick("home")}>   <img width="50" height="40" src={logo}></img>PerfectFitForMe</Link>
+      <Link className="navbar-brand" to="/" onClick={() => this.handleClick("home")}>   <img width="50" height="40" src={logo} alt=""></img>PerfectFitForMe</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
       <div className="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul className="navbar-nav mr-auto">
-          <li className={this.state.current == "home" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/" onClick={() => this.handleClick("home")}>Home {this.props.current == "home" ? <span className="sr-only">(current)</span> : null }</Link>
+          <li className={this.state.current === "home" ? "nav-item active" : "nav-item" }>
+            <Link className="nav-link" to="/" onClick={() => this.handleClick("home")}>Home {this.props.current === "home" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
-          <li className={this.state.current == "jobs" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/jobs" onClick={() => this.handleClick("jobs")}>Jobs  {this.props.current == "jobs" ? <span className="sr-only">(current)</span> : null }</Link>
+          <li className={this.state.current === "jobs" ? "nav-item active" : "nav-item" }>
+            <Link className="nav-link" to="/jobs" onClick={() => this.handleClick("jobs")}>Jobs  {this.props.current === "jobs" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
-          <li className={this.state.current == "qol" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/qol" onClick={() => this.handleClick("qol")}>Quality of Life  {this.props.current == "qol" ? <span className="sr-only">(current)</span> : null }</Link>
+          <li className={this.state.current === "qol" ? "nav-item active" : "nav-item" }>
+            <Link className="nav-link" to="/qol" onClick={() => this.handleClick("qol")}>Quality of Life  {this.props.current === "qol" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
-          <li className={this.state.current == "transportation" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/transportation" onClick={() => this.handleClick("transportation")}>Transportation  {this.props.current == "transportation" ? <span className="sr-only">(current)</span> : null }</Link>
+          <li className={this.state.current === "transportation" ? "nav-item active" : "nav-item" }>
+            <Link className="nav-link" to="/transportation" onClick={() => this.handleClick("transportation")}>Transportation  {this.props.current === "transportation" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
-          <li className={this.state.current == "about" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/about" onClick={() => this.handleClick("about")}>About Us  {this.props.current == "about" ? <span className="sr-only">(current)</span> : null }</Link>
+          <li className={this.state.current === "about" ? "nav-item active" : "nav-item" }>
+            <Link className="nav-link" to="/about" onClick={() => this.handleClick("about")}>About Us  {this.props.current === "about" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
