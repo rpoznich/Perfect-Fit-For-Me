@@ -88,7 +88,6 @@ class About extends Component {
     componentDidMount()
     {
         //get # commits and issues 
-        let memData = this.state.memData;
         //fetch call
         //for each member, populate # issues and #committes
         fetch("https://gitlab.com/api/v4/projects/11069679/repository/commits")
@@ -98,15 +97,15 @@ class About extends Component {
             for(var i in data)
             {
                 let commit_data = data[i];
-                for(var member in memData)
+                for(var member in this.state.memData)
                 {
-                    if(memData[member].alias.includes(commit_data.author_name))
+                    if(this.state.memData[member].alias.includes(commit_data.author_name))
                     {
-                        memData[member].commits += 1;
+                        this.state.memData[member].commits += 1;
                     }
                 }
             }
-            this.setState({memData : memData}); 
+            this.setState({}); 
         })
         .catch(e =>
         {
@@ -125,7 +124,7 @@ class About extends Component {
                     this.state.memData[mem].issues = new_issues;
                 }
             }
-            this.setState({memData : memData});
+            this.setState({});
         })
         .catch(e =>
         {
