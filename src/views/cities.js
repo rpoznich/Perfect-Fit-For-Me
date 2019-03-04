@@ -17,20 +17,29 @@ class CityListing extends Component{
         }else{
             this.state.circleColor = "featured-rating-orange";
         }
+        this.state.highlightedDS = "";
+        this.state.unhighlightedDS = "";
+        let bound = (Math.ceil(this.props.cost_of_living / 2))
+        for(let i = 0; i < bound; ++i){
+            this.state.highlightedDS += "$";
+        }
+        for(let j = 0; j < 5 - (this.state.highlightedDS.length); ++j){
+            this.state.unhighlightedDS += "$";
+        }
     }
 
     render(){
         return (<div class="featured-place-wrap">
+                            <Link to={"/cities/"+this.props.id}>
                             <img src={""+ this.props.image} height="200" width="100" alt="#"></img>
                             <div className="container">
                                 <span className={this.state.circleColor} title="Overall Rating">{this.props.overall_rating / 10.0}</span>
                             </div>
                             <div class="featured-title-box">
-                            <Link to={"/cities/"+this.props.id}>
                                 <h6 >{this.props.name}</h6>
                                 {/* <p>Restaurant </p> <span>• </span>
-                                <p>3 Reviews</p> <span> • </span>
-                                <p><span>$$$</span>$$</p> */}
+                                <p>3 Reviews</p> <span> • </span> */}
+                                <p><span>{this.state.highlightedDS}</span>{this.state.unhighlightedDS}</p>
                                 <ul>
                                     <li><span class="icon-location-pin"></span>
                                         <p>{this.props.state}</p>
@@ -47,8 +56,8 @@ class CityListing extends Component{
                                     <span class="ti-heart"></span>
                                     <span class="ti-bookmark"></span>
                                 </div> */}
+                                </div>
                                 </Link>
-                            </div>
                     </div>)
     }
 }
