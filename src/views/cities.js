@@ -5,6 +5,7 @@ import '../css/city/bootstrap.min.css';
 import '../css/city/simple-line-icons.css';
 import '../css/city/font-awesome.min.css';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 class CityInstance extends Component{
     constructor(props){
@@ -18,10 +19,8 @@ class CityInstance extends Component{
                   <h6 class="m-0 font-weight-bold text-primary">City Ratings</h6>
                 </div>
                 <div class="card-body">
-                  <div class="mb-1 small">Normal Progress Bar</div>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" width="75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
+                  <div class="mb-1 small">Housing</div>
+                  <ProgressBar now={60}></ProgressBar>
                   <div class="mb-1 small">Small Progress Bar</div>
                   <div class="progress progress-sm mb-2">
                     <div class="progress-bar" role="progressbar" width="75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>

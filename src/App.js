@@ -71,13 +71,13 @@ class NavBar extends Component
             <Link className="nav-link" to="/" onClick={() => this.handleClick("home")}>Home {this.props.current === "home" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
           <li className={this.state.current === "jobs" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/jobs" onClick={() => this.handleClick("jobs")}>Jobs  {this.props.current === "jobs" ? <span className="sr-only">(current)</span> : null }</Link>
+            <a className="nav-link" href="/jobs" onClick={() => this.handleClick("jobs")}>Jobs  {this.props.current === "jobs" ? <span className="sr-only">(current)</span> : null }</a>
           </li>
           <li className={this.state.current === "cities" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/cities" onClick={() => this.handleClick("cities")}>Cities  {this.props.current === "cities" ? <span className="sr-only">(current)</span> : null }</Link>
+            <a className="nav-link" href="/cities" onClick={() => this.handleClick("cities")}>Cities  {this.props.current === "cities" ? <span className="sr-only">(current)</span> : null }</a>
           </li>
           <li className={this.state.current === "transportation" ? "nav-item active" : "nav-item" }>
-            <Link className="nav-link" to="/transportation" onClick={() => this.handleClick("transportation")}>Transportation  {this.props.current === "transportation" ? <span className="sr-only">(current)</span> : null }</Link>
+            <a className="nav-link" href="/transportation" onClick={() => this.handleClick("transportation")}>Transportation  {this.props.current === "transportation" ? <span className="sr-only">(current)</span> : null }</a>
           </li>
           <li className={this.state.current === "about" ? "nav-item active" : "nav-item" }>
             <Link className="nav-link" to="/about" onClick={() => this.handleClick("about")}>About Us  {this.props.current === "about" ? <span className="sr-only">(current)</span> : null }</Link>
