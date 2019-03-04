@@ -124,7 +124,7 @@ class About extends Component {
         //get # commits and issues 
         //fetch call
         //for each member, populate # issues and #committes
-        fetch("https://gitlab.com/api/v4/projects/11069679/repository/commits")
+        fetch("https://gitlab.com/api/v4/projects/11069679/repository/commits?all=true&per_page=100&page=1")
         .then(response => response.json())
         .then(data => {
             //process the data
@@ -145,7 +145,7 @@ class About extends Component {
         {
                 console.log(e);
         })
-
+        
         fetch("https://gitlab.com/api/v4/projects/11069679/issues?state=closed")
         .then(issues => issues.json())
         .then(issues => {

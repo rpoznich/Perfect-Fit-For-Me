@@ -131,7 +131,7 @@ class Cities extends Component {
              </div>
         )
         }else{
-            return (<div>"gay"</div>)
+            return (<div></div>);
         }
     }
 }
