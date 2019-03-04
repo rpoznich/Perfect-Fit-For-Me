@@ -31,7 +31,8 @@
 			"tolerance": 6.7895,
 			"overall_rating": 100.0,
 			"state" : "Texas",
-			"image" : "https://austinenergy.com/wcm/connect/801973cc-820d-4a2e-8f94-3ddffcf66964/city-austin-skyline.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-801973cc-820d-4a2e-8f94-3ddffcf66964-lXDSZ0Q"
+			"image" : "https://austinenergy.com/wcm/connect/801973cc-820d-4a2e-8f94-3ddffcf66964/city-austin-skyline.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-801973cc-820d-4a2e-8f94-3ddffcf66964-lXDSZ0Q",
+			"population" : 950690
 		},
 		{
 			"name": "Seattle",
