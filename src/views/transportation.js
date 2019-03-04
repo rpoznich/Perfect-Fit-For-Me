@@ -20,7 +20,7 @@ class TransportationListing extends Component{
     }
     render(){
         return (<div class="featured-place-wrap">
-                            <Link to={"/transportation/"+this.props.id}>
+                            <a href={"/transportation/"+this.props.id}>
                             <img src={""+ this.props.image} height="200" width="100" alt="#"></img>
                             <div className="container">
                                 <span className={this.state.circleColor} title="Overall Rating">{this.props.quality * 10.0}</span>
@@ -46,7 +46,7 @@ class TransportationListing extends Component{
                                     <span class="ti-bookmark"></span>
                                 </div>
                                 </div>
-                                </Link>
+                                </a>
                     </div>)
     }
 }
@@ -110,7 +110,7 @@ class Transportation extends Component {
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <div class="featured-btn-wrap">
-                        <a href="#" class="btn btn-danger">VIEW ALL</a>
+                        <a href="" class="btn btn-danger">VIEW ALL</a>
                     </div>
                 </div>
             </div>

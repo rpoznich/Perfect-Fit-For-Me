@@ -22,7 +22,8 @@ class Routing extends Component{
             <Route exact path="/" component={Home}/>
             <Route exact path="/jobs/:id" component={Jobs}/>
             <Route exact path="/jobs" component={Jobs}/>
-            <Route exact path="/cities" component={Cities}/>   
+            <Route exact path="/cities/:id" component={Cities}/> 
+            <Route exact path="/cities" component={Cities}/>  
             <Route exact path="/transportation" component={Transportation}/>       
             <Route exact path="/about" component={About}/>
           </Switch>
