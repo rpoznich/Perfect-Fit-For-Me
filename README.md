@@ -66,3 +66,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### DOCKER Information 
+To run Docker, use the following command: 
+
+`docker run -it -v [YOUR PERFECT-FIT REPO DIRECTORY]:/usr/perfectfit -w /usr/perfectfit -p 3000:3000 dylankile/perfectfit`
+
+
+
