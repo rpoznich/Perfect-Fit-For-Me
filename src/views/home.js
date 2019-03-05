@@ -52,8 +52,8 @@ class Home extends Component {
                     </div>
                     <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Filler to talk about Jobs...</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Discover Jobs that Fulfill You</h2>
+                        <p>Start with a job that lets you do what you love.</p>
                     </div>
                     </div>
                 </div>
@@ -70,8 +70,8 @@ class Home extends Component {
                     </div>
                     <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4">Filler to talk about QoL...</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Explore Cities that Excite You</h2>
+                        <p>Settle down in a city that meets your personal goals.</p>
                     </div>
                     </div>
                 </div>
@@ -88,8 +88,8 @@ class Home extends Component {
                     </div>
                     <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Filler to talk about Transportation...</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Find Transportation that Fits You</h2>
+                        <p>Save time and money by finding transportation that supports your lifestyle.</p>
                     </div>
                     </div>
                 </div>
