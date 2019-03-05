@@ -11,11 +11,11 @@ class TransportationInstance extends Component{
         return(
 <div className="transportation-instance">
   <h1 class="my-4">{this.props.name + " "}
-    <small>{this.props.name}</small>
+    <small>{this.props.system}</small>
   </h1>
   <div class="row">
     <div class="col-md-8">
-      <img class="img-fluid" src="http://placehold.it/750x500" alt=""></img>
+      <img class="img-fluid" src={this.props.image} alt=""></img>
     </div>
     <div class="col-md-4">
       <h3 class="my-3">Transportation Guide</h3>
