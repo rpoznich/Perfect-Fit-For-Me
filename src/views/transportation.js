@@ -5,6 +5,7 @@ import '../css/city/style.scss';
 import '../css/city/bootstrap.min.css';
 import '../css/city/simple-line-icons.css';
 import '../css/city/font-awesome.min.css';
+import TransportationInstance from './transportationInstance.js';
 
 class TransportationListing extends Component{
     constructor(props){
@@ -41,10 +42,10 @@ class TransportationListing extends Component{
                                     </li>
 
                                 </ul>
-                                <div class="bottom-icons">
+                                /*<div class="bottom-icons">
                                     <span class="ti-heart"></span>
                                     <span class="ti-bookmark"></span>
-                                </div>
+                                </div> */
                                 </div>
                                 </a>
                     </div>)
@@ -86,7 +87,7 @@ class Transportation extends Component {
 
     render()
     {
-        if(!this.props.isListing){
+        if(this.isListing){
         let components = [];
         for(let id in this.state.transportation)
         {
@@ -120,7 +121,9 @@ class Transportation extends Component {
              </div>
         )
         }else{
-            return (<div></div>);
+            return (<div className="main" style={{marginTop: "20vh"}}> 
+                <TransportationInstance {...this.state.transportation[this.id]}></TransportationInstance>
+            </div>);
         }
     }
 }

@@ -89,7 +89,7 @@ class Cities extends Component {
             return response.json();
           }).then(data => {
             // Work with JSON data here
-            this.state.cities = data.cities
+            this.state.cities = data.cities;
             this.setState(this.state);
           }).catch(err => {
             // Do something for an error here
