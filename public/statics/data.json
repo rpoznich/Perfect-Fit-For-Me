@@ -72,6 +72,8 @@
     "transportation": [
 		{
 			"name": "Austin",
+			"state": "Texas",
+			"link": "https://capmetro.org/",
 			"system": "Capital Metro",
 			"guide": "CapMetro operates bus, paratransit services and a commuter rail system known as the Capital MetroRail in Austin and several suburbs in Travis and Williamson counties.",
 			"quality": 0.5,
@@ -84,6 +86,8 @@
 		},
 		{
 			"name": "Seattle",
+			"state": "Washington",
+			"link": "https://www.seattle.gov/transportation/getting-around",
 			"system": "King County Metro and Sound Transit",
 			"guide": "Two public transportation agencies serve the city of Seattle: King County Metro Transit and Sound Transit. Snohomish County's Community Transit also runs bus routes to Downtown Seattle and the University of Washington. Sound Transit is the regional transit authority that is comprised of the light rail, express buses, and commuter rail within the Central Puget Sound area.",
 			"quality": 0.8,
@@ -96,6 +100,8 @@
 		},
 		{
 			"name": "San Jose",
+			"state": "California",
+			"link": "https://www.sanjose.org/directions-transit",
 			"system": "Santa Clara Valley Transportation Authority",
 			"guide": "VTA operates three light rail lines, a number of bus lines, and paratransit service. As VTA covers Santa Clara County in general, it serves the major core city of San Jose (where VTA is based and headquartered), with service to the other municipalities of Campbell, Cupertino, Gilroy, Los Altos, Los Altos Hills, Los Gatos, Milpitas, Monte Sereno, Morgan Hill, Mountain View, Palo Alto, Santa Clara, Saratoga and Sunnyvale.",
 			"quality": 0.62,
