@@ -10,22 +10,6 @@ class JobListing extends Component{
     constructor(props){
         super(props);
         this.state = {}
-        if(this.props.overall_rating < 40.0){
-            this.state.circleColor = "featured-rating";
-        }else if(this.props.overall_rating >= 70.0){
-            this.state.circleColor = "featured-rating-green";
-        }else{
-            this.state.circleColor = "featured-rating-orange";
-        }
-        this.state.highlightedDS = "";
-        this.state.unhighlightedDS = "";
-        let bound = (Math.ceil(this.props.cost_of_living / 2))
-        for(let i = 0; i < bound; ++i){
-            this.state.highlightedDS += "$";
-        }
-        for(let j = 0; j < 5 - (this.state.highlightedDS.length); ++j){
-            this.state.unhighlightedDS += "$";
-        }
     }
 
     render(){
@@ -100,7 +84,7 @@ class Jobs extends Component {
 
     render()
     {
-        if(!this.props.isListing){
+        if(this.isListing){
         let components = [];
         for(let id in this.state.jobs)
         {
@@ -134,7 +118,37 @@ class Jobs extends Component {
              </div>
         )
         }else{
-            return (<div></div>);
+            const job = this.state.jobs[this.id]
+            if (job == undefined) {
+                console.log("undefined!!!!!!!!!!")
+                return (<div className="main" style={{margin: "20vh"}}></div>)
+            } 
+            console.log("DEFINED*****")
+            return (
+            <div className="main" id="target" style={{margin: "20vh"}}>
+                <div class="container">
+
+<div class="row">
+  <div class="col-md-8 mb-5">
+    <h2>Job: {job.title}</h2>
+    <hr/>
+    <p>{job.description}</p>
+    <a class="btn btn-primary btn-lg" href={job.link}>Apply now! &raquo;</a>
+  </div>
+  <div class="col-md-4 mb-5">
+    <h2>Contact Us</h2>
+    <hr/>
+    <address>
+      <strong>{job.company}</strong>
+      <br/>{job.type}
+      <br/>{job.location}
+      <br/>Updated {job.time}
+    </address>
+  </div>
+</div>
+</div>
+            </div>
+            )
         }
     }
 }

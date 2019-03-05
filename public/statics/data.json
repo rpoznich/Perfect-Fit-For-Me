@@ -5,21 +5,27 @@
 			"company": "H&R Block",
 			"location": "Austin, TX",
 			"type": "Full-time",
-			"time": "11 hours ago"
-		},
-		{
-			"title": "Tutor",
-			"company": "Grade Potential Tutoring",
-			"location": "Seattle, WA",
-			"type": "Full-time",
-			"time": "14 hours ago"
+			"time": "11 hours ago",
+			"description": "H&R Block, the world’s leader in tax preparation services, is seeking talented, customer focused Receptionists to join our tax office teams. These are seasonal positions, where you will work a flexible, varied schedule between the months of January and April. If you do well, there are opportunities to work in subsequent seasons and also opportunities for advancement!", 
+			"link": "https://sjobs.brassring.com/TGnewUI/Search/Home/HomeWithPreLoad?PageType=JobDetails&partnerid=25515&siteid=5616&jobid=2717138&codes=INT-GLASSDOOR#jobDetails=2717138_5616"
 		},
 		{
 			"title": "Cashier",
 			"company": "Whole Foods Market",
 			"location": "San Jose, CA",
 			"type": "Full-time",
-			"time": "1 day ago"
+			"time": "1 day ago",
+			"description": "Provides support as a member of the Front-End team to include assisting customers during the check-out process, performing all cash register functions, bagging groceries, and working at the customer service desk. Works to maintain attractive customer service displays and support the regional Customer Service vision. All Whole Foods Market Retail jobs require ensuring a positive company image by providing courteous, friendly, and efficient service to customers and Team Members at all times. All positions must be performed with team and store Standard Operating Procedures. Further, Team Members must be prepared and able to perform the duties inherent in other Team Member job descriptions. Team Leaders are required to spend significant time on the floor, engaging with customers, and pitching in to help whenever and wherever needed. All positions must strive to support WFM core values and goals, promote national, regional, and store programs and initiatives, and ensure adherence to all applicable health and safety regulations. ",
+			"link": "https://careers.wholefoodsmarket.com/global/en/job/WHFOGLOBALREQ20190300328/Cashier?utm_source=glassdoor&utm_medium=phenom-feeds"			
+		},
+		{
+			"title": "Software Developer",
+			"company": "Malouf",
+			"location": "Logan, UT",
+			"type": "Full-time",
+			"time": "25 days ago",
+			"description": "Malouf is hiring a back end Software Developer. Software developers are responsible for our internal software tools that provide data and tools for the entire business. This includes helping provide data, program integrations, and being involved in processes and decisions that increase efficiency and insight into our business. Malouf developers are expected to be familiar with the latest in programming standards. This position is expected to be data intensive and involve our shipping and fulfillment systems. If you enjoy understanding a company at a high level and hope to implement systems that will enable growth, this is the right position for you. ",
+			"link": "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword=Software+Developer&sc.keyword=Software+Developer&locT=&locId=&jobType="			
 		}
 	],
     "cities": [
