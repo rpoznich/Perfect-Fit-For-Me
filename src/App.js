@@ -83,14 +83,14 @@ class NavBar extends Component
           <li className={this.state.current === "about" ? "nav-item active" : "nav-item" }>
             <Link className="nav-link" to="/about" onClick={() => this.handleClick("about")}>About Us  {this.props.current === "about" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div className="dropdown-menu" aria-labelledby="dropdown01">
               <a className="dropdown-item" href="#">Action</a>
               <a className="dropdown-item" href="#">Another action</a>
               <a className="dropdown-item" href="#">Something else here</a>
             </div>
-          </li>
+          </li> */}
         </ul>
       </div>
     </nav>

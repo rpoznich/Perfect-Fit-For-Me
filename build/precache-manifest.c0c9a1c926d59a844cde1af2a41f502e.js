@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "fee66e712a8a08eef5805a46892932ad",
-    "url": "/static/media/fontawesome-webfont.fee66e71.woff"
+    "revision": "b06871f281fee6b241d60582ae9369b9",
+    "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
-    "revision": "9a904af1332d3ac4b9dc",
-    "url": "/static/css/main.3a9401a1.chunk.css"
+    "revision": "5ffe86eb72cd476d2b1e",
+    "url": "/static/css/main.f3c18945.chunk.css"
   },
   {
     "revision": "fdfcfda2d9b1bf31db52",
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/static/media/austincoverphoto.ea492a6a.jpg"
   },
   {
-    "revision": "65a475bc7ce527cf07bf",
-    "url": "/static/js/2.65a475bc.chunk.js"
+    "revision": "9b04845d7c97264bf3f9",
+    "url": "/static/js/2.9b04845d.chunk.js"
   },
   {
     "revision": "1211756476dec370b20e215bba6166cd",
@@ -48,16 +48,16 @@ self.__precacheManifest = [
     "url": "/static/media/fontawesome-webfont.af7ae505.woff2"
   },
   {
-    "revision": "9a904af1332d3ac4b9dc",
-    "url": "/static/js/main.9a904af1.chunk.js"
+    "revision": "fee66e712a8a08eef5805a46892932ad",
+    "url": "/static/media/fontawesome-webfont.fee66e71.woff"
+  },
+  {
+    "revision": "5ffe86eb72cd476d2b1e",
+    "url": "/static/js/main.5ffe86eb.chunk.js"
   },
   {
     "revision": "674f50d287a8c48dc19ba404d20fe713",
     "url": "/static/media/fontawesome-webfont.674f50d2.eot"
-  },
-  {
-    "revision": "b06871f281fee6b241d60582ae9369b9",
-    "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
     "revision": "912ec66d7572ff821749319396470bde",
@@ -66,10 +66,6 @@ self.__precacheManifest = [
   {
     "revision": "945236df52170f56de6884002fe13edd",
     "url": "/static/media/68fdaa828d60e1828ee849c1f72bbc4c.945236df.png"
-  },
-  {
-    "revision": "96a2c3f036f07f962f82d4d9e4b72ae0",
-    "url": "/static/media/undraw_posting_photo.96a2c3f0.svg"
   },
   {
     "revision": "810ee5a6c97705cb875ca7e11d2b6f18",
@@ -92,11 +88,19 @@ self.__precacheManifest = [
     "url": "/static/media/ozone_kafley.1a49ea6a.jpg"
   },
   {
-    "revision": "65a475bc7ce527cf07bf",
+    "revision": "f53c00b03628704be9ac3a9a3f4fa3cd",
+    "url": "/static/media/gitlab.f53c00b0.png"
+  },
+  {
+    "revision": "b95ce996818fbd9607b4182ad7ce5fb0",
+    "url": "/static/media/pm.b95ce996.png"
+  },
+  {
+    "revision": "9b04845d7c97264bf3f9",
     "url": "/static/css/2.ba6d0ddb.chunk.css"
   },
   {
-    "revision": "04562934aeb0c438314ec16cc988ee7f",
+    "revision": "4a2789c1bd590a38ce2401ae3d84a8d8",
     "url": "/index.html"
   }
 ];
