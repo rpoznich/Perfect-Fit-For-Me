@@ -269,12 +269,14 @@ class About extends Component {
         </header>
         <div className="row equal">{theTools}</div>
         <div className="row justify-content-center">
+        <div className="featured-place-wrap">
           <a href='https://gitlab.com/rpoznich/perfect-fit'>
-            <img src={gitlab} height="100" width="100"></img>
+            <img src={gitlab} height="110" width="100"></img>
           </a>
           <a href="https://documenter.getpostman.com/view/6836390/S11LuJgi">
-            <img height="80" width="75" src={pm}></img>
+            <img height="76" width="75" src={pm}></img>
           </a>
+        </div>
         </div>
       </div>
     )
