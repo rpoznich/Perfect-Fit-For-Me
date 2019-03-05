@@ -71,6 +71,7 @@ class Person extends Component {
         </a>
         <div className='card-body text-center'>
           <h5 className='card-title mb-0'>{this.props.name}</h5>
+          <h10 className='card-title mb-0'>{this.props.bio}</h10>
           <div className='card-text text-black-50'>{this.props.role}</div>
           <div className='card-text text-black-50'>
             Commits: {this.props.commits}
@@ -94,6 +95,7 @@ class About extends Component {
     this.state.memData = {
       'Ryan Poznich': {
         name: 'Ryan Poznich',
+        bio: 'Junior Computer Science major at the University of Texas at Austin',
         alias: ['Ryan Poznich'],
         username: 'rpoznich',
         role: 'Full-stack',
@@ -105,6 +107,7 @@ class About extends Component {
       },
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
+        bio: 'Junior Computer Science major, pursuing a Business minor, at the University of Texas at Austin',
         alias: ['Jonathan Nguyen'],
         username: 'GammaJohn',
         role: 'Front-end',
@@ -116,6 +119,7 @@ class About extends Component {
       },
       'Ozone Kafley': {
         name: 'Ozone Kafley',
+        bio: 'Senior Computer Science major at the University of Texas at Austin',
         alias: ['Ozone Kafley', ''],
         username: 'kafleyozone',
         role: 'Full-stack',
@@ -127,6 +131,7 @@ class About extends Component {
       },
       'Dylan Kile': {
         name: 'Dylan Kile',
+        bio: 'Senior Computer Science major at the University of Texas at Austin',
         alias: ['Dylan Kile'],
         username: 'dylankile',
         role: 'Back-end',
@@ -138,6 +143,7 @@ class About extends Component {
       },
       'Daniel Thai': {
         name: 'Daniel Thai',
+        bio: 'Computer Science major at the University of Texas at Austin',
         alias: ['Daniel Thai'],
         username: 'danielthai',
         role: 'Back-end',
