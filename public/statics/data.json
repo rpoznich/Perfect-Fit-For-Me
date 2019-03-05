@@ -96,15 +96,15 @@
 		},
 		{
 			"name": "San Jose",
-			"system": "",
-			"guide": "",
+			"system": "Santa Clara Valley Transportation Authority",
+			"guide": "VTA operates three light rail lines, a number of bus lines, and paratransit service. As VTA covers Santa Clara County in general, it serves the major core city of San Jose (where VTA is based and headquartered), with service to the other municipalities of Campbell, Cupertino, Gilroy, Los Altos, Los Altos Hills, Los Gatos, Milpitas, Monte Sereno, Morgan Hill, Mountain View, Palo Alto, Santa Clara, Saratoga and Sunnyvale.",
 			"quality": 0.62,
 			"lines": 67,
 			"stops": 1969,
 			"image": "http://www.sanjoseca.gov/images/pages/N4862/285.jpg",
-			"example_1": "https://smarttripsaustin.org/wp-content/uploads/2016/04/Metro-Rapid.jpg",
-			"example_2": "https://www.austinmonitor.com/wp-content/uploads/2018/05/bus-stop.jpg",
-			"example_3": "http://www.dailytexanonline.com/sites/default/files/styles/article_main_image/public/images/2014/06/2014-06-12_Capmetro_Bus_Routes_Guad_Lavaca_Amy.Zhang18655.jpg?itok=qoIhjq4-"
+			"example_1": "https://www.transit.wiki/images/b/b7/VTA_lrt.jpg",
+			"example_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Rail_transport_in_San_Jose%2C_California_-_DSC03960.JPG/1200px-Rail_transport_in_San_Jose%2C_California_-_DSC03960.JPG",
+			"example_3": "https://thumbs.dreamstime.com/z/november-san-jose-ca-usa-vta-train-crossing-throu-november-san-jose-ca-usa-vta-train-crossing-downtown-san-jose-vta-light-132786228.jpg"
 		}
 	]   
 }
