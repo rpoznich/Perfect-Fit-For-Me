@@ -6,7 +6,24 @@ import daniel from './../daniel_thai.png'
 import dylan from './../dylan_kile.jpg'
 import ozone from './../ozone_kafley.jpg'
 
-class Tool extends Component {}
+class Tool extends Component {
+   constructor(props){
+     super(props)
+   }
+
+   render(){
+     return (
+       <div className='col-xl-4 col-md-6 mb-4'>
+          <div className="jumbotron" height="100%" width="100%">
+            <h1 className='card-title text-center mb-0'>
+              {this.props.name}
+            </h1>
+            <div className='card-text text-black-60'>{this.props.message}</div>
+          </div>
+        </div>
+     )
+   }
+}
 
 class Description extends Component {
   constructor (props) {
@@ -127,6 +144,32 @@ class About extends Component {
         tests: 0
       }
     }
+    this.state.toolsData = {
+      'React': {
+        name: 'React.JS',
+        message: 'A JavaScript library to create components'
+      },
+      'Docker' :{
+        name: 'Docker',
+        message: 'A tool that can package an application and its dependencies in a virtual container that can run on any Linux server.'
+      },
+      'Postman':{
+        name: 'Postman',
+        message: 'An API design tool used to create our API'
+      },
+      'AWS':{
+        name: 'AWS',
+        message: 'A service to manage our domain, and host our website and database'
+      },
+      'React Router':{
+        name: 'React Router',
+        message: 'A React extension used to manage application states.'
+      },
+      'React Bootstrap':{
+        name: 'React Bootstrap',
+        message: 'A tool used for easier rendering of React components that use bootstrap'
+      }
+    }
   }
 
   componentDidMount () {
@@ -178,13 +221,21 @@ class About extends Component {
     let components = []
     let site_message =
       'Our site is meant to help people find the right spot to live. There are many factors involved in determining where to live, and we believe there should be a good congregation of data about different locations that is essential to know before moving.'
-    for (let mem in this.state.memData) {
+    let data_message =
+      'Our data is based off of three models: public transportation, cities, and jobs. We have found that the quality of life of living in a certain area has many different factors, so we linked each of these data points together to create our website. ';
+      for (let mem in this.state.memData) {
       components.push(
         <div id={mem} className='col-xl-4 col-md-6 mb-4'>
           <div className='card border-0 shadow'>
             <Person {...this.state.memData[mem]} />
           </div>
         </div>
+      )
+    }
+    let theTools = []
+    for(let tool in this.state.toolsData){
+      theTools.push(
+        <Tool {...this.state.toolsData[tool]}></Tool>
       )
     }
     return (
@@ -204,14 +255,15 @@ class About extends Component {
         </header>
         <div className='row justify-content-center'>
           <Description purpose='About Our Site' message={site_message} />
-          <Description purpose='About Our Data' />
+          <Description purpose='About Our Data' message={data_message}/>
         </div>
         <header className='bg-primary text-center py-5 mb-4'>
           <div className='container'>
             <h1 className='font-weight-light text-white'>Tools Used</h1>
           </div>
-          <div className='row justify-content-center' />
+          <div className='row justify-content-center' ></div>
         </header>
+        <div className="row equal">{theTools}</div>
       </div>
     )
   }

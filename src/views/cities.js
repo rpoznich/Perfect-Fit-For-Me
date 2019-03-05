@@ -45,12 +45,12 @@ class CityListing extends Component{
                                     <li><span class="icon-location-pin"></span>
                                         <p>{this.props.state}</p>
                                     </li>
-                                    <li><span class="icon-screen-smartphone"></span>
+                                    {/* <li><span class="icon-screen-smartphone"></span>
                                         <p>+44 20 7336 8898</p>
                                     </li>
                                     <li><span class="icon-link"></span>
                                         <p>https://burgerandlobster.com</p>
-                                    </li>
+                                    </li> */}
 
                                 </ul>
                                 {/* <div class="bottom-icons">
