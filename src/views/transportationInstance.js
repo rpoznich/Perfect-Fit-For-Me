@@ -11,7 +11,7 @@ class TransportationInstance extends Component{
         return(
 <div className="transportation-instance">
   <h1 class="my-4">{this.props.name + " "}
-    <small>Transportation System Name</small>
+    <small>{this.props.name}</small>
   </h1>
   <div class="row">
     <div class="col-md-8">
@@ -19,13 +19,12 @@ class TransportationInstance extends Component{
     </div>
     <div class="col-md-4">
       <h3 class="my-3">Transportation Guide</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+      <p>{this.props.guide}</p>
       <h3 class="my-3">Helpful Statistics</h3>
       <ul>
-        <li>Lorem Ipsum</li>
-        <li>Dolor Sit Amet</li>
-        <li>Consectetur</li>
-        <li>Adipiscing Elit</li>
+        <li>{"Quality: " + this.props.quality * 10 + "/10"}</li>
+        <li>{"Number of Lines: " + this.props.lines}</li>
+        <li>{"Number of Stops: " + this.props.stops}</li>
       </ul>
     </div>
   </div>
@@ -33,22 +32,17 @@ class TransportationInstance extends Component{
   <div class="row">
     <div class="col-md-3 col-sm-6 mb-4">
       <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt=""></img>
+            <img class="img-fluid" src={this.props.example_1} alt=""></img>
           </a>
     </div>
     <div class="col-md-3 col-sm-6 mb-4">
       <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt=""></img>
+            <img class="img-fluid" src={this.props.example_2} alt=""></img>
           </a>
     </div>
     <div class="col-md-3 col-sm-6 mb-4">
       <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt=""></img>
-          </a>
-    </div>
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt=""></img>
+            <img class="img-fluid" src={this.props.example_3} alt=""></img>
           </a>
     </div>
   </div>
