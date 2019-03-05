@@ -47,13 +47,13 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6 order-lg-2">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="img/01.jpg" alt=""></img>
+                        <img class="img-fluid rounded-circle" src="https://www.gray.com/sites/default/files/styles/article_entry/public/images/blog-entry/main_articleimage_thinkstockphotos-178538809_web.jpg?itok=2OG-4qCq" alt=""></img>
                     </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Discover Jobs that Fulfill You</h2>
-                        <p>Start with a job that lets you do what you love.</p>
+                        <h2 class="display-4">Discover Jobs that Fulfill You.</h2>
+                        {/*<p>Start with a job that lets you do what you love.</p>*/}
                     </div>
                     </div>
                 </div>
@@ -65,13 +65,13 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="img/02.jpg" alt=""></img>
+                        <img class="img-fluid rounded-circle" src="https://instagram.fftw1-1.fna.fbcdn.net/vp/486483d9b9f15ccf93374eae4ba96adf/5D0767A7/t51.2885-15/e35/49363537_136222177392954_7394575524856652646_n.jpg?_nc_ht=instagram.fftw1-1.fna.fbcdn.net" alt=""></img>
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4">Explore Cities that Excite You</h2>
-                        <p>Settle down in a city that meets your personal goals.</p>
+                        <h2 class="display-4">Explore Cities that Excite You.</h2>
+                        {/*<p>Settle down in a city that meets your personal goals.</p>*/}
                     </div>
                     </div>
                 </div>
@@ -83,13 +83,13 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6 order-lg-2">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="img/03.jpg" alt=""></img>
+                        <img class="img-fluid rounded-circle" src="https://thenypost.files.wordpress.com/2018/06/massive-subway-delays.jpg?quality=90&strip=all&w=618&h=410&crop=1" alt=""></img>
                     </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Find Transportation that Fits You</h2>
-                        <p>Save time and money by finding transportation that supports your lifestyle.</p>
+                        <h2 class="display-4">Find Transportation that Fits You.</h2>
+                        {/*<p>Save time and money by finding transportation that supports your lifestyle.</p>*/}
                     </div>
                     </div>
                 </div>

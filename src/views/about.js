@@ -7,8 +7,8 @@ import dylan from './../dylan_kile.jpg'
 import ozone from './../ozone_kafley.jpg'
 import gitlab from './../gitlab.png'
 import pm from './../pm.png'
-import Button from 'react-bootstrap/Button'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+// import Button from 'react-bootstrap/Button'
+// import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 class Tool extends Component {
    constructor(props){
