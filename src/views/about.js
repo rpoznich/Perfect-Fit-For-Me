@@ -5,6 +5,10 @@ import jonathan from './../jonathan_nguyen.jpg'
 import daniel from './../daniel_thai.png'
 import dylan from './../dylan_kile.jpg'
 import ozone from './../ozone_kafley.jpg'
+import gitlab from './../gitlab.png'
+import pm from './../pm.png'
+import Button from 'react-bootstrap/Button'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 class Tool extends Component {
    constructor(props){
@@ -147,15 +151,15 @@ class About extends Component {
     this.state.toolsData = {
       'React': {
         name: 'React.JS',
-        message: 'A JavaScript library to create components'
+        message: 'A JavaScript library to create components that we use in the front-end'
       },
       'Docker' :{
         name: 'Docker',
-        message: 'A tool that can package an application and its dependencies in a virtual container that can run on any Linux server.'
+        message: 'A tool that can package an application and its dependencies in a virtual container'
       },
       'Postman':{
         name: 'Postman',
-        message: 'An API design tool used to create our API'
+        message: 'An API design tool used to create our API and generate documentation'
       },
       'AWS':{
         name: 'AWS',
@@ -264,6 +268,14 @@ class About extends Component {
           <div className='row justify-content-center' ></div>
         </header>
         <div className="row equal">{theTools}</div>
+        <div className="row justify-content-center">
+          <a href='https://gitlab.com/rpoznich/perfect-fit'>
+            <img src={gitlab} height="100" width="100"></img>
+          </a>
+          <a href="https://documenter.getpostman.com/view/6836390/S11LuJgi">
+            <img height="80" width="75" src={pm}></img>
+          </a>
+        </div>
       </div>
     )
   }
