@@ -22,6 +22,7 @@ RUN pip install mypy
 RUN pip install numpy
 RUN pip install pylint
 RUN pip install Flask 
+RUN pip install awscli
 
 
 CMD bash
