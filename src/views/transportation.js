@@ -28,26 +28,26 @@ class TransportationListing extends Component{
                             </div>
                             <div class="featured-title-box">
                                 <h6 >{this.props.name}</h6>
-                                <p>Restaurant </p> <span>• </span>
-                                <p>3 Reviews</p> <span> • </span>
+                                <p>{this.props.system}</p> 
+                                    {/* <span>• </span>
+                                    <p>3 Reviews</p> <span> • </span> */}
                                 <ul>
                                     <li><span class="icon-location-pin"></span>
                                         <p>{this.props.state}</p>
                                     </li>
-                                    <li><span class="icon-screen-smartphone"></span>
+                                    {/* <li><span class="icon-screen-smartphone"></span>
                                         <p>+44 20 7336 8898</p>
-                                    </li>
+                                    </li> */}
                                     <li><span class="icon-link"></span>
-                                        <p>https://burgerandlobster.com</p>
+                                        <p>{this.props.link}</p>
                                     </li>
-
                                 </ul>
-                                /*<div class="bottom-icons">
+                                {/*<div class="bottom-icons">
                                     <span class="ti-heart"></span>
                                     <span class="ti-bookmark"></span>
-                                </div> */
-                                </div>
-                                </a>
+                                </div> */}
+                            </div>
+                            </a>
                     </div>)
     }
 }
@@ -101,7 +101,7 @@ class Transportation extends Component {
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
-                        <h3>Featured Places</h3>
+                        <h3>Featured Systems</h3>
                     </div>
                 </div>
             </div>

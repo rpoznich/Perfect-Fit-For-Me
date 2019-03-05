@@ -72,15 +72,15 @@
 		},
 		{
 			"name": "Seattle",
-			"system": "",
-			"guide": "",
+			"system": "King County Metro and Sound Transit",
+			"guide": "Two public transportation agencies serve the city of Seattle: King County Metro Transit and Sound Transit. Snohomish County's Community Transit also runs bus routes to Downtown Seattle and the University of Washington. Sound Transit is the regional transit authority that is comprised of the light rail, express buses, and commuter rail within the Central Puget Sound area.",
 			"quality": 0.8,
 			"lines": 199,
 			"stops": 3096,
 			"image": "https://uploads.visitseattle.org/2015/03/Metro_OranViriyincy.jpg",
-			"example_1": "https://smarttripsaustin.org/wp-content/uploads/2016/04/Metro-Rapid.jpg",
-			"example_2": "https://www.austinmonitor.com/wp-content/uploads/2018/05/bus-stop.jpg",
-			"example_3": "http://www.dailytexanonline.com/sites/default/files/styles/article_main_image/public/images/2014/06/2014-06-12_Capmetro_Bus_Routes_Guad_Lavaca_Amy.Zhang18655.jpg?itok=qoIhjq4-"
+			"example_1": "https://uploads.visitseattle.org/2015/03/LightRail_OranViriyincy.jpg",
+			"example_2": "https://static.seattletimes.com/wp-content/uploads/2018/02/184a2c5c-1133-11e8-a8e3-1042dc037152-780x474.jpg",
+			"example_3": "https://static.seattletimes.com/wp-content/uploads/2017/01/bfa66a64-e408-11e6-996f-1eb912bfac36-780x591.jpg"
 		},
 		{
 			"name": "San Jose",
