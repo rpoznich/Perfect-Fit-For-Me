@@ -98,7 +98,7 @@ class Jobs extends Component {
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
-                        <h3>Featured Places</h3>
+                        <h3>Featured Jobs</h3>
                     </div>
                 </div>
             </div>
