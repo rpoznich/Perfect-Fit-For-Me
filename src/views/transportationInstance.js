@@ -9,7 +9,7 @@ class TransportationInstance extends Component{
 
     render(){
         return(
-<div className="transportation-instance">
+<div className="transportation-instance" style={{marginLeft: 5 + 'em'}}>
   <h1 class="my-4">{this.props.name + " "}
     <small>{this.props.system}</small>
   </h1>
