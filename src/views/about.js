@@ -7,6 +7,7 @@ import dylan from './../dylan_kile.jpg'
 import ozone from './../ozone_kafley.jpg'
 import gitlab from './../gitlab.png'
 import pm from './../pm.png'
+import Row from 'react-bootstrap/Row'
 // import Button from 'react-bootstrap/Button'
 // import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
@@ -17,14 +18,14 @@ class Tool extends Component {
 
    render(){
      return (
-       <div className='col-xl-4 col-md-6 mb-4'>
-          <div className="jumbotron" height="100%" width="100%">
+          <div className='col-xl-4 d-flex mb-4'>
+          <div className='jumbotron'>
             <h1 className='card-title text-center mb-0'>
               {this.props.name}
             </h1>
             <div className='card-text text-black-60'>{this.props.message}</div>
           </div>
-        </div>
+          </div>
      )
    }
 }
@@ -37,7 +38,7 @@ class Description extends Component {
   render () {
     return (
       <div className='col-xl-6 col-md-6 mb-4'>
-        <div className='jumbotron'>
+        <div className='jumbotron' min-height="500px">
           <div className='card-body'>
             <h1 className='card-title text-center mb-0'>
               {this.props.purpose}
@@ -271,9 +272,9 @@ class About extends Component {
           <div className='container'>
             <h1 className='font-weight-light text-white'>Tools Used</h1>
           </div>
-          <div className='row justify-content-center' ></div>
+          <div className='row justify-content-center row-eq-height' ></div>
         </header>
-        <div className="row equal">{theTools}</div>
+        <div className='row row-eq-height'>{theTools}</div>
         <div className="row justify-content-center">
         <div className="featured-place-wrap">
           <a href='https://gitlab.com/rpoznich/perfect-fit'>
