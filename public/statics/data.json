@@ -112,5 +112,41 @@
 			"example_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Rail_transport_in_San_Jose%2C_California_-_DSC03960.JPG/1200px-Rail_transport_in_San_Jose%2C_California_-_DSC03960.JPG",
 			"example_3": "https://thumbs.dreamstime.com/z/november-san-jose-ca-usa-vta-train-crossing-throu-november-san-jose-ca-usa-vta-train-crossing-downtown-san-jose-vta-light-132786228.jpg"
 		}
+	],
+	"events": [
+		{
+			"name": "Music Event 1",
+			"description": "SUMMARY WHERE THE OVERALL DESCRIPTION GOES",
+			"venue": "Example Hall",
+			"logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F56747516%2F211234311650%2F1%2Foriginal.jpg?w=800&auto=compress&rect=0%2C38%2C960%2C480&s=83da60afc1eb78511b3226f592d34ed6",
+			"organizer": "Apple",
+			"start": "12:00",
+			"end": "2:00",
+			"status": "completed",
+			"url": "https://www.google.com"
+			
+		},
+		{
+			"name": "TED TALK Event 2",
+			"description": "SUMMARY WHERE THE OVERALL DESCRIPTION GOES",
+			"venue": "Example Stadium",
+			"logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F56747516%2F211234311650%2F1%2Foriginal.jpg?w=800&auto=compress&rect=0%2C38%2C960%2C480&s=83da60afc1eb78511b3226f592d34ed6",
+			"organizer": "Banana",
+			"start": "12:00",
+			"end": "2:00",
+			"status": "live",
+			"url": "https://www.google.com"			
+		},
+		{
+			"name": "Music Event 3",
+			"description": "SUMMARY WHERE THE OVERALL DESCRIPTION GOES",
+			"venue": "Example Stadium",
+			"logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F56747516%2F211234311650%2F1%2Foriginal.jpg?w=800&auto=compress&rect=0%2C38%2C960%2C480&s=83da60afc1eb78511b3226f592d34ed6",
+			"organizer": "Apple",
+			"start": "12:00",
+			"end": "2:00",
+			"status": "canceled",
+			"url": "https://www.google.com"			
+		}
 	]   
 }
