@@ -112,7 +112,7 @@ class About extends Component {
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
         bio: 'Junior Computer Science major, pursuing a Business minor, at the University of Texas at Austin',
-        alias: ['Jonathan Nguyen'],
+        alias: ['Jonathan Nguyen', 'Van'],
         username: 'GammaJohn',
         role: 'Front-end',
         img: jonathan,

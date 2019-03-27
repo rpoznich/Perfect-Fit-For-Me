@@ -22,8 +22,9 @@ class Routing extends Component{
             <Route exact path="/" component={Home}/>
             <Route exact path="/jobs/:id" component={Jobs}/>
             <Route exact path="/jobs" component={Jobs}/>
-            <Route exact path="/cities/:id" component={Cities}/> 
+            <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/cities" component={Cities}/>  
+            <Route exact path="/cities/:id" component={Cities}/>
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/events" component={Events}/>       
             <Route exact path="/about" component={About}/>
@@ -75,7 +76,7 @@ class NavBar extends Component
             <a className="nav-link" href="/jobs" onClick={() => this.handleClick("jobs")}>Jobs  {this.props.current === "jobs" ? <span className="sr-only">(current)</span> : null }</a>
           </li>
           <li className={this.state.current === "cities" ? "nav-item active" : "nav-item" }>
-            <a className="nav-link" href="/cities" onClick={() => this.handleClick("cities")}>Cities  {this.props.current === "cities" ? <span className="sr-only">(current)</span> : null }</a>
+            <a className="nav-link" href="/cities/1" onClick={() => this.handleClick("cities")}>Cities  {this.props.current === "cities" ? <span className="sr-only">(current)</span> : null }</a>
           </li>
           <li className={this.state.current === "events" ? "nav-item active" : "nav-item" }>
             <a className="nav-link" href="/events" onClick={() => this.handleClick("events")}>Events  {this.props.current === "events" ? <span className="sr-only">(current)</span> : null }</a>
