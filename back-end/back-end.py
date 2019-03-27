@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import jsonify
 import json
 import requests
 import citiesExtract
@@ -10,7 +11,11 @@ def get_default():
 
 @app.route('/api/cities')
 def get_cities():
-    return citiesExtract.extract_cities()
+    cities = citiesExtract.extract_cities()
+    #images = citiesExtract.extract_images(cities)
+    values = citiesExtract.extract_values(cities)
+    return jsonify(values) #"In development. PLEASE COME BACK LATER"
+
 
 if __name__ == '__main__': 
 	print("Is this running")
