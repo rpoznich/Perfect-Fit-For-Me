@@ -1,0 +1,7 @@
+flask
+black 
+coverage 
+mypy
+numpy
+pylint
+requests

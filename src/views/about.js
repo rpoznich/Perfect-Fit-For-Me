@@ -92,6 +92,9 @@ class Person extends Component {
 class About extends Component {
   constructor (props) {
     super(props)
+    this.total_commits = 0;
+    this.total_issues = 0;
+    this.total_tests = 0;
     this.state = {}
     this.state.memData = {
       'Ryan Poznich': {
@@ -109,7 +112,7 @@ class About extends Component {
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
         bio: 'Junior Computer Science major, pursuing a Business minor, at the University of Texas at Austin',
-        alias: ['Jonathan Nguyen'],
+        alias: ['Jonathan Nguyen', 'Van'],
         username: 'GammaJohn',
         role: 'Front-end',
         img: jonathan,
@@ -199,7 +202,8 @@ class About extends Component {
             if (
               this.state.memData[member].alias.includes(commit_data.author_name)
             ) {
-              this.state.memData[member].commits += 1
+              this.state.memData[member].commits += 1;
+              this.total_commits += 1;
             }
           }
         }
@@ -219,6 +223,7 @@ class About extends Component {
           let new_issues = num_issues.length
           if (new_issues > 0) {
             this.state.memData[mem].issues = new_issues
+            this.total_issues += new_issues;
           }
         }
         this.setState({})
@@ -258,6 +263,22 @@ class About extends Component {
         </header>
         <div className='container'>
           <div className='row justify-content-center'>{components}</div>
+        </div>
+        <div className='row justify-content-center row-eq-height' >
+        <div className='card-body text-center'>
+          <h5 className='card-title mb-0'>{this.props.name}</h5>
+          <h10 className='card-title mb-0'>{this.props.bio}</h10>
+          <div className='card-text text-black-50'>{this.props.role}</div>
+          <div className='card-text text-black-50'>
+            Total Commits: {this.total_commits}
+          </div>
+          <div className='card-text text-black-50'>
+            Total Issues: {this.total_issues}
+          </div>
+          <div className='card-text text-black-50'>
+           Total Tests: {this.total_tests}
+          </div>
+        </div>
         </div>
         <header className='bg-primary text-center py-5 mb-4'>
           <div className='container'>
