@@ -106,6 +106,7 @@ class Cities extends Component {
   render () {
     if (this.isListing) {
       let components = []
+      //NEED TO CHANGE WHEN WE GET DATA FROM BACKEND
       for (let id in this.state.cities) {
         components.push(
           <div className='col-md-4 featured-responsive'>
@@ -137,7 +138,7 @@ class Cities extends Component {
                 </div>
               </div>
             </section>
-            <PageBar></PageBar>
+            <PageBar model='/cities/'></PageBar>
           </div>
         </div>
       )

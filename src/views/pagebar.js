@@ -16,7 +16,8 @@ class PageBar extends Component {
         let items = [];
         for(let i = this.state.activePage; i < this.state.activePage + 5; ++i){
             items.push(
-                <Pagination.Item key={i} active={i === this.state.activePage} href={'/cities/' + i}>
+                //CHANGE CITIES IN ALL PLACES
+                <Pagination.Item key={i} active={i === this.state.activePage} href={this.props.model + i}>
                   {i}
                 </Pagination.Item>
               );
@@ -30,7 +31,7 @@ class PageBar extends Component {
 
   <Pagination.Ellipsis />
   <Pagination.Item>{this.state.numPages}</Pagination.Item>
-  <Pagination.Next href={'/cities/' + (this.state.activePage + 1)}/>
+  <Pagination.Next href={this.props.model + (this.state.activePage + 1)}/>
   <Pagination.Last />
 </Pagination>
 </div>
