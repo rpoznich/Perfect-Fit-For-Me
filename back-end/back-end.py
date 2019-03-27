@@ -12,9 +12,15 @@ def get_default():
 @app.route('/api/cities')
 def get_cities():
     cities = citiesExtract.extract_cities()
-    #images = citiesExtract.extract_images(cities)
+    images = citiesExtract.extract_images(cities)
     values = citiesExtract.extract_values(cities)
-    return jsonify(values) #"In development. PLEASE COME BACK LATER"
+    location = citiesExtract.extract_location(cities)
+    cities = {}
+    for k in images: 
+    	if k in values and k in location: 
+    		cities[k] = {"images":images[k], "qualities":values[k], "location":location[k]}
+
+    return jsonify(cities) #"In development. PLEASE COME BACK LATER"
 
 
 if __name__ == '__main__': 

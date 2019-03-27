@@ -43,6 +43,23 @@ def extract_values(cities):
 		values[name] = categories
 	return values
 
+def extract_location(cities): 
+	location = {}
+	for city in cities: 
+		name = city["name"]
+		linkToCity = city["href"]
+		cityJSON = requests.get(linkToCity).text
+		jsonToDict = json.loads(cityJSON)
+		state = jsonToDict["_links"]["ua:admin1-divisions"][0]["name"]
+		latlon = jsonToDict["bounding_box"]["latlon"]
+		latitude = float(latlon["east"]) + float(latlon["west"]) / 2 
+		longitude = float(latlon["north"]) + float(latlon["south"]) / 2
+		location[name] = {"state":state, "latitude":str(latitude), "longitude":str(longitude)}
+	print(location)
+	return location
+
+
+
 
 
 
