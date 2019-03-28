@@ -1,3 +1,4 @@
+
 from flask import Flask
 from flask import jsonify
 import json
@@ -16,13 +17,15 @@ def get_cities():
     values = citiesExtract.extract_values(cities)
     location = citiesExtract.extract_location(cities)
     cities = {}
+    city_id = 1
     for k in images: 
     	if k in values and k in location: 
-    		cities[k] = {"images":images[k], "qualities":values[k], "location":location[k]}
+    		cities[k] = {"city id":city_id, "images":images[k], "qualities":values[k], 
+                        "location":location[k]}
+        city_id += 1
 
     return jsonify(cities) #"In development. PLEASE COME BACK LATER"
 
 
 if __name__ == '__main__': 
-	print("Is this running")
-	app.run(debug=True, host='0.0.0.0')
+	app.run(debug=True)
