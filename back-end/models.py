@@ -25,8 +25,7 @@ class City(db.Model):
     latitude = db.Column(db.Float(10))
     longitude = db.Column(db.Float(10))
     jobs = relationship('Job', back_populates="city") 
-
-    def __init__(self)
+    
 
 class Job(db.Model): 
 	__tablename__ = 'job'
@@ -35,5 +34,11 @@ class Job(db.Model):
 	description = db.Column(db.String(4000)) 
 	city_name = db.Column(db.String(30), back_populates="jobs")
 	state_name = db.Column(db.String(30), back_populates="jobs")
+
+def create_tables(): 
+	db.create_all() 
+	print("Tables created")
+
+def
 
 
