@@ -27,7 +27,7 @@ def scrape_events():
 	eventsTable = []
 	url = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.within=1500mi&location.latitude=39&location.longitude=-98&token=WG5JAPAZ3A56WMVJKO7K&expand=venue"
 
-	for p in range(1, 21): # scrape 20 pages
+	for p in range(1, 11): # scrape 10 pages
 		url_with_page = url + "&page=" + str(p)
 		eventsJSON = requests.get(url_with_page).text
 		page_info = json.loads(eventsJSON, object_hook=_byteify)["pagination"]
@@ -45,16 +45,20 @@ def scrape_events():
 			eventInstance["url"] = events[i]["url"]
 			if events[i]["logo"] is not None:
 				eventInstance["logo"] = events[i]["logo"]["url"]
+			else:
+				eventInstance["logo"] = None
 			eventsTable.append(eventInstance)
 		print("Page " + str(p) + " complete")
 
 	# printing table
-	for e in eventsTable:
-		print(e["name"])
-		for k, v in e.items():
-			if k != "name":
-				print('   ' + str(k) + ': ' + str(v))
-	print(len(eventsTable))
+	# for e in eventsTable:
+	# 	print(e["name"])
+	# 	for k, v in e.items():
+	# 		if k != "name":
+	# 			print('   ' + str(k) + ': ' + str(v))
+	# print(len(eventsTable))
+
+	return eventsTable;
 
 if __name__ == "__main__":
 	scrape_events()
