@@ -6,6 +6,7 @@ import json
 import requests
 import citiesExtract
 import dbwriter
+import models
 
 
 app = Flask(__name__)
@@ -21,13 +22,16 @@ def get_default():
 def get_events():
     events = dbwriter.Event.query.all()
     return jsonify([e.json() for e in events])
+    
+@app.route('/api/jobs')
+def get_jobs(): 
+	jobs = models.get_jobs()
+	return jsonify(jobs)
 
 @app.route('/api/cities')
 def get_cities():
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    json_url = os.path.join(SITE_ROOT, 'static', 'json','cities.json')
-    data = json.load(open(json_url))
-    return jsonify(data) #"In development. PLEASE COME BACK LATER"
+    cities = models.get_cities()
+    return jsonify(cities) #"In development. PLEASE COME BACK LATER"
 
 if __name__ == '__main__': 
 	app.run()

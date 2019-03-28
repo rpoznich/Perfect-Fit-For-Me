@@ -88,6 +88,42 @@ def make_cities_table():
     db.session.commit()
     print("Made cities table")
 
+def get_jobs(): 
+    jobs = {"Jobs":[]}
+    job_objs = Job.query.all() 
+    for j in job_objs: 
+        job = {
+            "id":j.job_id, 
+            "job title":j.job_title,
+            "annual salary":j.salary, 
+            "location": {
+                "city": j.city_name,
+                "state": j.state
+            },
+            "description": j.description
+        }
+        jobs["Jobs"].append(job)
+    return jobs
+
+def get_cities(): 
+    cities = {}
+    city_objs = City.query.all()
+    for c in city_objs: 
+        name = c.name
+        cities[name] = { 
+            "id":c.id, 
+            "population":c.population,
+            "images": {
+                "web":c.web_img,
+                "mobile":c.mobile_img
+            },
+            "location": {
+                "latitude":c.latitude,
+                "longitude":c.longitude,
+                "state":c.state 
+            }
+        }
+    return cities
 if __name__ == "__main__": 
     print("Making the databases")
     remove_tables()
