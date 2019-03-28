@@ -16,12 +16,13 @@ def get_cities():
     images = citiesExtract.extract_images(cities)
     values = citiesExtract.extract_values(cities)
     location = citiesExtract.extract_location(cities)
+    salaries = citiesExtract.extract_salaries(cities)
     cities = {}
     city_id = 1
     for k in images: 
-    	if k in values and k in location: 
+    	if k in values and k in location and k in salaries: 
     		cities[k] = {"city id":city_id, "images":images[k], "qualities":values[k], 
-                        "location":location[k]}
+                        "location":location[k], "salaries":salaries[k]}
         city_id += 1
 
     return jsonify(cities) #"In development. PLEASE COME BACK LATER"

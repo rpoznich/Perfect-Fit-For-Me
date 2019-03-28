@@ -64,6 +64,7 @@ def extract_location(cities):
 		longitude = latlon["longitude"]
 		location[name] = {"state":state, "latitude":latitude, "longitude":longitude
 						  ,"population":population}
+	return location
 
 def extract_salaries(cities): 
 	salaries = {}
@@ -75,10 +76,12 @@ def extract_salaries(cities):
 		linkToSalaryInfo = jsonToDict["_links"]["ua:salaries"]["href"]
 		salaryInfoJSON = requests.get(linkToSalaryInfo).text 
 		salaryInfo = json.loads(salaryInfoJSON)["salaries"]
+		jobsSalaries = {}
 		for salary in salaryInfo: 
 			jobName = salary["job"]["title"]
 			avg_salary = salary["salary_percentiles"]["percentile_50"]
-			salaries[jobName] = avg_salary
+			jobsSalaries[jobName] = avg_salary
+		salaries[name] = jobsSalaries
 	return salaries
 
 
