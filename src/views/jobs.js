@@ -5,17 +5,16 @@ import '../css/city/bootstrap.min.css'
 import '../css/city/simple-line-icons.css'
 import '../css/city/font-awesome.min.css'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-
+import PageBar from './pagebar.js'
 class JobListing extends Component {
   constructor (props) {
     super(props)
     this.state = {}
   }
-
   render () {
     return (
       <div class='featured-place-wrap'>
-        <a href={'/jobs/' + this.props.id}>
+        <a href={'/jobInstance/' + this.props.id}>
           {/* <img src={""+ this.props.image} height="200" width="100"></img> */}
           {/* <div className="container">
                                 <span className={this.state.circleColor} title="Overall Rating">{this.props.overall_rating / 10.0}</span>
@@ -53,12 +52,13 @@ class JobListing extends Component {
     )
   }
 }
-
 class Jobs extends Component {
   constructor (props) {
     super(props)
     this.isListing = true
-    if (typeof props.match.params.id !== 'undefined') {
+    // If is an instance?
+    let pathName = window.location.pathname.split("/");
+    if (pathName.includes('jobInstance')) {
       this.isListing = false
       this.id = props.match.params.id
     }
@@ -66,7 +66,6 @@ class Jobs extends Component {
       jobs: {}
     }
   }
-
   componentDidMount () {
     fetch('../statics/data.json')
       .then(response => {
@@ -76,6 +75,8 @@ class Jobs extends Component {
       .then(data => {
         // Work with JSON data here
         this.state.jobs = data.jobs
+        this.state.cities = data.cities
+        this.state.events = data.events
         this.setState(this.state)
       })
       .catch(err => {
@@ -83,7 +84,6 @@ class Jobs extends Component {
         console.log('Error Reading data ' + err)
       })
   }
-
   render () {
     if (this.isListing) {
       let components = []
@@ -107,7 +107,7 @@ class Jobs extends Component {
                   </div>
                 </div>
                 <div class='row'>{components}</div>
-                <div class='row justify-content-center'>
+                {/* <div class='row justify-content-center'>
                   <div class='col-md-4'>
                     <div class='featured-btn-wrap'>
                       <a href='#' class='btn btn-danger'>
@@ -115,8 +115,9 @@ class Jobs extends Component {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
+              <PageBar model='/jobs/'></PageBar>
             </section>
           </div>
         </div>
@@ -128,6 +129,19 @@ class Jobs extends Component {
         return <div className='main' style={{ margin: '20vh' }} />
       }
       console.log('DEFINED*****')
+      
+      let currLocation = job.location.split(",")
+      let currCity = currLocation[0]
+      let cityID = 0
+      for(let id in this.state.cities){
+        if(this.state.cities[id].name == currCity){
+          cityID = id
+          break
+        }
+      }
+      // ACTUALLY GET NEARBY EVENTS USING THIS.STATE.EVENTS
+      let firstEvent = 0
+      let secEvent = 1
       return (
         <div className='main' id='target' style={{ margin: '20vh' }}>
           <div class='container'>
@@ -151,6 +165,18 @@ class Jobs extends Component {
                   {job.location}
                   <br />
                   Updated {job.time}
+                  <br />
+                  <br />
+                  <strong>Learn More About the City of</strong>
+                  <br />
+                  <a href={'/cityInstance/' + cityID}>{currCity + ' '}</a>
+                  <br />
+                  <br />
+                  <strong>Nearby Events</strong>
+                  <br />
+                  <a href={'/eventInstance/' + firstEvent}>{this.state.events[firstEvent].name + ' '}</a>
+                  <br />
+                  <a href={'/eventInstance/' + secEvent}>{this.state.events[secEvent].name + ' '}</a>
                 </address>
               </div>
             </div>
@@ -160,5 +186,4 @@ class Jobs extends Component {
     }
   }
 }
-
 export default Jobs
