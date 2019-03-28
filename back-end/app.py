@@ -36,5 +36,9 @@ def get_cities():
     cities = models.get_cities()
     return jsonify(cities)
 
+@app.route('/api/cities/state/<state>')
+def get_cities_by_state(state):
+	return jsonify(models.get_cities_by_state(state))
+
 if __name__ == '__main__': 
 	app.run()

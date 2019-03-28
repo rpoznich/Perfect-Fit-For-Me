@@ -32,7 +32,24 @@ class City(db.Model):
         self.web_img = web 
         self.mobile_img = mob 
         self.latitude = lat 
-        self.longitude = lon    
+        self.longitude = lon  
+
+    def toDict(self): 
+        name = self.name
+        city = { 
+            "id":self.id, 
+            "population":self.population,
+            "images": {
+                "web":self.web_img,
+                "mobile":self.mobile_img
+            },
+            "location": {
+                "latitude":self.latitude,
+                "longitude":self.longitude,
+                "state":self.state 
+            }
+        }
+        return city
 
 class Job(db.Model): 
     __tablename__ = 'job'
@@ -122,21 +139,18 @@ def get_cities():
     city_objs = City.query.all()
     for c in city_objs: 
         name = c.name
-        cities[name] = { 
-            "id":c.id, 
-            "population":c.population,
-            "images": {
-                "web":c.web_img,
-                "mobile":c.mobile_img
-            },
-            "location": {
-                "latitude":c.latitude,
-                "longitude":c.longitude,
-                "state":c.state 
-            }
-        }
+        cities[name] = c.toDict()
     return cities
-    
+
+def get_cities_by_state(state):
+    cities = {}
+    city_objs = City.query.filter_by(state=state).all() 
+    print(len(city_objs))
+    for c in city_objs: 
+        name = c.name
+        cities[name] = c.toDict() 
+    return cities
+
 if __name__ == "__main__": 
     print("Making the databases")
     remove_tables()
