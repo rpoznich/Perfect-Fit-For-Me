@@ -1,6 +1,7 @@
 
 from flask import Flask
 from flask import jsonify
+from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
 import citiesExtract
@@ -29,4 +30,4 @@ def get_cities():
 
 
 if __name__ == '__main__': 
-	app.run(debug=True)
+	app.run()
