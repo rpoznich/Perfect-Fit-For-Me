@@ -1,3 +1,4 @@
+
 # Dockerfile - for the back-end
 
 FROM python:3
@@ -10,5 +11,7 @@ RUN apt-get update
 
 RUN pip install -r requirements.txt
 
-CMD bash
+ENTRYPOINT ["python"]
+
+CMD ["back-end.py"]
 

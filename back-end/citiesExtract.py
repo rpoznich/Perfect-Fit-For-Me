@@ -3,12 +3,14 @@ import json
 
 def extract_cities():
 	url = "https://api.teleport.org/api/continents/geonames:NA/urban_areas"
+	print("okay, city")
 	JSON_obj = requests.get(url).text
 	cities = json.loads(JSON_obj)["_links"]["ua:items"]
 	return cities # list of cities
 
 def extract_images(cities): 
 	images = {} # "city_name":"image_link"
+	print("okay, img")
 	for city in cities: 
 		name = city["name"]
 		linkToCity = city["href"]
@@ -25,12 +27,14 @@ def extract_images(cities):
 
 
 def extract_values(cities): 
+	print("okay, location")
 	values = {}
 	for city in cities: 
 		name = city["name"]
 		linkToCity = city["href"]
 		cityJSON = requests.get(linkToCity).text
-		cityInfo = json.loads(cityJSON)["_links"]["ua:scores"]
+		link = json.loads(cityJSON)["_links"]
+		cityInfo = link["ua:scores"]
 		valuesLink = cityInfo["href"]
 		valuesJSON = requests.get(valuesLink).text 
 		valuesInfo = json.loads(valuesJSON)["categories"]
@@ -50,13 +54,35 @@ def extract_location(cities):
 		linkToCity = city["href"]
 		cityJSON = requests.get(linkToCity).text
 		jsonToDict = json.loads(cityJSON)
-		state = jsonToDict["_links"]["ua:admin1-divisions"][0]["name"]
-		latlon = jsonToDict["bounding_box"]["latlon"]
-		latitude = float(latlon["east"]) + float(latlon["west"]) / 2 
-		longitude = float(latlon["north"]) + float(latlon["south"]) / 2
-		location[name] = {"state":state, "latitude":str(latitude), "longitude":str(longitude)}
-	print(location)
+		linkToCityInfo = jsonToDict["_links"]["ua:identifying-city"]["href"]
+		cityInfoJSON = requests.get(linkToCityInfo).text
+		cityInfo = json.loads(cityInfoJSON)
+		state = cityInfo["_links"]["city:admin1_division"]["name"]
+		population = cityInfo["population"]
+		latlon = cityInfo["location"]["latlon"]
+		latitude = latlon["latitude"]
+		longitude = latlon["longitude"]
+		location[name] = {"state":state, "latitude":latitude, "longitude":longitude
+						  ,"population":population}
 	return location
+
+def extract_salaries(cities): 
+	salaries = {}
+	for city in cities: 
+		name = city["name"]
+		linkToCity = city["href"]
+		cityJSON = requests.get(linkToCity).text
+		jsonToDict = json.loads(cityJSON)
+		linkToSalaryInfo = jsonToDict["_links"]["ua:salaries"]["href"]
+		salaryInfoJSON = requests.get(linkToSalaryInfo).text 
+		salaryInfo = json.loads(salaryInfoJSON)["salaries"]
+		jobsSalaries = {}
+		for salary in salaryInfo: 
+			jobName = salary["job"]["title"]
+			avg_salary = salary["salary_percentiles"]["percentile_50"]
+			jobsSalaries[jobName] = avg_salary
+		salaries[name] = jobsSalaries
+	return salaries
 
 
 
