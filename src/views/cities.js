@@ -127,7 +127,7 @@ class Cities extends Component {
                   </div>
                 </div>
                 <div class='row'>{components}</div>
-                <div class='row justify-content-center'>
+                {/* <div class='row justify-content-center'>
                   <div class='col-md-4'>
                     <div class='featured-btn-wrap'>
                       <a href='' class='btn btn-danger'>
@@ -135,10 +135,10 @@ class Cities extends Component {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
+              <PageBar model='/cities/'></PageBar>
             </section>
-            <PageBar model='/cities/'></PageBar>
           </div>
         </div>
       )

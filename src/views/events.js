@@ -6,6 +6,7 @@ import '../css/city/bootstrap.min.css';
 import '../css/city/simple-line-icons.css';
 import '../css/city/font-awesome.min.css';
 import EventInstance from './eventsInstance.js';
+import PageBar from './pagebar.js'
 
 class EventListing extends Component{
     constructor(props){
@@ -21,7 +22,7 @@ class EventListing extends Component{
     }
     render(){
         return (<div class="featured-place-wrap">
-                            <a href={"/events/"+this.props.id}>
+                            <a href={"/eventInstance/"+this.props.id}>
                             <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
                             <div className="container">
                                 <span className={this.state.circleColor} title="Status">{}</span>
@@ -56,11 +57,12 @@ class Event extends Component {
     constructor(props)
     {
         super(props);
-        this.isListing = true;
-        if(typeof props.match.params.id != 'undefined')
-        {
-            this.isListing = false;
-            this.id = props.match.params.id;
+        this.isListing = true
+        // If is an instance?
+        let pathName = window.location.pathname.split("/");
+        if (pathName.includes('eventInstance')) {
+            this.isListing = false
+            this.id = props.match.params.id
         }
         this.state = 
         {
@@ -108,14 +110,15 @@ class Event extends Component {
             <div class="row">
                 {components}
             </div>
-            <div class="row justify-content-center">
+            {/* <div class="row justify-content-center">
                 <div class="col-md-4">
                     <div class="featured-btn-wrap">
                         <a href="" class="btn btn-danger">VIEW ALL</a>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
+        <PageBar model='/events/'></PageBar>
     </section>
              </div>
              </div>

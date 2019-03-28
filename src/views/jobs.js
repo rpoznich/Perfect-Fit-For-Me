@@ -5,6 +5,7 @@ import '../css/city/bootstrap.min.css'
 import '../css/city/simple-line-icons.css'
 import '../css/city/font-awesome.min.css'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import PageBar from './pagebar.js'
 
 class JobListing extends Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class JobListing extends Component {
   render () {
     return (
       <div class='featured-place-wrap'>
-        <a href={'/jobs/' + this.props.id}>
+        <a href={'/jobInstance/' + this.props.id}>
           {/* <img src={""+ this.props.image} height="200" width="100"></img> */}
           {/* <div className="container">
                                 <span className={this.state.circleColor} title="Overall Rating">{this.props.overall_rating / 10.0}</span>
@@ -58,7 +59,9 @@ class Jobs extends Component {
   constructor (props) {
     super(props)
     this.isListing = true
-    if (typeof props.match.params.id !== 'undefined') {
+    // If is an instance?
+    let pathName = window.location.pathname.split("/");
+    if (pathName.includes('jobInstance')) {
       this.isListing = false
       this.id = props.match.params.id
     }
@@ -107,7 +110,7 @@ class Jobs extends Component {
                   </div>
                 </div>
                 <div class='row'>{components}</div>
-                <div class='row justify-content-center'>
+                {/* <div class='row justify-content-center'>
                   <div class='col-md-4'>
                     <div class='featured-btn-wrap'>
                       <a href='#' class='btn btn-danger'>
@@ -115,8 +118,9 @@ class Jobs extends Component {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
+              <PageBar model='/jobs/'></PageBar>
             </section>
           </div>
         </div>
