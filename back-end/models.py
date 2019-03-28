@@ -157,6 +157,3 @@ if __name__ == "__main__":
     create_tables()
     make_jobs_table() 
     make_cities_table()
-
-
-

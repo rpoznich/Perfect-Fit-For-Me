@@ -9,6 +9,8 @@ import dbwriter
 import models
 from flask_cors import CORS, cross_origin 
 
+# import dbwriter
+# import models
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -21,7 +23,6 @@ db = SQLAlchemy(app)
 def get_events():
     events = dbwriter.Event.query.all()
     return jsonify([e.json() for e in events])
-
 
 @app.route('/api/jobs')
 @cross_origin()
@@ -38,7 +39,6 @@ def get_one_job_by_id(id):
 @cross_origin()
 def get_jobs_by_city(city): 
 	return jsonify(models.get_jobs_by_city(city))
-
 
 @app.route('/api/cities')
 @cross_origin()
