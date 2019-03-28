@@ -1,18 +1,13 @@
-
-from flask_sqlalchemy import sqlalchemy
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
-from app import db
 
-# city_table = db.Table('city',
-#   db.Column('city_name', db.String(30), db.ForeignKey('city.name'))
-#   db.Column('state',db.String(30), db.ForeignKey('city.state'))
-#   )
+application = Flask(__name__)
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://perfectfit:theozonelair@mysql-db-instance.chdg6as3bxgl.us-east-2.rds.amazonaws.com:3306/perfectfitdb'
+db = SQLAlchemy(application)
 
-# salaries_table = db.Table('salary', 
-#   db.Column('city_name', db.String(30), db.ForeignKey('city.name'))
-#   db.Column('state', db.String(30), db.ForeignKey('state.name'))
-#   )
 class City(db.Model): 
     __tablename__ = 'city'
     id = db.Column(db.Integer(), primary_key=True)
@@ -81,79 +76,30 @@ class Job(db.Model):
         }
         return job
 
-def remove_tables(): 
-    db.drop_all() 
-    print("Removed all tables")
+class Event(db.Model):
+    eventid = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
+    summary = db.Column(db.String(1000))
+    address = db.Column(db.String(200))
+    city = db.Column(db.String(25))
+    state = db.Column(db.String(25))
+    venue = db.Column(db.String(200))
+    start = db.Column(db.String(25))
+    end = db.Column(db.String(25))
+    timezone = db.Column(db.String(50))
+    url = db.Column(db.String(300))
+    logo = db.Column(db.String(300), nullable=True)
 
-def create_tables(): 
-    db.create_all() 
-    print("Tables created")
-
-def make_jobs_table(): 
-    with open('static/json/cities.json') as inp: 
-        cities = json.load(inp)
-    job_id = 1
-    for city in cities: 
-        salaries = cities[city]['salaries']
-        for salary in salaries: 
-            job_db_obj = Job(job_id, salary, city, cities[city]['location']['state'],salaries[salary])
-            db.session.add(job_db_obj)
-            job_id += 1
-    db.session.commit()
-    print("Made jobs table")
-
-def make_cities_table(): 
-    with open('static/json/cities.json') as inp: 
-        cities = json.load(inp)
-    for city in cities: 
-        c = cities[city]
-        city_db_obj = City(
-            c['city id'], city, c['location']['state'], c["location"]["population"],
-            c["images"]["web"], c["images"]["mobile"], c["location"]["latitude"],
-            c["location"]["longitude"] 
-            )
-        db.session.add(city_db_obj)
-    db.session.commit()
-    print("Made cities table")
-
-def get_one_job_by_id(identifier): 
-    j = Job.query.get(identifier)
-    return j.toDict()
-
-def get_jobs_by_city(city): 
-    job_objs = Job.query.filter_by(city_name=city).all()
-    jobs = {"Jobs":[]}
-    for j in job_objs:
-        jobs["Jobs"].append(j.toDict())
-    return jobs
-
-def get_jobs(): 
-    jobs = {"Jobs":[]}
-    job_objs = Job.query.all() 
-    for j in job_objs: 
-        jobs["Jobs"].append(j.toDict())
-    return jobs
-
-def get_cities(): 
-    cities = {}
-    city_objs = City.query.all()
-    for c in city_objs: 
-        name = c.name
-        cities[name] = c.toDict()
-    return cities
-
-def get_cities_by_state(state):
-    cities = {}
-    city_objs = City.query.filter_by(state=state).all() 
-    print(len(city_objs))
-    for c in city_objs: 
-        name = c.name
-        cities[name] = c.toDict() 
-    return cities
-
-if __name__ == "__main__": 
-    print("Making the databases")
-    remove_tables()
-    create_tables()
-    make_jobs_table() 
-    make_cities_table()
+    def json(self):
+        return {"eventid": self.eventid, 
+                "name": self.name,
+                "summary": self.summary,
+                "address": self.address,
+                "city": self.city,
+                "state": self.state,
+                "venue": self.venue,
+                "start": self.start,
+                "end": self.end,
+                "timezone": self.timezone,
+                "url": self.url,
+                "logo": self.logo}

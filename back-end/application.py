@@ -1,45 +1,75 @@
 from flask import Flask
 from flask import jsonify
-from config import Config
 from flask_sqlalchemy import SQLAlchemy
+from models import City, Job, Event, application, db
 import json
 import requests
-import citiesExtract
-import dbwriter
 
+#------------------#
+# DATABASE QUERIES #
+#------------------#
+def get_jobs(): 
+    jobs = {"Jobs":[]}
+    job_objs = Job.query.all() 
+    for j in job_objs: 
+        jobs["Jobs"].append(j.toDict())
+    return jobs
 
-application = Flask(__name__)
-application.config.from_object(Config) 
-application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://perfectfit:theozonelair@mysql-db-instance.chdg6as3bxgl.us-east-2.rds.amazonaws.com:3306/perfectfitdb'
-db = SQLAlchemy(application)
+def get_one_job_by_id(identifier): 
+    j = Job.query.get(identifier)
+    return j.toDict()
 
-@application.route('/') 
-def get_default(): 
-	return 'Welcome to the back-end' 
+def get_jobs_by_city(city): 
+    job_objs = Job.query.filter_by(city_name=city).all()
+    jobs = {"Jobs":[]}
+    for j in job_objs:
+        jobs["Jobs"].append(j.toDict())
+    return jobs
 
-@application.route('/api/events')
+def get_cities(): 
+    cities = {}
+    city_objs = City.query.all()
+    for c in city_objs: 
+        name = c.name
+        cities[name] = c.toDict()
+    return cities
+
+def get_cities_by_state(state):
+    cities = {}
+    city_objs = City.query.filter_by(state=state).all() 
+    print(len(city_objs))
+    for c in city_objs: 
+        name = c.name
+        cities[name] = c.toDict() 
+    return cities
+
+#------------#
+# API ROUTES #
+#------------#
+@app.route('/api/events')
 def get_events():
-    events = dbwriter.Event.query.all()
+    events = Event.query.all()
     return jsonify([e.json() for e in events])
 
-@application.route('/api/cities')
+@app.route('/api/jobs')
+def get_jobs(): 
+    return jsonify(get_jobs())
+
+@app.route('/api/jobs/id/<id>')
+def get_one_job_by_id(id):
+    return jsonify(get_one_job_by_id(id))
+
+@app.route("/api/jobs/city/<city>")
+def get_jobs_by_city(city): 
+    return jsonify(get_jobs_by_city(city))
+
+@app.route('/api/cities')
 def get_cities():
-    cities = citiesExtract.extract_cities()
-    images = citiesExtract.extract_images(cities)
-    values = citiesExtract.extract_values(cities)
-    location = citiesExtract.extract_location(cities)
-    salaries = citiesExtract.extract_salaries(cities)
-    cities = {}
-    city_id = 1
-    for k in images: 
-        if k in values and k in location and k in salaries: 
-            cities[k] = {"city id":city_id, "images":images[k], "qualities":values[k], 
-                        "location":location[k], "salaries":salaries[k]}
-        city_id += 1
+    return jsonify(get_cities())
 
-    return jsonify(cities) #"In development. PLEASE COME BACK LATER"
-
+@app.route('/api/cities/state/<state>')
+def get_cities_by_state(state):
+    return jsonify(get_cities_by_state(state))
 
 if __name__ == '__main__': 
 	application.run()
