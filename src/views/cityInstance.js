@@ -11,6 +11,14 @@ class CityInstance extends Component {
   }
 
   render () {
+    let jobItems = []
+    for(let jobs in this.props.jobID){
+      jobItems.push(<ListGroup.Item><a href={'/jobInstance/' + this.props.jobID[jobs]}>{this.props.jobNames[jobs]}</a></ListGroup.Item>);
+    }
+    let eventItems = []
+    for(let events in this.props.eventID){
+      eventItems.push(<ListGroup.Item><a href={'/eventInstance/' + this.props.eventID[events]}>{this.props.eventNames[events]}</a></ListGroup.Item>);
+    }
     return (
       <div className='city-instance'>
         <head>
@@ -289,10 +297,7 @@ class CityInstance extends Component {
                   <div class='card-body'>
                     <div class='text-center'>
                       <ListGroup variant='flush'>
-                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                        {eventItems}
                       </ListGroup>
                     </div>
                     {/* <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
@@ -319,10 +324,7 @@ class CityInstance extends Component {
                   <div class='card-body'>
                     <div class='text-center'>
                       <ListGroup variant='flush'>
-                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                      {jobItems}
                       </ListGroup>
                     </div>
                     {/* <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>

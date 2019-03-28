@@ -94,7 +94,9 @@ class Cities extends Component {
       })
       .then(data => {
         // Work with JSON data here
-        this.state.cities = data.cities
+        this.state.events = data.events;
+        this.state.jobs = data.jobs;
+        this.state.cities = data.cities;
         this.setState(this.state)
       })
       .catch(err => {
@@ -143,9 +145,30 @@ class Cities extends Component {
         </div>
       )
     } else {
+      let city = 'Austin'
+            let jobID = []
+            let jobNames = []
+            let eventID = []
+            let eventNames = []
+            for(let jobs in this.state.jobs){
+                let location = this.state.jobs[jobs].location.split(',');
+                let equals = location[0].toUpperCase() === city.toUpperCase();
+                if(equals){
+                    jobID.push(jobs);
+                    jobNames.push(this.state.jobs[jobs].company)
+                }
+            }
+            for(let events in this.state.events){
+                let location = this.state.events[events].address.split(',');
+                let equals = location[0].toUpperCase() === city.toUpperCase();
+                if(equals){
+                    eventID.push(events);
+                    eventNames.push(this.state.events[events].name);
+                }
+            }
       return (
         <div className='main' style={{ marginTop: '20vh' }}>
-          <CityInstance {...this.state.cities[this.id]} />
+          <CityInstance {...this.state.cities[this.id]} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>
         </div>
       )
     }
