@@ -95,8 +95,6 @@ def make_cities_table():
             c["images"]["web"], c["images"]["mobile"], c["location"]["latitude"],
             c["location"]["longitude"] 
             )
-        # job_db_obj = Job.query.filter_by(state=city_db_obj.state,city_name=city_db_obj.name).all()
-        # city_db_obj.jobs = job_db_obj
         db.session.add(city_db_obj)
     db.session.commit()
     print("Made cities table")
