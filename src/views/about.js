@@ -107,7 +107,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: 'https://www.linkedin.com/in/ryan-poznich-670293154',
-        tests: 0
+        tests: 9
       },
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
