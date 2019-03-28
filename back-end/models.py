@@ -88,6 +88,19 @@ def make_cities_table():
     db.session.commit()
     print("Made cities table")
 
+def get_one_job_by_id(identifier): 
+    j = Job.query.get(identifier)
+    job = {
+            "id":j.job_id, 
+            "job title":j.job_title,
+            "annual salary":j.salary, 
+            "location": {
+                "city": j.city_name,
+                "state": j.state
+            },
+            "description": j.description
+        }
+    return job
 def get_jobs(): 
     jobs = {"Jobs":[]}
     job_objs = Job.query.all() 
