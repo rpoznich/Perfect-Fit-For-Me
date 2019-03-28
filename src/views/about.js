@@ -213,7 +213,7 @@ class About extends Component {
         console.log(e)
       })
 
-    fetch('https://gitlab.com/api/v4/projects/11069679/issues?state=closed')
+    fetch('https://gitlab.com/api/v4/projects/11069679/issues?state=closed&per_page=100&page=1')
       .then(issues => issues.json())
       .then(issues => {
         for (let mem in this.state.memData) {

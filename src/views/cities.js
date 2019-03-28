@@ -34,7 +34,7 @@ class CityListing extends Component {
     return (
       <div class='featured-place-wrap'>
         <a href={'/cityInstance/' + this.props.id}>
-          <img src={'' + this.props.image} height='200' width='100' alt='#' />
+          <img src={'' + this.props[images][web]} height='200' width='100' alt='#' />
           <div className='container'>
             <span className={this.state.circleColor} title='Overall Rating'>
               {this.props.overall_rating / 10.0}
@@ -87,16 +87,17 @@ class Cities extends Component {
   }
 
   componentDidMount () {
-    fetch('../statics/data.json')
+    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities')
       .then(response => {
         // change this to actual API
         return response.json()
       })
       .then(data => {
         // Work with JSON data here
-        this.state.events = data.events;
-        this.state.jobs = data.jobs;
-        this.state.cities = data.cities;
+        // this.state.events = data.events;
+        // this.state.jobs = data.jobs;
+        this.state.cities = data;
+        console.log(this.state.cities);
         this.setState(this.state)
       })
       .catch(err => {
@@ -150,22 +151,22 @@ class Cities extends Component {
             let jobNames = []
             let eventID = []
             let eventNames = []
-            for(let jobs in this.state.jobs){
-                let location = this.state.jobs[jobs].location.split(',');
-                let equals = location[0].toUpperCase() === city.toUpperCase();
-                if(equals){
-                    jobID.push(jobs);
-                    jobNames.push(this.state.jobs[jobs].company)
-                }
-            }
-            for(let events in this.state.events){
-                let location = this.state.events[events].address.split(',');
-                let equals = location[0].toUpperCase() === city.toUpperCase();
-                if(equals){
-                    eventID.push(events);
-                    eventNames.push(this.state.events[events].name);
-                }
-            }
+            // for(let jobs in this.state.jobs){
+            //     let location = this.state.jobs[jobs].location.split(',');
+            //     let equals = location[0].toUpperCase() === city.toUpperCase();
+            //     if(equals){
+            //         jobID.push(jobs);
+            //         jobNames.push(this.state.jobs[jobs].company)
+            //     }
+            // }
+            // for(let events in this.state.events){
+            //     let location = this.state.events[events].address.split(',');
+            //     let equals = location[0].toUpperCase() === city.toUpperCase();
+            //     if(equals){
+            //         eventID.push(events);
+            //         eventNames.push(this.state.events[events].name);
+            //     }
+            // }
       return (
         <div className='main' style={{ marginTop: '20vh' }}>
           <CityInstance {...this.state.cities[this.id]} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>
