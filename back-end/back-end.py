@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask import jsonify
 from config import Config
@@ -6,16 +5,23 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
 import citiesExtract
+import dbwriter
 
 
 app = Flask(__name__)
 app.config.from_object(Config) 
-db = SQLAlchemy(app) 
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://perfectfit:theozonelair@mysql-db-instance.chdg6as3bxgl.us-east-2.rds.amazonaws.com:3306/perfectfitdb'
+db = SQLAlchemy(app)
 
 @app.route('/') 
 def get_default(): 
 	return 'Welcome to the back-end' 
+
+@app.route('/api/events')
+def get_events():
+    events = dbwriter.Event.query.all()
+    return jsonify([e.json() for e in events])
 
 @app.route('/api/cities')
 def get_cities():

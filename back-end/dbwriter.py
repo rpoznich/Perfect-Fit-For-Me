@@ -25,6 +25,18 @@ class Event(db.Model):
 	url = db.Column(db.String(300))
 	logo = db.Column(db.String(300), nullable=True)
 
+	def json(self):
+		return {"eventid": self.eventid, 
+				"name": self.name,
+				"summary": self.summary,
+				"address": self.address,
+				"venue": self.venue,
+				"start": self.start,
+				"end": self.end,
+				"timezone": self.timezone,
+				"url": self.url,
+				"logo": self.logo}
+
 if __name__ == "__main__":
 	# CLEARS ALL ROWS FOR SPECIFIED TABLE, UNCOMMENT WITH DISCRETION
 	# db.session.query(Event).delete()
