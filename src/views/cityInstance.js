@@ -3,6 +3,7 @@ import { homedir } from 'os'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../css/cityInstance/sb-admin-2.css'
 import '../css/cityInstance/sb-admin-2.min.css'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 class CityInstance extends Component {
   constructor (props) {
@@ -261,6 +262,68 @@ class CityInstance extends Component {
                         src={this.props.image}
                         alt=''
                       />
+                    </div>
+                    {/* <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+                      <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a> */}
+                  </div>
+                </div>
+                {/* <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                    </div>
+                    <div class="card-body">
+                      <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
+                      <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
+                    </div>
+                  </div> */}
+              </div>
+            </div>
+            <div className='row'>
+              <div class='col-lg-6 mb-4'>
+                <div class='card shadow mb-4'>
+                  <div class='card-header py-3'>
+                    <h6 class='m-0 font-weight-bold text-primary'>
+                      Events Nearby
+                    </h6>
+                  </div>
+                  <div class='card-body'>
+                    <div class='text-center'>
+                      <ListGroup variant='flush'>
+                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                      </ListGroup>
+                    </div>
+                    {/* <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+                      <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a> */}
+                  </div>
+                </div>
+                {/* <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                    </div>
+                    <div class="card-body">
+                      <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
+                      <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
+                    </div>
+                  </div> */}
+              </div>
+              <div class='col-lg-6 mb-4'>
+                <div class='card shadow mb-4'>
+                  <div class='card-header py-3'>
+                    <h6 class='m-0 font-weight-bold text-primary'>
+                      Jobs Nearby
+                    </h6>
+                  </div>
+                  <div class='card-body'>
+                    <div class='text-center'>
+                      <ListGroup variant='flush'>
+                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                      </ListGroup>
                     </div>
                     {/* <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
                       <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a> */}

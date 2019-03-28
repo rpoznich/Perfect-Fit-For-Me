@@ -8,6 +8,14 @@ class EventInstance extends Component {
   }
 
   render () {
+    let items = []
+    for(let jobs in this.props.jobID){
+      items.push(
+        <a href={'/jobInstance/' + jobs}>{this.props.jobNames[jobs]}
+          <br />
+        </a>
+      );
+    }
     return (
       <div className='main' id='target' style={{ margin: '20vh' }}>
         <div class='container'>
@@ -60,6 +68,13 @@ class EventInstance extends Component {
                 {this.props.venue}
                 <br />
                 {this.props.organizer}
+                <br />
+                <a href={'/cityInstance/' + this.props.cityID}>{this.props.cityName}</a>
+                <br />
+                <br />
+              <strong>Jobs Nearby</strong>
+                <br/>
+                {items}
                 <br />
                 <br />
                 <strong>Status</strong>

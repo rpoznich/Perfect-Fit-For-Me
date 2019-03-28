@@ -80,6 +80,8 @@ class Event extends Component {
           }).then(data => {
             // Work with JSON data here
             this.state.events = data.events;
+            this.state.jobs = data.jobs;
+            this.state.cities = data.cities;
             this.setState(this.state);
           }).catch(err => {
             // Do something for an error here
@@ -124,8 +126,29 @@ class Event extends Component {
              </div>
         )
         }else{
+            let eventCity = 'Austin'
+            let jobID = []
+            let jobNames = []
+            let cityID = 0
+            let cityName = ''
+            for(let jobs in this.state.jobs){
+                let location = this.state.jobs[jobs].location.split(',');
+                let equals = location[0].toUpperCase() === eventCity.toUpperCase();
+                if(equals){
+                    jobID.push(jobs);
+                    jobNames.push(this.state.jobs[jobs].company)
+                }
+            }
+            for(let cities in this.state.cities){
+                let location = this.state.cities[cities].name;
+                let equals = location.toUpperCase() === eventCity.toUpperCase();
+                if(equals){
+                    cityID = cities;
+                    cityName = location
+                }
+            }
             return (<div className="main" style={{marginTop: "20vh"}}> 
-                <EventInstance {...this.state.events[this.id]}></EventInstance>
+                <EventInstance {...this.state.events[this.id]} cityName={cityName} cityID={cityID} jobID={jobID} jobNames={jobNames}></EventInstance>
             </div>);
         }
     }
