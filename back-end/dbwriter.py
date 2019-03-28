@@ -31,7 +31,7 @@ if __name__ == "__main__":
 	# db.session.commit()
 
 	# DROPS THE SPECIFIED TABLE, UNCOMMENT WITH DISCRETION
-	Event.__table__.drop(db.engine)
+	# Event.__table__.drop(db.engine)
 
 	# CREATES TABLES FOR MODELS IF THEY DON'T EXIST
 	db.create_all()
