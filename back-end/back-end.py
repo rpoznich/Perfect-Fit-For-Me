@@ -1,10 +1,17 @@
 
 from flask import Flask
 from flask import jsonify
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
 import citiesExtract
+
+
 app = Flask(__name__)
+app.config.from_object(Config) 
+db = SQLAlchemy(app) 
+
 
 @app.route('/') 
 def get_default(): 
@@ -20,8 +27,8 @@ def get_cities():
     cities = {}
     city_id = 1
     for k in images: 
-    	if k in values and k in location and k in salaries: 
-    		cities[k] = {"city id":city_id, "images":images[k], "qualities":values[k], 
+        if k in values and k in location and k in salaries: 
+            cities[k] = {"city id":city_id, "images":images[k], "qualities":values[k], 
                         "location":location[k], "salaries":salaries[k]}
         city_id += 1
 
