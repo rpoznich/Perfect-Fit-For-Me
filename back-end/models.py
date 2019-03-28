@@ -51,6 +51,19 @@ class Job(db.Model):
         self.salary = salary 
         self.description = description
 
+    def toDict(self): 
+        job = {
+            "id":self.job_id, 
+            "job title":self.job_title,
+            "annual salary":self.salary, 
+            "location": {
+                "city": self.city_name,
+                "state": self.state
+            },
+            "description": self.description
+        }
+        return job
+
 def remove_tables(): 
     db.drop_all() 
     print("Removed all tables")
@@ -90,32 +103,20 @@ def make_cities_table():
 
 def get_one_job_by_id(identifier): 
     j = Job.query.get(identifier)
-    job = {
-            "id":j.job_id, 
-            "job title":j.job_title,
-            "annual salary":j.salary, 
-            "location": {
-                "city": j.city_name,
-                "state": j.state
-            },
-            "description": j.description
-        }
-    return job
+    return j.toDict()
+
+def get_jobs_by_city(city): 
+    job_objs = Job.query.filter_by(city_name=city).all()
+    jobs = {"Jobs":[]}
+    for j in job_objs:
+        jobs["Jobs"].append(j.toDict())
+    return jobs
+
 def get_jobs(): 
     jobs = {"Jobs":[]}
     job_objs = Job.query.all() 
     for j in job_objs: 
-        job = {
-            "id":j.job_id, 
-            "job title":j.job_title,
-            "annual salary":j.salary, 
-            "location": {
-                "city": j.city_name,
-                "state": j.state
-            },
-            "description": j.description
-        }
-        jobs["Jobs"].append(job)
+        jobs["Jobs"].append(j.toDict())
     return jobs
 
 def get_cities(): 

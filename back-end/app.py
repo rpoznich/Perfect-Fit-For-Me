@@ -23,15 +23,19 @@ def get_events():
     events = dbwriter.Event.query.all()
     return jsonify([e.json() for e in events])
 
-@app.route('/api/jobs/id/<id>')
-def get_one_job_by_id(id):
-	return jsonify(models.get_one_job_by_id(id))
 
 @app.route('/api/jobs')
 def get_jobs(): 
 	jobs = models.get_jobs()
 	return jsonify(jobs)
 
+@app.route('/api/jobs/id/<id>')
+def get_one_job_by_id(id):
+	return jsonify(models.get_one_job_by_id(id))
+
+@app.route("/api/jobs/city/<city>")
+def get_jobs_by_city(city): 
+	return jsonify(models.get_jobs_by_city(city))
 
 
 @app.route('/api/cities')
