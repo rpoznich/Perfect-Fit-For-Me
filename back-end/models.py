@@ -136,12 +136,10 @@ def get_cities():
             }
         }
     return cities
+    
 if __name__ == "__main__": 
     print("Making the databases")
     remove_tables()
     create_tables()
     make_jobs_table() 
     make_cities_table()
-
-
-

@@ -30,14 +30,17 @@ def scrape_events():
 	for p in range(1, 11): # scrape 10 pages
 		url_with_page = url + "&page=" + str(p)
 		eventsJSON = requests.get(url_with_page).text
-		page_info = json.loads(eventsJSON, object_hook=_byteify)["pagination"]
-		page_size = page_info["page_size"]
+		# page_info = json.loads(eventsJSON, object_hook=_byteify)["pagination"]
+		# page_size = page_info["page_size"]
 		events = json.loads(eventsJSON, object_hook=_byteify)["events"]
-		for i in range(0, page_size):
+		for i in range(0, len(events)):
+			# print(i)
 			eventInstance = {}
 			eventInstance["name"] = events[i]["name"]["text"]
 			eventInstance["summary"] = events[i]["summary"]
-			eventInstance["address"] = events[i]["venue"]["address"]["localized_address_display"]
+			eventInstance["address"] = events[i]["venue"]["address"]["address_1"]
+			eventInstance["city"] = events[i]["venue"]["address"]["city"]
+			eventInstance["state"] = events[i]["venue"]["address"]["region"]
 			eventInstance["venue"] = events[i]["venue"]["name"]
 			eventInstance["start"] = events[i]["start"]["local"]
 			eventInstance["end"] = events[i]["end"]["local"]

@@ -24,9 +24,6 @@ def extract_images(cities):
 
     return images
 
-
-
-
 def extract_values(cities): 
     print("okay, location")
     values = {}
@@ -102,8 +99,3 @@ def scrape_cities():
     with open('static/json/cities.json', 'w') as out: 
         out.write(json.dumps(cities,indent=4, separators=(',',': ')))
     return cities
-
-
-
-
-

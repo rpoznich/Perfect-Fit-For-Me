@@ -5,9 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
 import citiesExtract
-import dbwriter
-import models
-
+# import dbwriter
+# import models
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -18,7 +17,6 @@ db = SQLAlchemy(app)
 def get_events():
     events = dbwriter.Event.query.all()
     return jsonify([e.json() for e in events])
-
 
 @app.route('/api/jobs')
 def get_jobs(): 
@@ -32,7 +30,6 @@ def get_one_job_by_id(id):
 @app.route("/api/jobs/city/<city>")
 def get_jobs_by_city(city): 
 	return jsonify(models.get_jobs_by_city(city))
-
 
 @app.route('/api/cities')
 def get_cities():
