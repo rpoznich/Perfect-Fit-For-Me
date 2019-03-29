@@ -17,9 +17,14 @@ class City(db.Model):
     web_img = db.Column(db.String(100))
     mobile_img = db.Column(db.String(100))
     latitude = db.Column(db.Float(10))
-    longitude = db.Column(db.Float(10)) 
+    longitude = db.Column(db.Float(10))
+    housing = db.Column(db.Float(4)) 
+    cost_of_living = db.Column(db.Float(4)) 
+    tolerance = db.Column(db.Float(4)) 
+    commute = db.Column(db.Float(4)) 
 
-    def __init__(self, id, n, s, pop, web, mob, lat, lon): 
+    def __init__(self, id, n, s, pop, web, mob, lat, lon,
+        housing, col, tol, commute): 
         self.id = id
         self.name = n 
         self.state = s
@@ -27,7 +32,11 @@ class City(db.Model):
         self.web_img = web 
         self.mobile_img = mob 
         self.latitude = lat 
-        self.longitude = lon  
+        self.longitude = lon
+        self.housing = housing 
+        self.cost_of_living = col 
+        self.tolerance = tol 
+        self.commute = commute  
 
     def toDict(self): 
         name = self.name
@@ -42,6 +51,12 @@ class City(db.Model):
                 "latitude":self.latitude,
                 "longitude":self.longitude,
                 "state":self.state 
+            }, 
+            "qualities": {
+                "housing":self.housing,
+                "cost of living":self.cost_of_living,
+                "tolerance":self.tolerance, 
+                "commute":self.commute
             }
         }
         return city
@@ -54,7 +69,6 @@ class Job(db.Model):
     state = db.Column(db.String(30))
     salary = db.Column(db.Float(10)) 
     description = db.Column(db.String(4000)) 
-
     def __init__ (self, id, name, city_name, state, salary = None, description = None):
         self.job_id = id
         self.job_title = name

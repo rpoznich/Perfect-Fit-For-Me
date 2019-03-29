@@ -1,13 +1,17 @@
 from models import City, Job, Event, db
 import json
 
-def clear_tables(): 
-    db.session.query(City).delete()
-    db.session.query(Job).delete()
-    db.session.query(Event).delete()
-    db.session.commit()
-    print("   Cleared tables")
-
+def clear_tables():
+    db.drop_all()
+    # db.session.query(City).delete()
+    # db.session.query(Job).delete()
+    # db.session.query(Event).delete()
+    # db.session.commit()
+    #db.drop_all()
+    print("   Deleted tables")
+def create_tables(): 
+    db.create_all() 
+    print("   Created Tables")
 def populate_cities(): 
     with open('static/json/cities.json') as inp: 
         cities = json.load(inp)
@@ -16,7 +20,8 @@ def populate_cities():
         city_db_obj = City(
             c['city id'], city, c['location']['state'], c["location"]["population"],
             c["images"]["web"], c["images"]["mobile"], c["location"]["latitude"],
-            c["location"]["longitude"] 
+            c["location"]["longitude"], c["qualities"]["Housing"], c["qualities"]["Cost of Living"],
+            c["qualities"]["Tolerance"], c["qualities"]["Commute"]  
             )
         db.session.add(city_db_obj)
     db.session.commit()
@@ -59,6 +64,7 @@ def populate_events():
 if __name__ == "__main__": 
     print("Starting population process")
     clear_tables()
+    create_tables()
     populate_cities()
     populate_jobs()
     populate_events()
