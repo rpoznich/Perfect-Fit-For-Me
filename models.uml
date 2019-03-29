@@ -1,0 +1,39 @@
+@startuml
+object job {
+  int id 
+  text job_title 
+  text city_name 
+  text state 
+  float salary 
+  text description
+}
+object city {
+  int id
+  text population 
+  link web_img 
+  link mobile_img
+  float latitude 
+  float longitude 
+  text state 
+  float housing 
+  float cost of living 
+  float tolerance 
+  float commute  
+}
+object event {
+  int eventid 
+  text name 
+  text summary 
+  text address 
+  text city 
+  text state 
+  text venue 
+  text start 
+  text end 
+  text timezone 
+  link url 
+  link logo
+}
+event --* city
+job --* city
+@enduml
