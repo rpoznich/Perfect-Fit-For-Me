@@ -24,7 +24,7 @@ class EventListing extends Component{
     }
     render(){
         return (<div class="featured-place-wrap">
-                            <a href={"/eventInstance/"+this.props.code}>
+                            <a href={"/eventInstance/"+this.props.eventid}>
                             <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
                             <div className="container">
                                 <span className={this.state.circleColor} title="Status">{}</span>
@@ -59,19 +59,22 @@ class Event extends Component {
     constructor(props)
     {
         super(props);
+        this.eid = -1
         this.isListing = true
         // If is an instance?
         let pathName = window.location.pathname.split("/");
         if (pathName.includes('eventInstance')) {
             this.isListing = false
-            this.code = props.match.params.code
+            this.eid = parseInt(pathName[pathName.length-1]) - 1
         }
         this.state = 
         {
             "events":
             {
 
-            }
+            },
+            "jobs": [],
+            hasMounted : 0
         }
     }
     
@@ -82,8 +85,18 @@ class Event extends Component {
           }).then(data => {
             // Work with JSON data here
             this.state.events = data;
-            // this.state.jobs = data.jobs;
-            // this.state.cities = data.cities;
+            this.state.hasMounted = 1;
+            this.setState(this.state);
+          }).catch(err => {
+            // Do something for an error here
+            console.log("Error Reading data " + err);
+          });
+        fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
+            return response.json();
+          }).then(data => {
+            // Work with JSON data here
+            this.state.jobs = data["Jobs"];
+            this.state.hasMounted = 1;
             this.setState(this.state);
           }).catch(err => {
             // Do something for an error here
@@ -95,10 +108,9 @@ class Event extends Component {
     {
         if(this.isListing){
         let components = [];
-        
         for(let i in this.state.events)
         {
-            components.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]} code={i}/></div>)
+            components.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
         }
         return(
             <div className="cities">
@@ -129,29 +141,33 @@ class Event extends Component {
              </div>
         )
         }else{
-            let eventCity = 'Austin'
+            console.log(this.eid)
+            console.log(typeof this.eid)
+            console.log(this.state.events)
             let jobID = []
             let jobNames = []
-            let cityID = 0
-            let cityName = '?!?!'
-            // for(let jobs in this.state.jobs){
-            //     let location = this.state.jobs[jobs].location.split(',');
-            //     let equals = location[0].toUpperCase() === eventCity.toUpperCase();
-            //     if(equals){
-            //         jobID.push(jobs);
-            //         jobNames.push(this.state.jobs[jobs].company)
-            //     }
-            // }
-            // for(let cities in this.state.cities){
-            //     let location = this.state.cities[cities].name;
-            //     let equals = location.toUpperCase() === eventCity.toUpperCase();
-            //     if(equals){
-            //         cityID = cities;
-            //         cityName = location
-            //     }
-            // }
+            if(this.state.hasMounted === 1){
+            let eventCity = this.state.events[this.eid].city
+            // let cityID = 0
+            // let cityName = '?!?!'
+            if(eventCity != null){
+              for(let pos in this.state.jobs){
+                  let location = this.state.jobs[pos].location.city
+                  let equals = location.toUpperCase() === eventCity.toUpperCase();
+                  if(equals){
+                      let dict = this.state.jobs[pos]
+                      jobID.push(dict.id); 
+                      jobNames.push(dict["job title"])
+                  }
+                  if(jobID.length >= 3){
+                    break;
+                  }
+              }
+            }
+        }
+            console.log(this.eid)
             return (<div className="main" style={{marginTop: "20vh"}}> 
-                <EventInstance code={this.code} cityName={cityName} cityID={cityID} jobID={jobID} jobNames={jobNames}></EventInstance>
+                <EventInstance {...this.state.events[this.eid]} hasMounted={this.state.hasMounted} jobID={jobID} jobNames={jobNames}></EventInstance>
             </div>);
         }
     }

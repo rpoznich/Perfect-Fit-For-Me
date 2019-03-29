@@ -5,45 +5,53 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 class EventInstance extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      attr: {name: []}
-    }
-  }
-
-  componentDidMount()
-  {
-    console.log("we here")
-      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
-          return response.json();
-        }).then(data => {
-          // Work with JSON data here
-          console.log("WTF")
-          this.state.attr = data[this.props.code];
-          // this.state.jobs = data.jobs;
-          // this.state.cities = data.cities;
-          this.setState(this.state);
-          console.log("hello??")
-        }).catch(err => {
-          // Do something for an error here
-          console.log("Error Reading data " + err);
-        });
   }
 
   render () {
+    //LIST OF DEFAULT VALS HERE
+    let address = ''
+    let city = ''
+    let end = ''
+    let logo = ''
+    let name = ''
+    let start = ''
+    let state = ''
+    let summary = ''
+    let timezone = ''
+    let url = ''
+    let venue = ''
+    //LIST OF ACTUAL VALS
+    if(this.props.hasMounted === 1){
+      address = this.props.address
+      city = this.props.city
+      if(city == null){
+        city = 'Online Event!'
+      }
+      end = this.props.end
+      logo = this.props.logo
+      start = this.props.start
+      state = this.props.state
+      summary = this.props.summary
+      timezone = this.props.timezone
+      url = this.props.url
+      venue = this.props.venue
+    }
     let items = []
+    let i = 0
     for(let jobs in this.props.jobID){
       items.push(
-        <a href={'/jobInstance/' + jobs}>{this.props.jobNames[jobs]}
+        <a href={'/jobInstance/' + jobs}>{this.props.jobNames[i]}
           <br />
         </a>
       );
+      i++
     }
     return (
       <div className='main' id='target' style={{ margin: '20vh' }}>
         <div class='container'>
           <div class='row'>
             <div class='col-md-8 mb-5'>
-              <h2>{this.state.attr.name}</h2>
+              <h2>{name}</h2>
               <hr />
               <div class='col-lg-32 mb-4'>
                 <div class='card shadow mb-4'>
@@ -57,7 +65,7 @@ class EventInstance extends Component {
                       <img
                         class='img-fluid px-3 px-sm-4 mt-3 mb-4'
                         style={{ width: '100%' }}
-                        src={this.state.attr.logo}
+                        src={logo}
                         alt=''
                       />
                     </div>
@@ -76,8 +84,8 @@ class EventInstance extends Component {
                   </div> */}
               </div>
               <hr />
-              <p>{this.state.attr.summary}</p>
-              <a class='btn btn-primary btn-lg' href={this.state.attr.url}>
+              <p>{summary}</p>
+              <a class='btn btn-primary btn-lg' href={url}>
                 Get A Ticket! &raquo;
               </a>
             </div>
@@ -87,14 +95,14 @@ class EventInstance extends Component {
               <address>
               <strong>Location</strong>
                 <br />
-                {this.state.attr.venue}
-                {/* <br />
-                {this.props.organizer}
-                <br /> */}
+                {(city != 'Online Event!') && 
+                <div>
+                {venue}
                 <br />
-                {this.state.attr.address}
+                {address}
                 <br />
-                <a href={'/cityInstance/' + this.state.attr.cityName}>{this.state.attr.cityName}</a>
+                <a href={'/cityInstance/' + city}>{city}</a></div>
+                || {city}}
                 <br />
                 <br />
               <strong>Jobs Nearby</strong>
@@ -109,13 +117,13 @@ class EventInstance extends Component {
                 <br />
                 <strong>Date and Time</strong>
                 <br />
-                {this.state.attr.start}
+                {start}
                 <br />
                 {' - '}
                 <br />
-                {this.state.attr.end}
+                {end}
                 <br />
-                {this.state.attr.timezone}
+                {'Time Zone: ' + timezone}
               </address>
             </div>
           </div>
