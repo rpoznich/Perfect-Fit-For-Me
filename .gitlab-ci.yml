@@ -1,0 +1,12 @@
+before_script:
+    - date
+    - uname -a
+    - printenv | sort
+    
+    
+frontend:  
+    docker build frontend .
+    script:
+        - cd ./frontend-react-app
+        - npm install
+        - npm test
