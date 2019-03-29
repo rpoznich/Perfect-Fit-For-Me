@@ -61,18 +61,19 @@ class Event extends Component {
         super(props);
         this.eid = -1
         this.isListing = true
+        this.pageNumber = 0
+        this.numPages = 0
         // If is an instance?
         let pathName = window.location.pathname.split("/");
         if (pathName.includes('eventInstance')) {
             this.isListing = false
             this.eid = parseInt(pathName[pathName.length-1]) - 1
+        }else {
+            this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
         }
         this.state = 
         {
-            "events":
-            {
-
-            },
+            "events": [],
             "jobs": [],
             hasMounted : 0
         }
@@ -86,6 +87,7 @@ class Event extends Component {
             // Work with JSON data here
             this.state.events = data;
             this.state.hasMounted = 1;
+            this.state.numPages = Math.ceil(this.state.events.length / 9);
             this.setState(this.state);
           }).catch(err => {
             // Do something for an error here
@@ -108,9 +110,17 @@ class Event extends Component {
     {
         if(this.isListing){
         let components = [];
+        let count = 1;
+        let indivComp = [];
         for(let i in this.state.events)
         {
-            components.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
+            if(count % 10 !== 0){
+                indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
+            }else{
+                components.push(indivComp);
+                indivComp = [];
+            }
+            ++count;
         }
         return(
             <div className="cities">
@@ -125,7 +135,7 @@ class Event extends Component {
                 </div>
             </div>
             <div class="row">
-                {components}
+                {components[this.pageNumber]}
             </div>
             {/* <div class="row justify-content-center">
                 <div class="col-md-4">
@@ -135,7 +145,7 @@ class Event extends Component {
                 </div>
             </div> */}
         </div>
-        <PageBar model='/events/'></PageBar>
+        <PageBar numPages={49} model='/events/'></PageBar>
     </section>
              </div>
              </div>

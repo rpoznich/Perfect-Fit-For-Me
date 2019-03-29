@@ -12,9 +12,18 @@ class CityListing extends Component {
   constructor (props) {
     super(props)
     this.state = {}
-    if (this.props.overall_rating < 40.0) {
+    this.state.overall = 0
+    let count = 0;
+    for(let quals in this.props.qualities){
+      ++count;
+      this.state.overall += this.props.qualities[quals];
+    }
+    this.state.overall /= count;
+    this.state.overall *= 10;
+    this.state.overall = Math.round(this.state.overall);
+    if (this.state.overall < 40.0) {
       this.state.circleColor = 'featured-rating'
-    } else if (this.props.overall_rating >= 70.0) {
+    } else if (this.state.overall >= 70.0) {
       this.state.circleColor = 'featured-rating-green'
     } else {
       this.state.circleColor = 'featured-rating-orange'
@@ -37,7 +46,7 @@ class CityListing extends Component {
           <img src={'' + this.props.images.web} height='200' width='100' alt='#' />
           <div className='container'>
             <span className={this.state.circleColor} title='Overall Rating'>
-              {this.props.overall_rating / 10.0}
+              {this.state.overall / 10}
             </span>
           </div>
           <div class='featured-title-box'>
@@ -75,11 +84,14 @@ class Cities extends Component {
   constructor (props) {
     super(props)
     this.isListing = true
+    this.pageNumber = 0;
     // If is an instance?
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('cityInstance')) {
       this.isListing = false
       this.id = props.match.params.id
+    }else{
+      this.pageNumber = parseInt(pathName[pathName.length-1]) - 1;
     }
     this.state = {
       cities: {}, events: {}, hasMounted : 0
@@ -142,14 +154,21 @@ class Cities extends Component {
 
   render () {
     if (this.isListing) {
-      let components = []
-      //NEED TO CHANGE WHEN WE GET DATA FROM BACKEND
+      let components = [];
+      let count = 1;
+      let indivComp = [];
       for (let id in this.state.cities) {
-        components.push(
-          <div className='col-md-4 featured-responsive'>
-            <CityListing id={id} {...this.state.cities[id]} />
-          </div>
-        )
+        if(count % 10 !== 0){  
+          indivComp.push(
+              <div className='col-md-4 featured-responsive'>
+                <CityListing id={id} {...this.state.cities[id]} />
+              </div>
+          )
+        }else{
+          components.push(indivComp);
+          indivComp = [];
+        }
+        ++count;
       }
       return (
         <div className='cities'>
@@ -163,7 +182,7 @@ class Cities extends Component {
                     </div>
                   </div>
                 </div>
-                <div class='row'>{components}</div>
+                <div class='row'>{components[this.pageNumber]}</div>
                 {/* <div class='row justify-content-center'>
                   <div class='col-md-4'>
                     <div class='featured-btn-wrap'>
@@ -174,7 +193,7 @@ class Cities extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar model='/cities/'></PageBar>
+              <PageBar numPages={8} model='/cities/'></PageBar>
             </section>
           </div>
         </div>

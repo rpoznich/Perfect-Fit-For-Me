@@ -8,7 +8,7 @@ class PageBar extends Component {
         super(props)
         //Get number of pages required
         this.state = {};
-        this.state.numPages = 10; //CHANGE
+        this.state.numPages = this.props.numPages;
         let url = window.location.pathname.split("/");
         let ap = url[url.length - 1];
         this.state.activePage =  parseInt(ap, 10);
