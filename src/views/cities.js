@@ -21,7 +21,7 @@ class CityListing extends Component {
     }
     this.state.highlightedDS = ''
     this.state.unhighlightedDS = ''
-    let bound = Math.ceil(this.props.cost_of_living / 2)
+    let bound = Math.ceil(this.props.qualities['Cost of Living'] / 2)
     for (let i = 0; i < bound; ++i) {
       this.state.highlightedDS += '$'
     }
@@ -34,14 +34,14 @@ class CityListing extends Component {
     return (
       <div class='featured-place-wrap'>
         <a href={'/cityInstance/' + this.props.id}>
-          <img src={'' + this.props[images][web]} height='200' width='100' alt='#' />
+          <img src={'' + this.props.images.web} height='200' width='100' alt='#' />
           <div className='container'>
             <span className={this.state.circleColor} title='Overall Rating'>
               {this.props.overall_rating / 10.0}
             </span>
           </div>
           <div class='featured-title-box'>
-            <h6>{this.props.name}</h6>
+            <h6>{this.props.id}</h6>
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
             <p>
@@ -51,7 +51,7 @@ class CityListing extends Component {
             <ul>
               <li>
                 <span class='icon-location-pin' />
-                <p>{this.props.state}</p>
+                <p>{this.props.location.state}</p>
               </li>
               {/* <li><span class="icon-screen-smartphone"></span>
                                         <p>+44 20 7336 8898</p>
@@ -82,12 +82,12 @@ class Cities extends Component {
       this.id = props.match.params.id
     }
     this.state = {
-      cities: {}
+      cities: {}, events: {}, hasMounted : 0
     }
   }
 
   componentDidMount () {
-    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities')
+    fetch('../statics/cities.json')
       .then(response => {
         // change this to actual API
         return response.json()
@@ -97,7 +97,41 @@ class Cities extends Component {
         // this.state.events = data.events;
         // this.state.jobs = data.jobs;
         this.state.cities = data;
-        console.log(this.state.cities);
+        this.state.hasMounted = 1
+        this.setState(this.state)
+      })
+      .catch(err => {
+        // Do something for an error here
+        console.log('Error Reading data ' + err)
+      })
+      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
+      .then(response => {
+        // change this to actual API
+        return response.json()
+      })
+      .then(data => {
+        // Work with JSON data here
+        // this.state.events = data.events;
+        // this.state.jobs = data.jobs;
+        this.state.events = data;
+        this.state.hasMounted = 1
+        this.setState(this.state)
+      })
+      .catch(err => {
+        // Do something for an error here
+        console.log('Error Reading data ' + err)
+      })
+      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
+      .then(response => {
+        // change this to actual API
+        return response.json()
+      })
+      .then(data => {
+        // Work with JSON data here
+        // this.state.events = data.events;
+        // this.state.jobs = data.jobs;
+        this.state.jobs = data["Jobs"];
+        this.state.hasMounted = 1
         this.setState(this.state)
       })
       .catch(err => {
@@ -146,30 +180,33 @@ class Cities extends Component {
         </div>
       )
     } else {
-      let city = 'Austin'
+            let city = this.id;
             let jobID = []
             let jobNames = []
             let eventID = []
             let eventNames = []
-            // for(let jobs in this.state.jobs){
-            //     let location = this.state.jobs[jobs].location.split(',');
-            //     let equals = location[0].toUpperCase() === city.toUpperCase();
-            //     if(equals){
-            //         jobID.push(jobs);
-            //         jobNames.push(this.state.jobs[jobs].company)
-            //     }
-            // }
-            // for(let events in this.state.events){
-            //     let location = this.state.events[events].address.split(',');
-            //     let equals = location[0].toUpperCase() === city.toUpperCase();
-            //     if(equals){
-            //         eventID.push(events);
-            //         eventNames.push(this.state.events[events].name);
-            //     }
-            // }
+            for(let jobs in this.state.jobs){
+                let location = this.state.jobs[jobs].location.city;
+                let equals = location.toUpperCase() === city.toUpperCase();
+                if(equals){
+                    jobID.push(this.state.jobs[jobs].id);
+                    jobNames.push(this.state.jobs[jobs]['job title'])
+                }
+            }
+            for(let eve in this.state.events){
+                let location = this.state.events[eve].city;
+                let equals = false;
+                if(location != null){
+                  equals = location.toUpperCase() === city.toUpperCase();
+                }
+                if(equals){
+                    eventID.push(this.state.events[eve].eventid);
+                    eventNames.push(this.state.events[eve].name);
+                }
+            }
       return (
         <div className='main' style={{ marginTop: '20vh' }}>
-          <CityInstance {...this.state.cities[this.id]} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>
+          <CityInstance {...this.state.cities[this.id]} hasMounted={this.state.hasMounted} id={this.id} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>
         </div>
       )
     }

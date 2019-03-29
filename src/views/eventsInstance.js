@@ -5,6 +5,28 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 class EventInstance extends Component {
   constructor (props) {
     super(props)
+    this.state = {
+      attr: {name: []}
+    }
+  }
+
+  componentDidMount()
+  {
+    console.log("we here")
+      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
+          return response.json();
+        }).then(data => {
+          // Work with JSON data here
+          console.log("WTF")
+          this.state.attr = data[this.props.code];
+          // this.state.jobs = data.jobs;
+          // this.state.cities = data.cities;
+          this.setState(this.state);
+          console.log("hello??")
+        }).catch(err => {
+          // Do something for an error here
+          console.log("Error Reading data " + err);
+        });
   }
 
   render () {
@@ -21,13 +43,13 @@ class EventInstance extends Component {
         <div class='container'>
           <div class='row'>
             <div class='col-md-8 mb-5'>
-              <h2>{this.props.name}</h2>
+              <h2>{this.state.attr.name}</h2>
               <hr />
               <div class='col-lg-32 mb-4'>
                 <div class='card shadow mb-4'>
                   <div class='card-header py-3'>
                     <h6 class='m-0 font-weight-bold text-primary'>
-                      Illustrations
+                      Logo
                     </h6>
                   </div>
                   <div class='card-body'>
@@ -35,7 +57,7 @@ class EventInstance extends Component {
                       <img
                         class='img-fluid px-3 px-sm-4 mt-3 mb-4'
                         style={{ width: '100%' }}
-                        src={this.props.logo}
+                        src={this.state.attr.logo}
                         alt=''
                       />
                     </div>
@@ -54,8 +76,8 @@ class EventInstance extends Component {
                   </div> */}
               </div>
               <hr />
-              <p>{this.props.description}</p>
-              <a class='btn btn-primary btn-lg' href={this.props.url}>
+              <p>{this.state.attr.summary}</p>
+              <a class='btn btn-primary btn-lg' href={this.state.attr.url}>
                 Get A Ticket! &raquo;
               </a>
             </div>
@@ -65,28 +87,35 @@ class EventInstance extends Component {
               <address>
               <strong>Location</strong>
                 <br />
-                {this.props.venue}
-                <br />
+                {this.state.attr.venue}
+                {/* <br />
                 {this.props.organizer}
+                <br /> */}
                 <br />
-                <a href={'/cityInstance/' + this.props.cityID}>{this.props.cityName}</a>
+                {this.state.attr.address}
+                <br />
+                <a href={'/cityInstance/' + this.state.attr.cityName}>{this.state.attr.cityName}</a>
                 <br />
                 <br />
               <strong>Jobs Nearby</strong>
                 <br/>
                 {items}
                 <br />
-                <br />
+                {/* <br />
                 <strong>Status</strong>
                 <br />
                 {this.props.status}
-                <br />
+                <br /> */}
                 <br />
                 <strong>Date and Time</strong>
                 <br />
-                {this.props.start + " -"}
+                {this.state.attr.start}
                 <br />
-                {this.props.end}
+                {' - '}
+                <br />
+                {this.state.attr.end}
+                <br />
+                {this.state.attr.timezone}
               </address>
             </div>
           </div>

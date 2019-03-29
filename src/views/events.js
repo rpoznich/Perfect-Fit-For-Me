@@ -11,10 +11,12 @@ import PageBar from './pagebar.js'
 class EventListing extends Component{
     constructor(props){
         super(props);
+        // WHY?
         this.state = {}
-        if(this.props.status == "completed" || this.props.status == "ended"){
+        // FIND A BETTER METRIC
+        if(this.props.eventid < 33){
             this.state.circleColor = "featured-rating";
-        } else if(this.props.status == "live"){
+        } else if(this.props.eventid > 100){
             this.state.circleColor = "featured-rating-green";
         } else {
             this.state.circleColor = "featured-rating-orange";
@@ -22,19 +24,19 @@ class EventListing extends Component{
     }
     render(){
         return (<div class="featured-place-wrap">
-                            <a href={"/eventInstance/"+this.props.id}>
+                            <a href={"/eventInstance/"+this.props.code}>
                             <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
                             <div className="container">
                                 <span className={this.state.circleColor} title="Status">{}</span>
                             </div>
                             <div class="featured-title-box">
                                 <h6 >{this.props.name}</h6>
-                                <p>{this.props.organizer}</p> 
+                                <p>{this.props.venue}</p> 
                                     {/* <span>• </span>
                                     <p>3 Reviews</p> <span> • </span> */}
                                 <ul>
                                     <li><span class="icon-location-pin"></span>
-                                        <p>{this.props.venue}</p>
+                                        <p>{this.props.city + ', ' + this.props.state}</p>
                                     </li>
                                     {/* <li><span class="icon-screen-smartphone"></span>
                                         <p>+44 20 7336 8898</p>
@@ -62,7 +64,7 @@ class Event extends Component {
         let pathName = window.location.pathname.split("/");
         if (pathName.includes('eventInstance')) {
             this.isListing = false
-            this.id = props.match.params.id
+            this.code = props.match.params.code
         }
         this.state = 
         {
@@ -75,13 +77,13 @@ class Event extends Component {
     
     componentDidMount()
     {
-        fetch('../statics/data.json').then(response => { //change this to actual API
+        fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
             return response.json();
           }).then(data => {
             // Work with JSON data here
-            this.state.events = data.events;
-            this.state.jobs = data.jobs;
-            this.state.cities = data.cities;
+            this.state.events = data;
+            // this.state.jobs = data.jobs;
+            // this.state.cities = data.cities;
             this.setState(this.state);
           }).catch(err => {
             // Do something for an error here
@@ -93,9 +95,10 @@ class Event extends Component {
     {
         if(this.isListing){
         let components = [];
-        for(let id in this.state.events)
+        
+        for(let i in this.state.events)
         {
-            components.push( <div className="col-md-4 featured-responsive"><EventListing id={id} {...this.state.events[id]}/></div>)
+            components.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]} code={i}/></div>)
         }
         return(
             <div className="cities">
@@ -130,25 +133,25 @@ class Event extends Component {
             let jobID = []
             let jobNames = []
             let cityID = 0
-            let cityName = ''
-            for(let jobs in this.state.jobs){
-                let location = this.state.jobs[jobs].location.split(',');
-                let equals = location[0].toUpperCase() === eventCity.toUpperCase();
-                if(equals){
-                    jobID.push(jobs);
-                    jobNames.push(this.state.jobs[jobs].company)
-                }
-            }
-            for(let cities in this.state.cities){
-                let location = this.state.cities[cities].name;
-                let equals = location.toUpperCase() === eventCity.toUpperCase();
-                if(equals){
-                    cityID = cities;
-                    cityName = location
-                }
-            }
+            let cityName = '?!?!'
+            // for(let jobs in this.state.jobs){
+            //     let location = this.state.jobs[jobs].location.split(',');
+            //     let equals = location[0].toUpperCase() === eventCity.toUpperCase();
+            //     if(equals){
+            //         jobID.push(jobs);
+            //         jobNames.push(this.state.jobs[jobs].company)
+            //     }
+            // }
+            // for(let cities in this.state.cities){
+            //     let location = this.state.cities[cities].name;
+            //     let equals = location.toUpperCase() === eventCity.toUpperCase();
+            //     if(equals){
+            //         cityID = cities;
+            //         cityName = location
+            //     }
+            // }
             return (<div className="main" style={{marginTop: "20vh"}}> 
-                <EventInstance {...this.state.events[this.id]} cityName={cityName} cityID={cityID} jobID={jobID} jobNames={jobNames}></EventInstance>
+                <EventInstance code={this.code} cityName={cityName} cityID={cityID} jobID={jobID} jobNames={jobNames}></EventInstance>
             </div>);
         }
     }
