@@ -20,4 +20,5 @@ backend:
         - pip install flask_sqlalchemy
         - pip install ConfigParser
         - pip install mysqlclient
+        - pip install PyMySQL
         - python tests.py
