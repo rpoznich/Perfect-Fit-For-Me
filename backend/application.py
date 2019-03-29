@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import jsonify
+from flask import Flask, jsonify, render_template
 from flask_cors import CORS, cross_origin
 from models import City, Job, Event, application, db
 import json
@@ -48,6 +47,11 @@ def query_cities_by_state(state):
 #------------#
 # API ROUTES #
 #------------#
+@application.route('/api/')
+@cross_origin()
+def render_home_page():
+    return render_template('home.html')
+
 @application.route('/api/events')
 @cross_origin()
 def get_events():

@@ -1,0 +1,24 @@
+before_script:
+    - date
+    - uname -a
+    - printenv | sort
+    
+    
+frontend:  
+    image: gpdowning/node
+    script:
+        - npm install
+        - npm test
+backend:  
+    image: gpdowning/python
+    script:
+        - cd ./backend
+        - pip install flask
+        - pip install requests
+        - pip install flask_cors
+        - pip install flask_marshmallow
+        - pip install flask_sqlalchemy
+        - pip install ConfigParser
+        - pip install mysqlclient
+        - pip install PyMySQL
+        - python tests.py

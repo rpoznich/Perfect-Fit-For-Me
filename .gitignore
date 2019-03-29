@@ -1,2 +1,6 @@
 *node_modules
+node_modules
+backend/env
+backend/requirements.txt
+backend/perfect-fit.zip
 *.pyc
