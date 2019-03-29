@@ -1,20 +1,20 @@
 ## Project Information
 
-* Name: Daniel Thai
-* EID: dkt433
-* GitLab ID: danielthai
+Name: Daniel Thai<br>
+EID: dkt433<br>
+GitLab ID: danielthai
 
-* Name: Dylan Kile
-* EID: 
-* GitLab ID: 
+Name: Dylan Kile<br>
+EID: <br>
+GitLab ID: 
 
-* Name: Jonathan Nguyen
-* EID: 
-* GitLab ID: 
+Name: Jonathan Nguyen<br>
+EID: <br>
+GitLab ID: 
 
-* Name: Ryan Poznich
-* EID: 
-* GitLab ID: 
+Name: Ryan Poznich<br>
+EID: <br>
+GitLab ID: 
 
 Git SHA: <br>
 GitLab Pipelines: https://gitlab.com/rpoznich/perfect-fit/pipelines<br>
