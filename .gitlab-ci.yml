@@ -12,7 +12,7 @@ frontend:
 backend:  
     image: gpdowning/python
     script:
-        - cd ./tests/back-end
+        - cd ./backend
         - pip install flask
         - pip install requests
         - pip install flask_cors
@@ -20,4 +20,5 @@ backend:
         - pip install flask_sqlalchemy
         - pip install ConfigParser
         - pip install mysqlclient
+        - pip install PyMySQL
         - python tests.py
