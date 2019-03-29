@@ -9,12 +9,12 @@ EID: <br>
 GitLab ID: 
 
 Name: Jonathan Nguyen<br>
-EID: <br>
-GitLab ID: 
+EID: jvn344<br>
+GitLab ID: gammajohn
 
 Name: Ryan Poznich<br>
-EID: <br>
-GitLab ID: 
+EID: rjp2433<br>
+GitLab ID: rpoznich
 
 Git SHA: <br>
 GitLab Pipelines: https://gitlab.com/rpoznich/perfect-fit/pipelines<br>
