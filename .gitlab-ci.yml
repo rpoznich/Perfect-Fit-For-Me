@@ -9,3 +9,15 @@ frontend:
     script:
         - npm install
         - npm test
+backend:  
+    image: gpdowning/python
+    script:
+        - cd ./tests/back-end
+        - pip install flask
+        - pip install requests
+        - pip install flask_cors
+        - pip install flask_marshmallow
+        - pip install flask_sqlalchemy
+        - pip install ConfigParser
+        - pip install mysqlclient
+        - python tests.py
