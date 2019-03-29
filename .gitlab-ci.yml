@@ -7,6 +7,5 @@ before_script:
 frontend:  
     docker build frontend .
     script:
-        - cd ./frontend-react-app
         - npm install
         - npm test
