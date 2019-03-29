@@ -23,8 +23,6 @@ backend_unit:
         - pip install mysqlclient
         - pip install PyMySQL
         - python tests.py
-        - pip install nodejs
-        - pip install newman
 backend_postman:
     image: gpdowning/node
     script:
