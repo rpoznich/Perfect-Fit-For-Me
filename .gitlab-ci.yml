@@ -7,9 +7,10 @@ before_script:
 frontend:  
     image: gpdowning/node
     script:
+        - cd ./frontend
         - npm install
         - npm test
-backend:  
+backend_unit:  
     image: gpdowning/python
     script:
         - cd ./backend
@@ -22,3 +23,8 @@ backend:
         - pip install mysqlclient
         - pip install PyMySQL
         - python tests.py
+backend_postman:
+    image: gpdowning/node
+    script:
+        - npm install newman
+        - node_modules/.bin/newman run Postman.json

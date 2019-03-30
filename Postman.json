@@ -1,0 +1,257 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Perfect Fit For Me",
+		"_postman_id": "b6be5890-e8c4-40fc-8320-00e5edb5628e",
+		"description": "API Tests for Perfect Fit For Me",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Landing Page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://api.perfectfitfor.me/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Landing page deployed"
+			},
+			"response": []
+		},
+		{
+			"name": "Cities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length > 50"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Cities received"
+			},
+			"response": []
+		},
+		{
+			"name": "Cities by State",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Austin ID\"] = jsonData[\"Austin\"][\"id\"] === 55",
+							"tests[\"Dallas ID\"] = jsonData[\"Dallas\"][\"id\"] === 38",
+							"tests[\"Houston ID\"] = jsonData[\"Houston\"][\"id\"] === 81"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/state/Texas",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Cities in Texas received"
+			},
+			"response": []
+		},
+		{
+			"name": "Cities by State",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Los Angeles ID\"] = jsonData[\"Los Angeles\"][\"id\"] === 4",
+							"tests[\"San Diego ID\"] = jsonData[\"San Diego\"][\"id\"] === 21",
+							"tests[\"San Francisco ID\"] = jsonData[\"San Francisco Bay Area\"][\"id\"] === 19"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/state/California",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Cities in California received"
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"JSON Length\"] = jsonData[\"Jobs\"].length > 4000"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Jobs received"
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Software Engineer\"",
+							"tests[\"Job ID\"] = jsonData[\"id\"] === 51"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/51",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Job ID 50 received"
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Financial Analyst\"",
+							"tests[\"Job ID\"] = jsonData[\"id\"] === 1234"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/1234",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Job ID 1234 received"
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs by City",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[\"Jobs\"][1][\"job title\"] === \"Electrical Engineer\"",
+							"tests[\"Job Title\"] = jsonData[\"Jobs\"][3][\"job title\"] === \"Chef\""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/city/Austin",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Jobs in Austin received"
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs by City",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[\"Jobs\"][7][\"job title\"] === \"UX Designer\"",
+							"tests[\"Job Title\"] = jsonData[\"Jobs\"][50][\"job title\"] === \"Software Engineer\""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/city/Houston",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Jobs in Houston received"
+			},
+			"response": []
+		},
+		{
+			"name": "Events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"JSON Length\"] = jsonData.length > 400"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Events received"
+			},
+			"response": []
+		}
+	]
+}
