@@ -5,8 +5,8 @@ EID: dkt433<br>
 GitLab ID: danielthai
 
 Name: Dylan Kile<br>
-EID: <br>
-GitLab ID: 
+EID: dmk2285<br>
+GitLab ID: dylankile
 
 Name: Jonathan Nguyen<br>
 EID: jvn344<br>
