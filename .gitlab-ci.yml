@@ -10,6 +10,12 @@ frontend:
         - cd ./frontend
         - npm install
         - npm test
+frontendUI:
+    image: gpdowning/python
+    script:
+        - cd ./frontend
+        - pip install selenium
+        - python guitest.py
 backend_unit:  
     image: gpdowning/python
     script:
