@@ -27,6 +27,7 @@ class EventInstance extends Component {
       if(city == null){
         city = 'Online Event!'
       }
+      name = this.props.name
       end = this.props.end
       logo = this.props.logo
       start = this.props.start

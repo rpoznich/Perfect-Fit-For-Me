@@ -99,6 +99,23 @@ class Cities extends Component {
   }
 
   componentDidMount () {
+    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
+      .then(response => {
+        // change this to actual API
+        return response.json()
+      })
+      .then(data => {
+        // Work with JSON data here
+        // this.state.events = data.events;
+        // this.state.jobs = data.jobs;
+        this.state.jobs = data["Jobs"];
+        this.state.hasMounted = 1
+        this.setState(this.state)
+      })
+      .catch(err => {
+        // Do something for an error here
+        console.log('Error Reading data ' + err)
+      })
     fetch('../statics/cities.json')
       .then(response => {
         // change this to actual API
@@ -126,23 +143,6 @@ class Cities extends Component {
         // this.state.events = data.events;
         // this.state.jobs = data.jobs;
         this.state.events = data;
-        this.state.hasMounted = 1
-        this.setState(this.state)
-      })
-      .catch(err => {
-        // Do something for an error here
-        console.log('Error Reading data ' + err)
-      })
-      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
-      .then(response => {
-        // change this to actual API
-        return response.json()
-      })
-      .then(data => {
-        // Work with JSON data here
-        // this.state.events = data.events;
-        // this.state.jobs = data.jobs;
-        this.state.jobs = data["Jobs"];
         this.state.hasMounted = 1
         this.setState(this.state)
       })

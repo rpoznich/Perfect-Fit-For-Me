@@ -5,15 +5,37 @@ import '../css/city/bootstrap.min.css'
 import '../css/city/simple-line-icons.css'
 import '../css/city/font-awesome.min.css'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import JobInstance from './jobsInstance.js'
 import PageBar from './pagebar.js'
+
 class JobListing extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      highlightedDS : '',
+      unhighlightedDS : ''
+    }
+    this.state.highlightedDS = ''
+    this.state.unhighlightedDS = ''
+    let salary = this.props["annual salary"]
+    if(salary >= 90000) {
+      this.state.highlightedDS = '$$$$$'
+      this.state.unhighlightedDS = ''
+    } else if(salary >= 75000) {
+      this.state.highlightedDS = '$$$$'
+      this.state.unhighlightedDS = '$'
+    } else if(salary >= 50000) {
+      this.state.highlightedDS = '$$$'
+      this.state.unhighlightedDS = '$$'
+    } else if(salary >= 30000) {
+      this.state.highlightedDS = '$$'
+      this.state.unhighlightedDS = '$$$'
+    } else {
+      this.state.highlightedDS = '$'
+      this.state.unhighlightedDS = '$$$$'
+    }
   }
-  render() {
-    let titles = this.props['job title'].split(" ")
-    let type = titles[titles.length-1]
+  render () {
     return (
       <div class='featured-place-wrap'>
         <a href={'/jobInstance/' + this.props.id}>
@@ -23,6 +45,11 @@ class JobListing extends Component {
                             </div> */}
           <div class='featured-title-box'>
             <h6>{this.props['job title']}</h6>
+            <p>
+              {'Potential Income: '}
+              <span>{this.state.highlightedDS}</span>
+              {this.state.unhighlightedDS}
+            </p>
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
             {/* <p><span>{this.state.highlightedDS}</span>{this.state.unhighlightedDS}</p> */}
@@ -34,12 +61,12 @@ class JobListing extends Component {
               {/* <li>
                 <span />
                 <p>{this.props.company}</p>
-              </li> */}
-              {/* <li>
+              </li>
+              <li>
                 <span />
-                <p>{type}</p>
-              </li> */}
-              {/* <li>
+                <p>{this.props.type}</p>
+              </li>
+              <li>
                 <span />
                 <p>{this.props.time}</p>
               </li> */}
@@ -55,87 +82,65 @@ class JobListing extends Component {
   }
 }
 class Jobs extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.isListing = true
+    this.pos = -1
+    this.pageNumber = 0
+    this.numPages = 0
     // If is an instance?
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('jobInstance')) {
       this.isListing = false
       this.pos = parseInt(pathName[pathName.length-1]) - 1
-    }else{
-      this.pageNumber = parseInt(pathName[pathName.length-1]) - 1;
+    } else {
+      this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
     }
-    this.state = 
-    {
-        "events": [],
-        "jobs": [],
-        hasMounted : 0
+    this.state = {
+      "events": [],
+      "jobs": [],
+      hasMounted : 0
     }
+  }
+  componentDidMount () {
+    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
+      return response.json();
+    }).then(data => {
+      // Work with JSON data here
+      this.state.jobs = (data["Jobs"]);
+      this.state.hasMounted = 1;
+      this.setState(this.state);
+    }).catch(err => {
+      // Do something for an error here
+      console.log("Error Reading data " + err);
+    });
     fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here
       this.state.events = data;
       this.state.hasMounted = 1;
-      this.setState(this.state);
-    }).catch(err => {
-      // Do something for an error here
-      console.log("Error Reading data " + err);
-    });
-    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
-      return response.json();
-    }).then(data => {
-      // Work with JSON data here
-      this.state.jobs = data["Jobs"];
-      this.state.hasMounted = 1;
+      this.state.numPages = Math.ceil(this.state.events.length / 9);
       this.setState(this.state);
     }).catch(err => {
       // Do something for an error here
       console.log("Error Reading data " + err);
     });
   }
-  // componentDidMount() {
-  //   fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
-  //     return response.json();
-  //   }).then(data => {
-  //     // Work with JSON data here
-  //     this.state.events = data;
-  //     this.state.hasMounted = 1;
-  //     this.setState(this.state);
-  //   }).catch(err => {
-  //     // Do something for an error here
-  //     console.log("Error Reading data " + err);
-  //   });
-  //   fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
-  //     return response.json();
-  //   }).then(data => {
-  //     // Work with JSON data here
-  //     this.state.jobs = data["Jobs"];
-  //     this.state.hasMounted = 1;
-  //     this.setState(this.state);
-  //   }).catch(err => {
-  //     // Do something for an error here
-  //     console.log("Error Reading data " + err);
-  //   });
-  // }
-  render() {
-    if (this.isListing) {
+  render () {
+    if(this.isListing){
       let components = [];
       let count = 1;
       let indivComp = [];
-      for (let pos in this.state.jobs) {
-        if(count % 10 !== 0){
-        indivComp.push(
-          <div className='col-md-4 featured-responsive'>
-            <JobListing {...this.state.jobs[pos]} />
-          </div>
-        )
-        }else{
-          components.push(indivComp);
-          indivComp = [];
-        }
-        ++count;
+      for(let i in this.state.jobs)
+      {
+          if(count % 10 !== 0){
+              indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
+          }else{
+              components.push(indivComp);
+              indivComp = [];
+          }
+          ++count;
       }
       return (
         <div className='cities'>
@@ -160,90 +165,36 @@ class Jobs extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar numPages={452} model='/jobs/'></PageBar>
+              <PageBar numPages={20} model='/jobs/'></PageBar>
             </section>
           </div>
         </div>
       )
     } else {
-      let job = {}
       let eventID = []
       let eventNames = []
-      console.log(this.state.jobs)
-      console.log(this.state.hasMounted)
-      if(this.state.hasMounted === 1){
-        console.log("pls...")
-        job = this.state.jobs[this.pos]
-        // ACTUALLY GET NEARBY EVENTS USING THIS.STATE.EVENTS
-        for(let pos in this.state.events){
-          let equals = job.location.city.toUpperCase() === this.state.events[pos].city.toUpperCase();
+      let jobCity = 'Austin';
+      try{jobCity = (this.state.jobs[this.pos].location.city)
+      }catch{}
+      for(let i in this.state.events){
+          let eventCity = 'Austin'
+          try{eventCity = (this.state.events[i].city)
+          }catch{}
+          let equals = false;
+          try{equals = jobCity.toUpperCase() === eventCity.toUpperCase()}catch{}
           if(equals){
-              let dict = this.state.events[pos]
-              eventID.push(dict.eventid); 
-              eventNames.push(dict.name)
+            let dict = this.state.events[i]
+            eventID.push(dict.eventid)
+            eventNames.push(dict.name)
           }
           if(eventID.length >= 3){
             break;
           }
         }
+        return (<div className="main" style={{marginTop: "20vh"}}> 
+                <JobInstance jobs={this.state.jobs['0']} pos={this.pos} hasMounted={this.state.hasMounted} eventID={eventID} eventNames={eventNames}></JobInstance>
+              </div>);
       }
-      let items = []
-      for(let pos in eventID){
-        items.push(
-          <a href={'/eventInstance/' + eventID[pos]}>{eventNames[pos]}
-            <br />
-          </a>
-        );
-      }
-      return (
-        <div className='main' id='target' style={{ margin: '20vh' }}>
-          <div class='container'>
-            <div class='row'>
-              <div class='col-md-8 mb-5'>
-                <h2>Job: {job['job title']}</h2>
-                <hr />
-                <p>{job.description}</p>
-                <a class='btn btn-primary btn-lg' >
-                  Apply now! &raquo;
-                </a>
-              </div>
-              <div class='col-md-4 mb-5'>
-                <h2>More Info</h2>
-                <hr />
-                <address>
-                  {/* <strong>{job.company}</strong>
-                  <br />
-                  {job.type}
-                  <br />
-                  {job.location}
-                  <br />
-                  Updated {job.time}
-                  <br />
-                  <br /> */}
-                  <strong>Learn More About the City of</strong>
-                  <br />
-                  <a href={'/cityInstance/' + job.location.city}>{job.location.city + ' '}</a>
-                  <br />
-                  {job.location.state}
-                  <br />
-                  <br />
-                  <strong>Nearby Events</strong>
-                  <br />
-                  {items}
-                  <br />
-                  <strong>Average Annual Salary</strong>
-                  <br />
-                  {('$' + job['annual salary']).replace(
-                            /\B(?=(\d{3})+(?!\d))/g,
-                            ','
-                          )}
-                </address>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
     }
-  }
 }
 export default Jobs
