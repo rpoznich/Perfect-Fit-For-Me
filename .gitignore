@@ -4,3 +4,4 @@ backend/env
 backend/requirements.txt
 backend/perfect-fit.zip
 *.pyc
+npm-debug.log
