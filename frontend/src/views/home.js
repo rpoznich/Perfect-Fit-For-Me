@@ -83,12 +83,12 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6 order-lg-2">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="https://thenypost.files.wordpress.com/2018/06/massive-subway-delays.jpg?quality=90&strip=all&w=618&h=410&crop=1" alt=""></img>
+                        <img class="img-fluid rounded-circle" src="https://assets.visitphilly.com/wp-content/uploads/2018/06/festival-pier-penns-landing-new-crtsy-festival-pier-2200x1237px.jpg" alt=""></img>
                     </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Find Transportation that Fits You.</h2>
+                        <h2 class="display-4">Find Events that Fit You.</h2>
                         {/*<p>Save time and money by finding transportation that supports your lifestyle.</p>*/}
                     </div>
                     </div>

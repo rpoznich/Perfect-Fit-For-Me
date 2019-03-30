@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "674f50d287a8c48dc19ba404d20fe713",
-    "url": "/static/media/fontawesome-webfont.674f50d2.eot"
+    "revision": "b06871f281fee6b241d60582ae9369b9",
+    "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
-    "revision": "e42ba612e6f2d809a9e6",
+    "revision": "534325e412904d1e66a8",
     "url": "/static/css/main.257a4357.chunk.css"
   },
   {
@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/static/media/Simple-Line-Icons.0cb0b9c5.woff2"
   },
   {
-    "revision": "f33df365d6d0255b586f2920355e94d7",
-    "url": "/static/media/Simple-Line-Icons.f33df365.eot"
-  },
-  {
     "revision": "d2285965fe34b05465047401b8595dd0",
     "url": "/static/media/Simple-Line-Icons.d2285965.ttf"
+  },
+  {
+    "revision": "f33df365d6d0255b586f2920355e94d7",
+    "url": "/static/media/Simple-Line-Icons.f33df365.eot"
   },
   {
     "revision": "78f07e2c2a535c26ef21d95e41bd7175",
@@ -52,12 +52,12 @@ self.__precacheManifest = [
     "url": "/static/media/fontawesome-webfont.fee66e71.woff"
   },
   {
-    "revision": "e42ba612e6f2d809a9e6",
-    "url": "/static/js/main.e42ba612.chunk.js"
+    "revision": "534325e412904d1e66a8",
+    "url": "/static/js/main.534325e4.chunk.js"
   },
   {
-    "revision": "b06871f281fee6b241d60582ae9369b9",
-    "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
+    "revision": "674f50d287a8c48dc19ba404d20fe713",
+    "url": "/static/media/fontawesome-webfont.674f50d2.eot"
   },
   {
     "revision": "912ec66d7572ff821749319396470bde",
@@ -100,7 +100,7 @@ self.__precacheManifest = [
     "url": "/static/css/2.13b0640e.chunk.css"
   },
   {
-    "revision": "d446d2a8f39b843d40286ac9be4d5707",
+    "revision": "4e6c583f1023f97a370ace9ace547e0c",
     "url": "/index.html"
   }
 ];
