@@ -94,7 +94,7 @@ class About extends Component {
     super(props)
     this.total_commits = 0;
     this.total_issues = 0;
-    this.total_tests = 0;
+    this.total_tests = 40;
     this.state = {}
     this.state.memData = {
       'Ryan Poznich': {
@@ -107,19 +107,19 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: 'https://www.linkedin.com/in/ryan-poznich-670293154',
-        tests: 9
+        tests: 10
       },
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
         bio: 'Junior Computer Science major, pursuing a Business minor, at the University of Texas at Austin',
-        alias: ['Jonathan Nguyen', 'Van'],
+        alias: ['Jonathan Nguyen', 'Van', 'root'],
         username: 'GammaJohn',
         role: 'Front-end',
         img: jonathan,
         commits: 0,
         issues: 0,
         website: '',
-        tests: 0
+        tests: 10
       },
       'Ozone Kafley': {
         name: 'Ozone Kafley',
@@ -143,7 +143,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: '',
-        tests: 0
+        tests: 10
       },
       'Daniel Thai': {
         name: 'Daniel Thai',
@@ -155,7 +155,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: '',
-        tests: 0
+        tests: 10
       }
     }
     this.state.toolsData = {
@@ -212,6 +212,28 @@ class About extends Component {
       .catch(e => {
         console.log(e)
       })
+      fetch(
+        'https://gitlab.com/api/v4/projects/11069679/repository/commits?all=true&per_page=100&page=2'
+      )
+        .then(response => response.json())
+        .then(data => {
+          // process the data
+          for (var i in data) {
+            let commit_data = data[i]
+            for (var member in this.state.memData) {
+              if (
+                this.state.memData[member].alias.includes(commit_data.author_name)
+              ) {
+                this.state.memData[member].commits += 1;
+                this.total_commits += 1;
+              }
+            }
+          }
+          this.setState({})
+        })
+        .catch(e => {
+          console.log(e)
+        })
 
     fetch('https://gitlab.com/api/v4/projects/11069679/issues?state=closed&per_page=100&page=1')
       .then(issues => issues.json())

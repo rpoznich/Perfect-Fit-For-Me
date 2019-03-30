@@ -99,7 +99,7 @@ class Cities extends Component {
   }
 
   componentDidMount () {
-    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
+    fetch('../statics/jobs.json')
       .then(response => {
         // change this to actual API
         return response.json()
@@ -133,7 +133,7 @@ class Cities extends Component {
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
+      fetch('../statics/events.json')
       .then(response => {
         // change this to actual API
         return response.json()

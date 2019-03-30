@@ -20,14 +20,11 @@ class Routing extends Component{
       <div>
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/jobs" component={Jobs}/>
             <Route exact path="/jobs/:id" component={Jobs}/>
             <Route exact path="/jobInstance/:id" component={Jobs}/>
-            <Route exact path="/cities" component={Cities}/>  
             <Route exact path="/cities/:id" component={Cities}/>
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>
-            <Route exact path="/events" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       
             <Route exact path="/about" component={About}/>
           </Switch>

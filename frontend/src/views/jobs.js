@@ -103,7 +103,7 @@ class Jobs extends Component {
     }
   }
   componentDidMount () {
-    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
+    fetch('../statics/jobs.json').then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here
@@ -114,7 +114,7 @@ class Jobs extends Component {
       // Do something for an error here
       console.log("Error Reading data " + err);
     });
-    fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
+    fetch('../statics/events.json').then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here
