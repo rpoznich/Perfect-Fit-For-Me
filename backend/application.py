@@ -16,7 +16,7 @@ def query_events():
 def query_events_by_page(num):
     num = int(num)
     events = []
-    for i in range(((num-1)*50+1), num*50+1):
+    for i in range(((num-1)*9+1), num*9+1):
         event = Event.query.get(i)
         if event is not None:
             events.append(event.json())
@@ -45,7 +45,7 @@ def query_jobs_by_city(city):
 def query_jobs_by_page(num):
     num = int(num)
     jobs = []
-    for i in range(((num-1)*50+1), num*50+1):
+    for i in range(((num-1)*9+1), num*9+1):
         job = Job.query.get(i)
         if job is not None:
             jobs.append(job.toDict())
@@ -73,7 +73,7 @@ def query_cities_by_state(state):
 def query_cities_by_page(num):
     num = int(num)
     cities = []
-    for i in range(((num-1)*50+1), num*50+1):
+    for i in range(((num-1)*9+1), num*9+1):
         city = City.query.get(i)
         if city is not None:
             cities.append(city.toDict())
