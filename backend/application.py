@@ -9,14 +9,19 @@ cors = CORS(application)
 #------------------#
 # DATABASE QUERIES #
 #------------------#
-def query_jobs():
+def query_events():
+    events = Event.query.all()
     return [e.json() for e in events]
 
 def query_events_by_page(num):
     num = int(num)
     events = []
     for i in range(((num-1)*50+1), num*50+1):
-        events.append(Event.query.get(i).json())
+        event = Event.query.get(i)
+        if event is not None:
+            events.append(event.json())
+        else:
+            return events
     return events
 
 def query_jobs(): 
@@ -41,7 +46,11 @@ def query_jobs_by_page(num):
     num = int(num)
     jobs = []
     for i in range(((num-1)*50+1), num*50+1):
-        jobs.append(Job.query.get(i).toDict())
+        job = Job.query.get(i)
+        if job is not None:
+            jobs.append(job.toDict())
+        else:
+            return jobs
     return jobs
 
 def query_cities(): 
@@ -65,7 +74,11 @@ def query_cities_by_page(num):
     num = int(num)
     cities = []
     for i in range(((num-1)*50+1), num*50+1):
-        cities.append(City.query.get(i).toDict())
+        city = City.query.get(i)
+        if city is not None:
+            cities.append(city.toDict())
+        else:
+            return cities
     return cities
 
 #------------#
