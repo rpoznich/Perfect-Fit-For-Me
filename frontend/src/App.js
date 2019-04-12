@@ -6,7 +6,9 @@ import Cities from './views/cities.js'
 import About from './views/about.js'
 import Events from './views/events.js'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
 
 
 class Routing extends Component{
@@ -27,6 +29,7 @@ class Routing extends Component{
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       
             <Route exact path="/about" component={About}/>
+            <Route exact path="/search" component={About}/>
           </Switch>
 
        </div>
@@ -38,7 +41,7 @@ class NavBar extends Component
   constructor(props)
   {
     super(props);
-    this.state = props;
+    this.state = {props, textInput : ''};
         this.handleClick = this.handleClick.bind(this);
   }
 
@@ -83,14 +86,12 @@ class NavBar extends Component
           <li className={this.state.current === "about" ? "nav-item active" : "nav-item" }>
             <Link className="nav-link" to="/about" onClick={() => this.handleClick("about")}>About Us  {this.props.current === "about" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
-          {/* <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div className="dropdown-menu" aria-labelledby="dropdown01">
-              <a className="dropdown-item" href="#">Action</a>
-              <a className="dropdown-item" href="#">Another action</a>
-              <a className="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> */}
+          <div>
+          <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
+            <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+
+          </div>
+          
         </ul>
       </div>
     </nav>
