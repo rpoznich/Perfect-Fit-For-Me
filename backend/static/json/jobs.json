@@ -1,6 +1,6 @@
 {
     "Petroleum Engineer": {
-        "national-salary": "132280",
+        "national-salary": 132280,
         "description": "Devise methods to improve oil and gas extraction and production and determine the need for new or modified tool designs. Oversee drilling and offer technical advice.",
         "title": "Petroleum Engineer",
         "top-cities-salaries": {
@@ -21,7 +21,7 @@
         "id": 6
     },
     "Roofer": {
-        "national-salary": "38970",
+        "national-salary": 38970,
         "description": "Cover roofs of structures with shingles, slate, asphalt, aluminum, wood, or related materials. May spray roofs, sidings, and walls with material to bind, seal, insulate, or soundproof sections of structures.",
         "title": "Roofer",
         "top-cities-salaries": {
@@ -42,7 +42,7 @@
         "id": 22
     },
     "Photographer": {
-        "national-salary": "32490",
+        "national-salary": 32490,
         "description": "Photograph people, landscapes, merchandise, or other subjects, using digital or film cameras and equipment. May develop negatives or use computer software to produce finished images and prints. Includes scientific photographers, aerial photographers, and photojournalists.",
         "title": "Photographer",
         "top-cities-salaries": {
@@ -63,7 +63,7 @@
         "id": 10
     },
     "Paralegal": {
-        "national-salary": "50410",
+        "national-salary": 50410,
         "description": "Assist lawyers by investigating facts, preparing legal documents, or researching legal precedent. Conduct research to support a legal proceeding, to formulate a defense, or to initiate legal action. Excludes \"Legal Secretaries\".",
         "title": "Paralegal",
         "top-cities-salaries": {
@@ -84,7 +84,7 @@
         "id": 34
     },
     "Logistician": {
-        "national-salary": "74590",
+        "national-salary": 74590,
         "description": "Analyze and coordinate the logistical functions of a firm or organization. Responsible for the entire life cycle of a product, including acquisition, distribution, internal allocation, delivery, and final disposal of resources. Excludes \"Transportation, Storage, and Distribution Managers\".",
         "title": "Logistician",
         "top-cities-salaries": {
@@ -105,7 +105,7 @@
         "id": 14
     },
     "Accountant": {
-        "national-salary": "69350",
+        "national-salary": 69350,
         "description": "Examine, analyze, and interpret accounting records to prepare financial statements, give advice, or audit and evaluate statements prepared by others. Install or advise on systems of recording costs or other financial and budgetary data. Excludes \"Tax Examiners and Collectors, and Revenue Agents\".",
         "title": "Accountant",
         "top-cities-salaries": {
@@ -126,7 +126,7 @@
         "id": 12
     },
     "Art Director": {
-        "national-salary": "92500",
+        "national-salary": 92500,
         "description": "Formulate design concepts and presentation approaches for visual communications media, such as print, broadcasting, and advertising. Direct workers engaged in art work or layout design.",
         "title": "Art Director",
         "top-cities-salaries": {
@@ -147,7 +147,7 @@
         "id": 7
     },
     "Chiropractor": {
-        "national-salary": "68640",
+        "national-salary": 68640,
         "description": "Assess, treat, and care for patients by manipulation of spine and musculoskeletal system. May provide spinal adjustment or address sacral or pelvic misalignment.",
         "title": "Chiropractor",
         "top-cities-salaries": {
@@ -168,7 +168,7 @@
         "id": 26
     },
     "Pharmacist": {
-        "national-salary": "124170",
+        "national-salary": 124170,
         "description": "Dispense drugs prescribed by physicians and other health practitioners and provide information to patients about medications and their use. May advise physicians and other health practitioners on the selection, dosage, interactions, and side effects of medications.",
         "title": "Pharmacist",
         "top-cities-salaries": {
@@ -189,7 +189,7 @@
         "id": 29
     },
     "Chemical Engineer": {
-        "national-salary": "102160",
+        "national-salary": 102160,
         "description": "Design chemical plant equipment and devise processes for manufacturing chemicals and products, such as gasoline, synthetic rubber, plastics, detergents, cement, paper, and pulp, by applying principles and technology of chemistry, physics, and engineering.",
         "title": "Chemical Engineer",
         "top-cities-salaries": {
@@ -210,7 +210,7 @@
         "id": 2
     },
     "Concierge": {
-        "national-salary": "30150",
+        "national-salary": 30150,
         "description": "Assist patrons at hotel, apartment, or office building with personal services. May take messages, arrange or give advice on transportation, business services or entertainment, or monitor guest requests for housekeeping and maintenance.",
         "title": "Concierge",
         "top-cities-salaries": {
@@ -231,7 +231,7 @@
         "id": 38
     },
     "Psychiatrist": {
-        "national-salary": "208,000",
+        "national-salary": 208000,
         "description": "Physicians who diagnose, treat, and help prevent disorders of the mind.",
         "title": "Psychiatrist",
         "top-cities-salaries": {
@@ -252,7 +252,7 @@
         "id": 31
     },
     "Interior Designer": {
-        "national-salary": "51500",
+        "national-salary": 51500,
         "description": "Plan, design, and furnish interiors of residential, commercial, or industrial buildings. Formulate design which is practical, aesthetic, and conducive to intended purposes, such as raising productivity, selling merchandise, or improving life style. May specialize in a particular field, style, or phase of interior design. Excludes \"Merchandise Displayers and Window Trimmers\".",
         "title": "Interior Designer",
         "top-cities-salaries": {
@@ -273,7 +273,7 @@
         "id": 9
     },
     "Pharmacy Technician": {
-        "national-salary": "31750",
+        "national-salary": 31750,
         "description": "Prepare medications under the direction of a pharmacist. May measure, mix, count out, label, and record amounts and dosages of medications according to prescription orders.",
         "title": "Pharmacy Technician",
         "top-cities-salaries": {
@@ -294,7 +294,7 @@
         "id": 30
     },
     "Chief Executive": {
-        "national-salary": "183270",
+        "national-salary": 183270,
         "description": "Determine and formulate policies and provide overall direction of companies or private and public sector organizations within guidelines set up by a board of directors or similar governing body. Plan, direct, or coordinate operational activities at the highest level of management with the help of subordinate executives and staff managers.",
         "title": "Chief Executive",
         "top-cities-salaries": {
@@ -315,7 +315,7 @@
         "id": 36
     },
     "Web Developer": {
-        "national-salary": "67990",
+        "national-salary": 67990,
         "description": "Design, create, and modify Web sites. Analyze user needs to implement Web site content, graphics, performance, and capacity. May integrate Web sites with other computer applications. May convert written, graphic, audio, and video components to compatible Web formats by using software designed to facilitate the creation of Web and multimedia content. Excludes \"Multimedia Artists and Animators\".",
         "title": "Web Developer",
         "top-cities-salaries": {
@@ -336,7 +336,7 @@
         "id": 18
     },
     "Dentist": {
-        "national-salary": "151440",
+        "national-salary": 151440,
         "description": "Examine, diagnose, and treat diseases, injuries, and malformations of teeth and gums. May treat diseases of nerve, pulp, and other dental tissues affecting oral hygiene and retention of teeth. May fit dental appliances or provide preventive care. Excludes \"Prosthodontists\", \"Orthodontists\", \"Oral and Maxillofacial Surgeons\" and \"Dentists, All Other Specialists\".",
         "title": "Dentist",
         "top-cities-salaries": {
@@ -357,7 +357,7 @@
         "id": 27
     },
     "Chemist": {
-        "national-salary": "74740",
+        "national-salary": 74740,
         "description": "Conduct qualitative and quantitative chemical analyses or experiments in laboratories for quality or process control or to develop new products or knowledge. Excludes \"Geoscientists, Except Hydrologists and Geographers\" and \"Biochemists and Biophysicists\".",
         "title": "Chemist",
         "top-cities-salaries": {
@@ -378,7 +378,7 @@
         "id": 35
     },
     "Civil Engineer": {
-        "national-salary": "84770",
+        "national-salary": 84770,
         "description": "Perform engineering duties in planning, designing, and overseeing construction and maintenance of building structures, and facilities, such as roads, railroads, airports, bridges, harbors, channels, dams, irrigation projects, pipelines, power plants, and water and sewage systems. Includes architectural, structural, traffic, ocean, and geo-technical engineers. Excludes \"Hydrologists\".",
         "title": "Civil Engineer",
         "top-cities-salaries": {
@@ -399,7 +399,7 @@
         "id": 3
     },
     "Librarian": {
-        "national-salary": "58520",
+        "national-salary": 58520,
         "description": "Administer libraries and perform related library services. Work in a variety of settings, including public libraries, educational institutions, museums, corporations, government agencies, law firms, non-profit organizations, and healthcare providers. Tasks may include selecting, acquiring, cataloguing, classifying, circulating, and maintaining library materials; and furnishing reference, bibliographical, and readers' advisory services. May perform in-depth, strategic research, and synthesize, analyze, edit, and filter information. May set up or work with databases and information systems to catalogue and access information.",
         "title": "Librarian",
         "top-cities-salaries": {
@@ -420,7 +420,7 @@
         "id": 23
     },
     "Retail Salesperson": {
-        "national-salary": "23210",
+        "national-salary": 23210,
         "description": "Sell merchandise, such as furniture, motor vehicles, appliances, or apparel to consumers. Excludes \"Cashiers\".",
         "title": "Retail Salesperson",
         "top-cities-salaries": {
@@ -441,7 +441,7 @@
         "id": 41
     },
     "Plumber": {
-        "national-salary": "52590",
+        "national-salary": 52590,
         "description": "Assemble, install, alter, and repair pipelines or pipe systems that carry water, steam, air, or other liquids or gases. May install heating and cooling equipment and mechanical control systems. Includes sprinklerfitters.",
         "title": "Plumber",
         "top-cities-salaries": {
@@ -462,7 +462,7 @@
         "id": 21
     },
     "Bartender": {
-        "national-salary": "21690",
+        "national-salary": 21690,
         "description": "Mix and serve drinks to patrons, directly or through waitstaff.",
         "title": "Bartender",
         "top-cities-salaries": {
@@ -483,7 +483,7 @@
         "id": 24
     },
     "Computer Programmer": {
-        "national-salary": "82240",
+        "national-salary": 82240,
         "description": "Create, modify, and test the code, forms, and script that allow computer applications to run. Work from specifications drawn up by software developers or other individuals. May assist software developers by analyzing user needs and designing software solutions. May develop and write computer programs to store, locate, and retrieve specific documents, data, and information.",
         "title": "Computer Programmer",
         "top-cities-salaries": {
@@ -504,7 +504,7 @@
         "id": 15
     },
     "Mathematician": {
-        "national-salary": "103010",
+        "national-salary": 103010,
         "description": "Conduct research in fundamental mathematics or in application of mathematical techniques to science, management, and other fields. Solve problems in various fields using mathematical methods.",
         "title": "Mathematician",
         "top-cities-salaries": {
@@ -525,7 +525,7 @@
         "id": 16
     },
     "Baker": {
-        "national-salary": "25690",
+        "national-salary": 25690,
         "description": "Mix and bake ingredients to produce breads, rolls, cookies, cakes, pies, pastries, or other baked goods. Pastry chefs in restaurants and hotels are included with \"Chefs and Head Cooks\".",
         "title": "Baker",
         "top-cities-salaries": {
@@ -546,7 +546,7 @@
         "id": 39
     },
     "Sales Manager": {
-        "national-salary": "121060",
+        "national-salary": 121060,
         "description": "Plan, direct, or coordinate the actual distribution or movement of a product or service to the customer. Coordinate sales distribution by establishing sales territories, quotas, and goals and establish training programs for sales representatives. Analyze sales statistics gathered by staff to determine sales potential and inventory requirements and monitor the preferences of customers.",
         "title": "Sales Manager",
         "top-cities-salaries": {
@@ -567,7 +567,7 @@
         "id": 37
     },
     "Veterinarian": {
-        "national-salary": "90420",
+        "national-salary": 90420,
         "description": "Diagnose, treat, or research diseases and injuries of animals. Includes veterinarians who conduct research and development, inspect livestock, or care for pets and companion animals.",
         "title": "Veterinarian",
         "top-cities-salaries": {
@@ -588,7 +588,7 @@
         "id": 32
     },
     "Software Developer": {
-        "national-salary": "101790",
+        "national-salary": 101790,
         "description": "Develop, create, and modify general computer applications software or specialized utility programs. Analyze user needs and develop software solutions. Design software or customize software for client use with the aim of optimizing operational efficiency. May analyze and design databases within an application area, working individually or coordinating database development as part of a team. May supervise computer programmers.",
         "title": "Software Developer",
         "top-cities-salaries": {
@@ -609,7 +609,7 @@
         "id": 17
     },
     "Financial Analyst": {
-        "national-salary": "84300",
+        "national-salary": 84300,
         "description": "Conduct quantitative analyses of information affecting investment programs of public or private institutions.",
         "title": "Financial Analyst",
         "top-cities-salaries": {
@@ -630,7 +630,7 @@
         "id": 13
     },
     "Graphic Designer": {
-        "national-salary": "48700",
+        "national-salary": 48700,
         "description": "Design or create graphics to meet specific commercial or promotional needs, such as packaging, displays, or logos. May use a variety of mediums to achieve artistic or decorative effects.",
         "title": "Graphic Designer",
         "top-cities-salaries": {
@@ -651,7 +651,7 @@
         "id": 8
     },
     "Cashier": {
-        "national-salary": "21030",
+        "national-salary": 21030,
         "description": "Receive and disburse money in establishments other than financial institutions. May use electronic scanners, cash registers, or related equipment. May process credit or debit card transactions and validate checks. Excludes \"Gaming Cage Persons and Booth Cashiers\".",
         "title": "Cashier",
         "top-cities-salaries": {
@@ -672,7 +672,7 @@
         "id": 40
     },
     "Electrician": {
-        "national-salary": "54110",
+        "national-salary": 54110,
         "description": "Install, maintain, and repair electrical wiring, equipment, and fixtures. Ensure that work is in accordance with relevant codes. May install or service street lights, intercom systems, or electrical control systems. Excludes \"Security and Fire Alarm Systems Installers\".",
         "title": "Electrician",
         "top-cities-salaries": {
@@ -693,7 +693,7 @@
         "id": 20
     },
     "Producer": {
-        "national-salary": "71620",
+        "national-salary": 71620,
         "description": "Produce or direct stage, television, radio, video, or motion picture productions for entertainment, information, or instruction. Responsible for creative decisions, such as interpretation of script, choice of actors or guests, set design, sound, special effects, and choreography.",
         "title": "Producer",
         "top-cities-salaries": {
@@ -714,7 +714,7 @@
         "id": 11
     },
     "Construction Laborer": {
-        "national-salary": "34530",
+        "national-salary": 34530,
         "description": "Perform tasks involving physical labor at construction sites. May operate hand and power tools of all types: air hammers, earth tampers, cement mixers, small mechanical hoists, surveying and measuring equipment, and a variety of other equipment and instruments. May clean and prepare sites, dig trenches, set braces to support the sides of excavations, erect scaffolding, and clean up rubble, debris and other waste materials. May assist other craft workers. Construction laborers who primarily assist a particular craft worker are classified under \"Helpers, Construction Trades\". Excludes \"Hazardous Materials Removal Workers\"",
         "title": "Construction Laborer",
         "top-cities-salaries": {
@@ -735,7 +735,7 @@
         "id": 19
     },
     "Chef": {
-        "national-salary": "45950",
+        "national-salary": 45950,
         "description": "Direct and may participate in the preparation, seasoning, and cooking of salads, soups, fish, meats, vegetables, desserts, or other foods. May plan and price menu items, order supplies, and keep records and accounts.",
         "title": "Chef",
         "top-cities-salaries": {
@@ -756,7 +756,7 @@
         "id": 25
     },
     "Lawyer": {
-        "national-salary": "119250",
+        "national-salary": 119250,
         "description": "Represent clients in criminal and civil litigation and other legal proceedings, draw up legal documents, or manage or advise clients on legal transactions. May specialize in a single area or may practice broadly in many areas of law.",
         "title": "Lawyer",
         "top-cities-salaries": {
@@ -777,7 +777,7 @@
         "id": 33
     },
     "Optometrist": {
-        "national-salary": "110300",
+        "national-salary": 110300,
         "description": "Diagnose, manage, and treat conditions and diseases of the human eye and visual system. Examine eyes and visual system, diagnose problems or impairments, prescribe corrective lenses, and provide treatment. May prescribe therapeutic drugs to treat specific eye conditions. Ophthalmologists are included in \"Physicians and Surgeons, All Other\".",
         "title": "Optometrist",
         "top-cities-salaries": {
@@ -798,7 +798,7 @@
         "id": 28
     },
     "Electrical Engineer": {
-        "national-salary": "95060",
+        "national-salary": 95060,
         "description": "Research, design, develop, test, or supervise the manufacturing and installation of electrical equipment, components, or systems for commercial, industrial, military, or scientific use. Excludes \"Computer Hardware Engineers\".",
         "title": "Electrical Engineer",
         "top-cities-salaries": {
@@ -819,7 +819,7 @@
         "id": 4
     },
     "Mechanical Engineer": {
-        "national-salary": "85880",
+        "national-salary": 85880,
         "description": "Perform engineering duties in planning and designing tools, engines, machines, and other mechanically functioning equipment. Oversee installation, operation, maintenance, and repair of equipment such as centralized heat, gas, water, and steam systems.",
         "title": "Mechanical Engineer",
         "top-cities-salaries": {

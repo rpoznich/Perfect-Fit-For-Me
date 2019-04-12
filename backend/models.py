@@ -61,32 +61,44 @@ class City(db.Model):
         }
         return city
 
-class Job(db.Model): 
-    __tablename__ = 'job'
+class Job(db.Model):
     job_id = db.Column(db.Integer(), primary_key=True)
     job_title = db.Column(db.String(35))
-    city_name = db.Column(db.String(30))
-    state = db.Column(db.String(30))
-    salary = db.Column(db.Float(10)) 
-    description = db.Column(db.String(4000)) 
-    def __init__ (self, id, name, city_name, state, salary = None, description = None):
-        self.job_id = id
-        self.job_title = name
-        self.city_name = city_name
-        self.state = state
-        self.salary = salary 
-        self.description = description
+    description = db.Column(db.String(4000))
+    education = db.Column(db.String(50))
+    salary = db.Column(db.Float(10))
+    city1 = db.Column(db.String(30))
+    city2 = db.Column(db.String(30))
+    city3 = db.Column(db.String(30))
+    city4 = db.Column(db.String(30))
+    city5 = db.Column(db.String(30))
+    salary1 = db.Column(db.Float(10))
+    salary2 = db.Column(db.Float(10))
+    salary3 = db.Column(db.Float(10))
+    salary4 = db.Column(db.Float(10))
+    salary5 = db.Column(db.Float(10))
 
     def toDict(self): 
         job = {
             "id":self.job_id, 
             "job title":self.job_title,
+            "description": self.description,
+            "education": self.education,
             "annual salary":self.salary, 
-            "location": {
-                "city": self.city_name,
-                "state": self.state
-            },
-            "description": self.description
+            "top cities": [
+                self.city1,
+                self.city2,
+                self.city3,
+                self.city4,
+                self.city5
+            ],
+            "top cities salaries": {
+                self.city1 : self.salary1,
+                self.city2 : self.salary2,
+                self.city3 : self.salary3,
+                self.city4 : self.salary4,
+                self.city5 : self.salary5
+            }
         }
         return job
 

@@ -35,13 +35,6 @@ def query_jobs_by_id(identifier):
     j = Job.query.get(identifier)
     return j.toDict()
 
-def query_jobs_by_city(city): 
-    job_objs = Job.query.filter_by(city_name=city).all()
-    jobs = {"Jobs":[]}
-    for j in job_objs:
-        jobs["Jobs"].append(j.toDict())
-    return jobs
-
 def query_jobs_by_page(num):
     num = int(num)
     jobs = []
@@ -108,11 +101,6 @@ def get_jobs():
 @cross_origin()
 def get_one_job_by_id(id):
     return jsonify(query_jobs_by_id(id))
-
-@application.route("/api/jobs/city/<city>")
-@cross_origin()
-def get_jobs_by_city(city): 
-    return jsonify(query_jobs_by_city(city))
 
 @application.route('/api/jobs/page/<num>')
 @cross_origin()

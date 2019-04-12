@@ -28,18 +28,28 @@ def populate_cities():
     print("   Populated cities")
 
 def populate_jobs(): 
-    with open('static/json/cities.json') as inp: 
-        cities = json.load(inp)
-    job_id = 1
-    for city in cities: 
-        salaries = cities[city]['salaries']
-        for salary in salaries: 
-            job_db_obj = Job(job_id, salary, city, cities[city]['location']['state'],salaries[salary])
-            db.session.add(job_db_obj)
-            job_id += 1
+    with open('static/json/jobs.json') as inp: 
+        jobs = json.load(inp)
+    for job_name in jobs: 
+        j = jobs[job_name]
+        job = Job(job_id = j["id"],
+                  job_title = j["title"],
+                  description = j["description"],
+                  education = j["education"],
+                  salary = j["national-salary"],
+                  city1 = j["top-cities"][0],
+                  city2 = j["top-cities"][1],
+                  city3 = j["top-cities"][2],
+                  city4 = j["top-cities"][3],
+                  city5 = j["top-cities"][4],
+                  salary1 = j["top-cities-salaries"][j["top-cities"][0]],
+                  salary2 = j["top-cities-salaries"][j["top-cities"][1]],
+                  salary3 = j["top-cities-salaries"][j["top-cities"][2]],
+                  salary4 = j["top-cities-salaries"][j["top-cities"][3]],
+                  salary5 = j["top-cities-salaries"][j["top-cities"][4]])
+        db.session.add(job)
     db.session.commit()
     print("   Populated jobs")
-
 
 def populate_events():
     with open('static/json/events.json') as inp:

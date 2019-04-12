@@ -156,7 +156,7 @@ def scrape_jobs():
         jobInstance["title"] = job_names[j]
         jobInstance["description"] = jobInfo["SocInfo"]["SocDescription"]
         jobInstance["education"] = jobInfo["LMI"]["TypicalTraining"]
-        jobInstance["national-salary"] = jobInfo["LMI"]["AveragePayNational"]
+        jobInstance["national-salary"] = int(jobInfo["LMI"]["AveragePayNational"].replace(',',''))
         jobInstance["top-cities"] = top_cities
         jobInstance["top-cities-salaries"] = top_salaries
         jobs[job_names[j]] = jobInstance
@@ -210,7 +210,7 @@ def scrape_events():
 
 if __name__ == "__main__":
     print("Starting scraping process")
-    # scrape_cities() # IF RAN AGAIN, REMOVE NON-US CITIES FROM JSON
+    scrape_cities() # IF RAN AGAIN, REMOVE NON-US CITIES FROM JSON
     scrape_jobs()
-    # scrape_events()
+    scrape_events()
     print("Completed scraping process")
