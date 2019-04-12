@@ -63,42 +63,22 @@ def extract_location(cities):
     print("   Extracted locations")
     return location
 
-def extract_salaries(cities): 
-    salaries = {}
-    for city in cities: 
-        name = city["name"]
-        linkToCity = city["href"]
-        cityJSON = requests.get(linkToCity).text
-        jsonToDict = json.loads(cityJSON)
-        linkToSalaryInfo = jsonToDict["_links"]["ua:salaries"]["href"]
-        salaryInfoJSON = requests.get(linkToSalaryInfo).text 
-        salaryInfo = json.loads(salaryInfoJSON)["salaries"]
-        jobsSalaries = {}
-        for salary in salaryInfo: 
-            jobName = salary["job"]["title"]
-            avg_salary = salary["salary_percentiles"]["percentile_50"]
-            jobsSalaries[jobName] = avg_salary
-        salaries[name] = jobsSalaries
-    print("   Extracted salaries")
-    return salaries
-
 def scrape_cities():
     cities = extract_cities()
     images = extract_images(cities)
     values = extract_values(cities)
     location = extract_location(cities)
-    salaries = extract_salaries(cities)
     cities = {}
     city_id = 1
 
     for k in images: 
-        if k in values and k in location and k in salaries: 
+        if k in values and k in location: 
             cities[k] = {"city id":city_id, "images":images[k], "qualities":values[k], 
-                        "location":location[k], "salaries":salaries[k]}
+                        "location":location[k]}
         city_id += 1
 
 	with open('static/json/cities.json', 'w') as out: 
-		out.write(json.dumps(cities,indent=4, separators=(',',': ')))
+		out.write(json.dumps(cities, indent=4, separators=(',',': ')))
 
     print("   Scraped cities and jobs")
     return cities
@@ -120,6 +100,73 @@ def _byteify(data, ignore_dicts = False):
         }
     # if it's anything else, return it in its original form
     return data
+
+# User ID: d7iQVH52IkmHUPZ
+# Token Key: dVaq+TBMNG2YuPbMqeUj+JcTmVkwW+dEbQaPPDdw093d09zu31kA9g01AA4Fx5f7rQb1vrrR0L9420I3e8LmPg==
+def scrape_jobs():
+    url = "https://api.careeronestop.org/v1/lmi/d7iQVH52IkmHUPZ/"
+    token = "Bearer dVaq+TBMNG2YuPbMqeUj+JcTmVkwW+dEbQaPPDdw093d09zu31kA9g01AA4Fx5f7rQb1vrrR0L9420I3e8LmPg=="
+
+    jobs = {}
+    job_names = []
+    job_codes = []
+    city_names = []
+    city_codes = []
+    with open('static/txt/jobs.txt') as f:
+        job_names = f.read().splitlines()
+    with open('static/txt/jobcodes.txt') as f:
+        job_codes = f.read().splitlines()
+    with open('static/txt/cities.txt') as f:
+        city_names = f.read().splitlines()
+    with open('static/txt/zipcodes.txt') as f:
+        city_codes = f.read().splitlines()
+
+    for j in range(0, len(job_names)):
+        instance_url = url + str(job_codes[j]) + "/"
+        salaries = {}
+        for c in range(0, len(city_names)):
+            connected = False
+            attempts = 0
+            while not connected:
+                try:
+                    zipJSON = requests.get(instance_url+city_codes[c], headers={"Authorization": token}).text
+                    connected = True
+                except requests.ConnectionError:
+                    print("   Failed connection, retrying")
+                    attempts += 1
+                    if attempts == 10:
+                        print("   Failed connection 10 times, aborting")
+                        break
+                    pass
+            zipInfo = json.loads(zipJSON, object_hook=_byteify)
+            zipSalary = zipInfo["LMI"]["AveragePayZip"]
+            if zipSalary:
+                salaries[city_names[c]] = int(zipSalary.replace(',',''))
+            else:
+                salaries[city_names[c]] = 0
+            print("   Extracted salary (" + str(c+1) + " out of " + str(len(city_names)) + ")")
+        top_cities = sorted(salaries, key=salaries.get, reverse=True)[:5]
+        top_salaries = {}
+        for city in top_cities:
+            top_salaries[city] = salaries[city]
+        jobJSON = requests.get(instance_url+"US", headers={"Authorization": token}).text
+        jobInfo = json.loads(jobJSON, object_hook=_byteify)
+        jobInstance = {}
+        jobInstance["id"] = j+1
+        jobInstance["title"] = job_names[j]
+        jobInstance["description"] = jobInfo["SocInfo"]["SocDescription"]
+        jobInstance["education"] = jobInfo["LMI"]["TypicalTraining"]
+        jobInstance["national-salary"] = jobInfo["LMI"]["AveragePayNational"]
+        jobInstance["top-cities"] = top_cities
+        jobInstance["top-cities-salaries"] = top_salaries
+        jobs[job_names[j]] = jobInstance
+        print("   Extracted job (" + str(j+1) + " out of " + str(len(job_names)) + ")")
+
+    with open('static/json/jobs.json', 'w') as out: 
+        out.write(json.dumps(jobs, indent=4, separators=(',',': ')))
+
+    print("   Scraped jobs")
+    return jobs
 
 # OAuth token: WG5JAPAZ3A56WMVJKO7K
 # User ID: 271324227120
@@ -156,13 +203,14 @@ def scrape_events():
 		print("   Extracted events (page " + str(p) + " out of " + str(num_pages) + ")")
 
 	with open('static/json/events.json', 'w') as out: 
-		out.write(json.dumps(eventsTable,indent=4, separators=(',',': ')))
+		out.write(json.dumps(eventsTable, indent=4, separators=(',',': ')))
 
 	print("   Scraped events")
 	return eventsTable;
 
 if __name__ == "__main__":
-	print("Starting scraping process")
-	scrape_cities()
-	scrape_events()
-	print("Completed scraping process")
+    print("Starting scraping process")
+    # scrape_cities() # IF RAN AGAIN, REMOVE NON-US CITIES FROM JSON
+    scrape_jobs()
+    # scrape_events()
+    print("Completed scraping process")
