@@ -7,6 +7,7 @@ import '../css/city/simple-line-icons.css';
 import '../css/city/font-awesome.min.css';
 import EventInstance from './eventsInstance.js';
 import PageBar from './pagebar.js'
+import Button from 'react-bootstrap/Button'
 
 class EventListing extends Component{
     constructor(props){
@@ -127,6 +128,10 @@ class Event extends Component {
             <div className="main" style={{marginTop: "10vh"}}>
     <section class="main-block light-bg">
         <div class="container">
+        <div>
+                <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
+                <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+              </div>
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
