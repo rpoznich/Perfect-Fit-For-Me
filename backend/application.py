@@ -74,6 +74,50 @@ def query_cities_by_page(num):
             return cities
     return cities
 
+#---------------# 
+# FILTER/SEARCH #
+#---------------# 
+@application.route("/filter/")
+@cross_origin() 
+def filter_results(): 
+    model = request.args.get('m')
+    if model == 'jobs': 
+        # ADD ATTRIBUTES AS NECESSARY # 
+        income = request.args.get('i')
+        location = request.args.get('loc') 
+        jobs = None
+        if income is not None and location is not None: 
+            # DO QUERY IN DATABASE WHERE JOBS POTENTIAL INCOME IS > CASH SIGN # 
+            # NEED TO FIGURE OUT WHAT A CASH SIGN MEANS IN TERMS OF VALUES 
+            salary = 30000 # SOME FILLER UNTIL I FIGURE OUT WHAT A CASH SIGN MEANS 
+            loc = location.split(",")[0]
+            jobs = Job.query.filter_by(salary>=salary).all() # Can't really filter by location since job doesn't give that info
+        elif income is not None: 
+            salary = 30000
+            jobs = Job.query.filter_by(salary>=salary).all()
+        elif location is not None: 
+            loc = location.split(",")[0]
+            jobs = Job.query.filter_by().all()
+    elif model == 'cities': # May Need to add average score to filter by average score
+        cost_of_living = request.args.get('col') 
+        # avg_score = request.get.args.get('avg')
+        cities = None
+        if cost_of_living is not None: 
+            col = 4 # Not sure what the Cash sign means again - is it more expensive/less expensive? 
+            cities = City.query.filter_by(col >= 4).all()
+    elif model == 'events':
+        location = request.args.get('loc')
+        events = None
+        if location is not None: 
+            loc = location.split(",")[0]
+            events = Event.query.filter_by(city=loc).all()
+    else assert(False) # Just to debug and check if proper input is given
+
+@application.route("/search/")
+@cross_origin() 
+def search_results():
+
+
 #------------#
 # API ROUTES #
 #------------#
