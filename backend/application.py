@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 from models import City, Job, Event, application, db
 import json
@@ -77,46 +77,82 @@ def query_cities_by_page(num):
 #---------------# 
 # FILTER/SEARCH #
 #---------------# 
+def query_filter_by_page(query_results, num): 
+    num = int(num)
+    results = [] 
+    for i in range(((num-1)*9+1), num*9+1):
+        if (i >= len(query_results)): 
+            break 
+        obj = query_results[i] 
+        if type(obj) is Job or type(obj) is City:
+            results.append(obj.toDict())
+        elif type(obj) is Event: 
+            results.append(obj.json())
+    return results
 @application.route("/filter/")
 @cross_origin() 
 def filter_results(): 
     model = request.args.get('m')
+    page = request.args.get('p')
+    results = None
+    response = None
     if model == 'jobs': 
         # ADD ATTRIBUTES AS NECESSARY # 
         income = request.args.get('i')
-        location = request.args.get('loc') 
-        jobs = None
+        location = request.args.get('loc')
+        education = request.args.get('edu') 
+        jobs_query = None
         if income is not None and location is not None: 
             # DO QUERY IN DATABASE WHERE JOBS POTENTIAL INCOME IS > CASH SIGN # 
             # NEED TO FIGURE OUT WHAT A CASH SIGN MEANS IN TERMS OF VALUES 
-            salary = 30000 # SOME FILLER UNTIL I FIGURE OUT WHAT A CASH SIGN MEANS 
+            #salary = 90000 # SOME FILLER UNTIL I FIGURE OUT WHAT A CASH SIGN MEANS 
             loc = location.split(",")[0]
-            jobs = Job.query.filter_by(salary>=salary).all() # Can't really filter by location since job doesn't give that info
+            jobs_query = Job.query.filter(Job.salary >= 90000).all() # Can't really filter by location since job doesn't give that info
         elif income is not None: 
-            salary = 30000
-            jobs = Job.query.filter_by(salary>=salary).all()
-        elif location is not None: 
-            loc = location.split(",")[0]
-            jobs = Job.query.filter_by().all()
+            #salary = 90000
+            jobs_query = Job.query.filter(Job.salary >= 90000).all()
+        elif education is not None: 
+            if (education == 'bac'):
+                jobs_query = Job.query.filter_by(education="Bachelor's degree").all()
+            if (education == 'mas'): 
+                jobs_query = Job.query.filter_by(education="Master's degree").all()
+        response = jsonify(query_filter_by_page(jobs_query,page))
+
+
+
     elif model == 'cities': # May Need to add average score to filter by average score
         cost_of_living = request.args.get('col') 
+        population = request.args.get('pop')
         # avg_score = request.get.args.get('avg')
         cities = None
         if cost_of_living is not None: 
             col = 4 # Not sure what the Cash sign means again - is it more expensive/less expensive? 
             cities = City.query.filter_by(col >= 4).all()
+        elif population is not None: 
+            if population == 1:
+                cities = City.query.filter_by(population<=200000).all()
+            elif population == 2: 
+                cities = City.query.filter_by(population > 200000, population < 999999).all()
+            elif population == 3:
+                cities = City.query.filter_by(population >= 1000000).all()
+        response = jsonify(query_filter_by_page(cities,page))
+
     elif model == 'events':
         location = request.args.get('loc')
         events = None
         if location is not None: 
             loc = location.split(",")[0]
             events = Event.query.filter_by(city=loc).all()
-    else assert(False) # Just to debug and check if proper input is given
+        response = jsonify(query_filter_by_page(events))
+    else: 
+        assert(False) # Just to debug and check if proper input is given
+
+    return response
 
 @application.route("/search/")
 @cross_origin() 
 def search_results():
-
+    return "WIP"
 
 #------------#
 # API ROUTES #
