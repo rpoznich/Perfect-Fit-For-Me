@@ -29,7 +29,7 @@ render () {
     let top_cities = ''
     let type = ''
     let education = ''
-    if(this.state.didMount === 1){
+    try{
             annual_salary = this.state.jobs[this.props.pos]['annual salary'];
             description = this.state.jobs[this.props.pos].description
             if(description === null){
@@ -100,9 +100,8 @@ render () {
         </div>
       </div>
     ) 
-    }else{
-        return <div></div>
-    }   
+    }catch{}
+    return <div>oops</div>
   }
 }
 export default JobInstance

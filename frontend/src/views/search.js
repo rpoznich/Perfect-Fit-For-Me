@@ -6,6 +6,44 @@ import '../css/city/bootstrap.min.css'
 import '../css/city/simple-line-icons.css'
 import '../css/city/font-awesome.min.css'
 
+class EventListing extends Component{
+  constructor(props){
+      super(props);
+      // WHY?
+      this.state = {}
+      // FIND A BETTER METRIC
+      if(this.props.eventid < 33){
+          this.state.circleColor = "featured-rating";
+      } else if(this.props.eventid > 100){
+          this.state.circleColor = "featured-rating-green";
+      } else {
+          this.state.circleColor = "featured-rating-orange";
+      }
+  }
+  render(){
+      return (<div class="featured-place-wrap">
+                          <a href={"/eventInstance/"+this.props.eventid}>
+                          <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
+                          <div className="container">
+                              <span className={this.state.circleColor} title="Status">{}</span>
+                          </div>
+                          <div class="featured-title-box">
+                              <h6 >{this.props.name}</h6>
+                              <p>{this.props.venue}</p> 
+                              <ul>
+                                  <li><span class="icon-location-pin"></span>
+                                      <p>{this.props.city + ', ' + this.props.state}</p>
+                                  </li>
+                                  <li><span class="icon-link"></span>
+                                      <p>{this.props.url}</p>
+                                  </li>
+                              </ul>
+                          </div>
+                          </a>
+                  </div>)
+  }
+}
+
 class CityListing extends Component {
     constructor (props) {
       super(props)
@@ -98,7 +136,7 @@ class Search extends Component{
     constructor (props) {
         super(props)
         let pathName = window.location.pathname.split("/");
-        this.state = {searchWord : pathName[pathName.length - 1], cities : {}, hasMounted : 0};
+        this.state = {searchWord : pathName[pathName.length - 1], cities : {}, events : {}, hasMounted : 0};
     }
 
     componentDidMount(){
@@ -112,6 +150,23 @@ class Search extends Component{
         // this.state.events = data.events;
         // this.state.jobs = data.jobs;
         this.state.cities = data;
+        this.state.hasMounted = 1
+        this.setState(this.state)
+      })
+      .catch(err => {
+        // Do something for an error here
+        console.log('Error Reading data ' + err)
+      })
+      fetch('../statics/events.json')
+      .then(response => {
+        // change this to actual API
+        return response.json()
+      })
+      .then(data => {
+        // Work with JSON data here
+        // this.state.events = data.events;
+        // this.state.jobs = data.jobs;
+        this.state.events = data;
         this.state.hasMounted = 1
         this.setState(this.state)
       })
@@ -141,6 +196,27 @@ class Search extends Component{
           )
         }
       }
+      
+      let eventIndivComp = []
+      let eventComp = []
+      for (let eid in this.state.events) {
+        if(eventIndivComp.length < 9){  
+          eventIndivComp.push(
+              <div className='col-md-4 featured-responsive'>
+                <EventListing {...this.state.events[eid]} />
+              </div>
+          )
+        }else{
+          eventComp.push(eventIndivComp);
+          eventIndivComp = [];
+          eventIndivComp.push(
+            <div className='col-md-4 featured-responsive'>
+                <EventListing {...this.state.events[eid]} />
+              </div>
+          )
+        }
+      }
+      try{
         return(
           <div className='cities'>
           <div className='main' style={{ marginTop: '10vh' }}>
@@ -149,17 +225,23 @@ class Search extends Component{
                 <div class='row justify-content-center'>
                   <div class='col-md-5'>
                     <div class='styled-heading'>
-                      <h3>{'Search Results for ' + this.state.searchWord}</h3>
+                      <h3>{'City Results for ' + this.state.searchWord}</h3>
                     </div>
                   </div>
                 </div>
                 <div class='row'>{components[0]}</div>
+                <div class='styled-heading'>
+                      <h3>{'Event Results for ' + this.state.searchWord}</h3>
+                </div>
+                <div class='row'>{eventComp[0]}</div>
               </div>
               <PageBar numPages={9} model='/cities/'></PageBar>
             </section>
           </div>
         </div>
         )
+      }catch{}
+      return <div></div>
     }
     
 }

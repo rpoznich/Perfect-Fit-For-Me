@@ -14,11 +14,29 @@ class JobListing extends Component {
     super(props)
     this.state = {
       highlightedDS : '',
-      unhighlightedDS : ''
+      unhighlightedDS : '',
+      jobs : {}
     }
-    this.state.highlightedDS = ''
-    this.state.unhighlightedDS = ''
-    let salary = this.props["annual salary"]
+  }
+
+  componentDidMount(){
+    let fetchLocation = '../statics/jobs-' + this.props.pageNumber + '.json'
+    fetch('../statics/jobs-1.json').then(response => { //change this to actual API
+      return response.json();
+    }).then(data => {
+      // Work with JSON data here
+      this.state.jobs = data;
+      this.setState(this.state);
+    }).catch(err => {
+      // Do something for an error here
+      console.log("Error Reading data " + err);
+    });
+  }
+  render () {
+    let salary = 0;
+    try{
+      salary = this.state.jobs[this.props.listingNum]["annual salary"]
+    }catch{}
     if(salary >= 90000) {
       this.state.highlightedDS = '$$$$$'
       this.state.unhighlightedDS = ''
@@ -35,19 +53,28 @@ class JobListing extends Component {
       this.state.highlightedDS = '$'
       this.state.unhighlightedDS = '$$$$'
     }
-  }
-  render () {
-    let top_cities = this.props["top cities"]
-    let top_city = top_cities[0]
+
+    let top_cities = {}
+    let top_city = ''
+    let job_id = 0
+    let job_title = ''
+    let education = ''
+    try{
+      top_cities = this.state.jobs[this.props.listingNum]["top cities"]
+      top_city = top_cities[0]
+      job_id = this.state.jobs[this.props.listingNum].id
+      job_title = this.state.jobs[this.props.listingNum]["job title"]
+      education = this.state.jobs[this.props.listingNum]["education"]
+    }catch{}
     return (
       <div class='featured-place-wrap'>
-        <a href={'/jobInstance/' + this.props.id}>
+        <a href={'/jobInstance/' + job_id}>
           {/* <img src={""+ this.props.image} height="200" width="100"></img> */}
           {/* <div className="container">
                                 <span className={this.state.circleColor} title="Overall Rating">{this.props.overall_rating / 10.0}</span>
                             </div> */}
           <div class='featured-title-box'>
-            <h6>{this.props["job title"]}</h6>
+            <h6>{job_title}</h6>
             <p>
               {'Average Income: '}
               <span>{this.state.highlightedDS}</span>
@@ -55,7 +82,7 @@ class JobListing extends Component {
             </p>
             <p>
               {'Education Requirement: '}
-              <span>{this.props["education"]}</span>
+              <span>{education}</span>
             </p>
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
@@ -101,9 +128,10 @@ class Jobs extends Component {
     if (pathName.includes('jobInstance')) {
       this.isListing = false
       // Because the index of the first job has id=2
-      this.pos = parseInt(pathName[pathName.length-1]) - 2
+      this.pos = parseInt(pathName[pathName.length-1])
     } else {
-      this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
+      this.pageNumber = parseInt(pathName[pathName.length-1])
+      console.log(this.pageNumber)
     }
     this.state = {
       "events": [],
@@ -141,15 +169,9 @@ class Jobs extends Component {
       let components = [];
       let count = 1;
       let indivComp = [];
-      for(let i in this.state.jobs)
+      for(let i = 0; i < 9; ++i)
       {
-          if(indivComp.length < 9){
-              indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
-          }else{
-              components.push(indivComp);
-              indivComp = [];
-              indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
-          }
+          indivComp.push( <div className="col-md-4 featured-responsive"><JobListing pageNumber={this.pageNumber} listingNum={indivComp.length}/></div>)
       }
       return (
         <div className='cities'>
@@ -167,7 +189,7 @@ class Jobs extends Component {
                     </div>
                   </div>
                 </div>
-                <div class='row'>{components[this.pageNumber]}</div>
+                <div class='row'>{indivComp}</div>
                 {/* <div class='row justify-content-center'>
                   <div class='col-md-4'>
                     <div class='featured-btn-wrap'>
