@@ -89,6 +89,7 @@ def query_filter_by_page(query_results, num):
         elif type(obj) is Event: 
             results.append(obj.json())
     return results
+
 @application.route("/filter/")
 @cross_origin() 
 def filter_results(): 
@@ -149,10 +150,23 @@ def filter_results():
 
     return response
 
-@application.route("/search/")
+@application.route("/api/<model>/search/<query>")
 @cross_origin() 
-def search_results():
-    return "WIP"
+def search_results(model, query):
+    if model == 'events':
+        events = Event.query
+        events = events.filter(Event.name.like('%' + query + '%'))
+        return jsonify([e.json() for e in events])
+    elif model == 'jobs':
+        jobs = Job.query
+        jobs = jobs.filter(Job.job_title.like('%' + query + '%'))
+        return jsonify([j.toDict() for j in jobs])
+    elif model == 'cities':
+        cities = City.query
+        cities = cities.filter(City.name.like('%' + query + '%'))
+        return jsonify([c.toDict() for c in cities])
+    else:
+        return "Invalid model: " + str(model)
 
 #------------#
 # API ROUTES #
