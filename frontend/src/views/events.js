@@ -111,17 +111,16 @@ class Event extends Component {
     {
         if(this.isListing){
         let components = [];
-        let count = 1;
         let indivComp = [];
         for(let i in this.state.events)
         {
-            if(count % 10 !== 0){
+            if(indivComp.length < 9){
                 indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }else{
                 components.push(indivComp);
                 indivComp = [];
+                indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }
-            ++count;
         }
         return(
             <div className="cities">
@@ -180,7 +179,6 @@ class Event extends Component {
               }
             }
         }
-            console.log(this.eid)
             return (<div className="main" style={{marginTop: "20vh"}}> 
                 <EventInstance {...this.state.events[this.eid]} hasMounted={this.state.hasMounted} jobID={jobID} jobNames={jobNames}></EventInstance>
             </div>);

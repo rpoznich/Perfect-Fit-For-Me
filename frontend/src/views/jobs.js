@@ -37,6 +37,8 @@ class JobListing extends Component {
     }
   }
   render () {
+    let top_cities = this.props["top cities"]
+    let top_city = top_cities[0]
     return (
       <div class='featured-place-wrap'>
         <a href={'/jobInstance/' + this.props.id}>
@@ -45,19 +47,24 @@ class JobListing extends Component {
                                 <span className={this.state.circleColor} title="Overall Rating">{this.props.overall_rating / 10.0}</span>
                             </div> */}
           <div class='featured-title-box'>
-            <h6>{this.props['job title']}</h6>
+            <h6>{this.props["job title"]}</h6>
             <p>
-              {'Potential Income: '}
+              {'Average Income: '}
               <span>{this.state.highlightedDS}</span>
               {this.state.unhighlightedDS}
+            </p>
+            <p>
+              {'Education Requirement: '}
+              <span>{this.props["education"]}</span>
             </p>
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
             {/* <p><span>{this.state.highlightedDS}</span>{this.state.unhighlightedDS}</p> */}
             <ul>
               <li>
+                <span>{'Top City'}</span>
                 <span class='icon-location-pin' />
-                <p>{this.props.location.city + ', ' + this.props.location.state}</p>
+                <p><span>{top_city}</span></p>
               </li>
               {/* <li>
                 <span />
@@ -93,7 +100,8 @@ class Jobs extends Component {
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('jobInstance')) {
       this.isListing = false
-      this.pos = parseInt(pathName[pathName.length-1]) - 1
+      // Because the index of the first job has id=2
+      this.pos = parseInt(pathName[pathName.length-1]) - 2
     } else {
       this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
     }
@@ -135,13 +143,13 @@ class Jobs extends Component {
       let indivComp = [];
       for(let i in this.state.jobs)
       {
-          if(count % 10 !== 0){
+          if(indivComp.length < 9){
               indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
           }else{
               components.push(indivComp);
               indivComp = [];
+              indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
           }
-          ++count;
       }
       return (
         <div className='cities'>
@@ -179,7 +187,7 @@ class Jobs extends Component {
       let eventID = []
       let eventNames = []
       let jobCity = 'Austin';
-      try{jobCity = (this.state.jobs[this.pos].location.city)
+      try{jobCity = (this.state.jobs[this.pos]["top cities"][0])
       }catch{}
       for(let i in this.state.events){
           let eventCity = 'Austin'

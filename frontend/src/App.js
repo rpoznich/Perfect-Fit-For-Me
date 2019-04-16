@@ -5,6 +5,7 @@ import Jobs from './views/jobs.js'
 import Cities from './views/cities.js'
 import About from './views/about.js'
 import Events from './views/events.js'
+import Search from './views/search.js'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
@@ -29,7 +30,7 @@ class Routing extends Component{
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       
             <Route exact path="/about" component={About}/>
-            <Route exact path="/search" component={About}/>
+            <Route exact path="/search/:query" component={Search}/>
           </Switch>
 
        </div>

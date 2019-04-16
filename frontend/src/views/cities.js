@@ -156,10 +156,10 @@ class Cities extends Component {
   render () {
     if (this.isListing) {
       let components = [];
-      let count = 1;
       let indivComp = [];
       for (let id in this.state.cities) {
-        if(count % 10 !== 0){  
+        console.log(id);
+        if(indivComp.length < 9){  
           indivComp.push(
               <div className='col-md-4 featured-responsive'>
                 <CityListing id={id} {...this.state.cities[id]} />
@@ -168,8 +168,12 @@ class Cities extends Component {
         }else{
           components.push(indivComp);
           indivComp = [];
+          indivComp.push(
+            <div className='col-md-4 featured-responsive'>
+                <CityListing id={id} {...this.state.cities[id]} />
+              </div>
+          )
         }
-        ++count;
       }
       return (
         <div className='cities'>
@@ -198,7 +202,7 @@ class Cities extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar numPages={8} model='/cities/'></PageBar>
+              <PageBar numPages={9} model='/cities/'></PageBar>
             </section>
           </div>
         </div>
@@ -209,6 +213,7 @@ class Cities extends Component {
             let jobNames = []
             let eventID = []
             let eventNames = []
+            try{
             for(let jobs in this.state.jobs){
                 let location = this.state.jobs[jobs].location.city;
                 let equals = location.toUpperCase() === city.toUpperCase();
@@ -216,7 +221,7 @@ class Cities extends Component {
                     jobID.push(this.state.jobs[jobs].id);
                     jobNames.push(this.state.jobs[jobs]['job title'])
                 }
-            }
+              }
             for(let eve in this.state.events){
                 let location = this.state.events[eve].city;
                 let equals = false;
@@ -228,6 +233,7 @@ class Cities extends Component {
                     eventNames.push(this.state.events[eve].name);
                 }
             }
+          }catch{}
       return (
         <div className='main' style={{ marginTop: '20vh' }}>
           <CityInstance {...this.state.cities[this.id]} hasMounted={this.state.hasMounted} id={this.id} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>

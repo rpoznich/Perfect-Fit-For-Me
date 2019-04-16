@@ -26,18 +26,20 @@ render () {
     let annual_salary = 0
     let description = ''
     let job_title = ''
-    let location = {}
+    let top_cities = ''
     let type = ''
+    let education = ''
     if(this.state.didMount === 1){
             annual_salary = this.state.jobs[this.props.pos]['annual salary'];
             description = this.state.jobs[this.props.pos].description
             if(description === null){
                 description = 'No information was provided for this job posting'
             }
-             job_title = this.state.jobs[this.props.pos]['job title'];
-            location = this.state.jobs[this.props.pos].location
+            job_title = this.state.jobs[this.props.pos]['job title'];
+            top_cities = this.state.jobs[this.props.pos]["top cities"]
             let parse = job_title.split(" ")
             type = parse[parse.length-1]
+            education = this.state.jobs[this.props.pos].education
     let items = []
     let i = 0
     for(let events in this.props.eventID){
@@ -56,9 +58,9 @@ render () {
               <h2>Job: {job_title}</h2>
               <hr />
               <p>{description}</p>
-              <a class='btn btn-primary btn-lg' href={''}>
+              {/* <a class='btn btn-primary btn-lg' href={''}>
                 Apply now! &raquo;
-              </a>
+              </a> */}
             </div>
             <div class='col-md-4 mb-5'>
               <h2>More Info</h2>
@@ -73,12 +75,20 @@ render () {
                 <br />
                 <strong>Average Annual Salary</strong>
                 <br />
-                {annual_salary}
+                {('$' + annual_salary).replace(
+                            /\B(?=(\d{3})+(?!\d))/g,
+                            ','
+                          )}
+                <br />
+                <br />
+                <strong>Education Requirement</strong>
+                <br />
+                {education}
                 <br />
                 <br />
                 <strong>Learn More About the City of</strong>
                 <br />
-                <a href={'/cityInstance/' + location.city}>{location.city + ' '}</a>
+                <a href={'/cityInstance/' + top_cities[0]}>{top_cities[0] + ' '}</a>
                 <br />
                 <br />
                 <strong>Events Nearby</strong>

@@ -32,6 +32,9 @@ class EventInstance extends Component {
       logo = this.props.logo
       start = this.props.start
       state = this.props.state
+      if(state == null){
+        state = 'Online Event!'
+      }
       summary = this.props.summary
       timezone = this.props.timezone
       url = this.props.url
