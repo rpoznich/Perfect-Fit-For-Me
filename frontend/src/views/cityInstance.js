@@ -18,7 +18,7 @@ class CityInstance extends Component {
     let salaryAvgYear = 0
     let salaryAvgMonth = 0
     let overallQuality = 0;
-    if(this.props.hasMounted === 1){
+    try{
       location = this.props.location
       image = this.props.images.web
       salaries = this.props.salaries
@@ -40,7 +40,7 @@ class CityInstance extends Component {
       overallQuality /= numQuals;
       overallQuality *= 10;
       overallQuality = Math.round(overallQuality * 10) / 10;
-    }
+    }catch{}
     let jobItems = []
     for(let jobs in this.props.jobID){
       jobItems.push(<ListGroup.Item><a href={'/jobInstance/' + this.props.jobID[jobs]}>{this.props.jobNames[jobs]}</a></ListGroup.Item>);
@@ -55,6 +55,7 @@ class CityInstance extends Component {
         break;
       }
     }
+    try{
     return (
       <div className='city-instance'>
         <head>
@@ -382,6 +383,7 @@ class CityInstance extends Component {
         </body>
       </div>
     )
+                }catch{}return(<div></div>)
   }
 }
 

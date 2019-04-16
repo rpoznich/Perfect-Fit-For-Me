@@ -99,25 +99,13 @@ class EventInstance extends Component {
               <address>
               <strong>Location</strong>
                 <br />
-                {(city != 'Online Event!') && 
-                <div>
-                {venue}
-                <br />
-                {address}
-                <br />
-                <a href={'/cityInstance/' + city}>{city}</a></div>
-                || {city}}
+                <a href={'/cityInstance/' + city}>{city}</a>
                 <br />
                 <br />
               <strong>Jobs Nearby</strong>
                 <br/>
                 {items}
-                <br />
-                {/* <br />
-                <strong>Status</strong>
-                <br />
-                {this.props.status}
-                <br /> */}
+                <br /> 
                 <br />
                 <strong>Date and Time</strong>
                 <br />
