@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
+from sqlalchemy import or_
 from models import City, Job, Event, application, db
 import json
 import requests
@@ -155,15 +156,28 @@ def filter_results():
 def search_results(model, query):
     if model == 'events':
         events = Event.query
-        events = events.filter(Event.name.like('%' + query + '%'))
+        events_name = events.filter(or_(Event.name.like('%' + query + '%'),
+                                        Event.summary.like('%' + query + '%'),
+                                        Event.address.like('%' + query + '%'),
+                                        Event.city.like('%' + query + '%'),
+                                        Event.state.like('%' + query + '%'),
+                                        Event.venue.like('%' + query + '%')))
         return jsonify([e.json() for e in events])
     elif model == 'jobs':
         jobs = Job.query
-        jobs = jobs.filter(Job.job_title.like('%' + query + '%'))
+        jobs = jobs.filter(or_(Job.job_title.like('%' + query + '%'),
+                               Job.description.like('%' + query + '%'),
+                               Job.education.like('%' + query + '%'),
+                               Job.city1.like('%' + query + '%'),
+                               Job.city2.like('%' + query + '%'),
+                               Job.city3.like('%' + query + '%'),
+                               Job.city4.like('%' + query + '%'),
+                               Job.city5.like('%' + query + '%')))
         return jsonify([j.toDict() for j in jobs])
     elif model == 'cities':
         cities = City.query
-        cities = cities.filter(City.name.like('%' + query + '%'))
+        cities = cities.filter(or_(City.name.like('%' + query + '%'),
+                                   City.state.like('%' + query + '%')))
         return jsonify([c.toDict() for c in cities])
     else:
         return "Invalid model: " + str(model)
