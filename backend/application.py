@@ -38,13 +38,13 @@ def query_jobs_by_id(identifier):
 
 def query_jobs_by_page(num):
     num = int(num)
-    jobs = []
-    for i in range(((num-1)*9+1), num*9+1):
-        job = Job.query.get(i)
-        if job is not None:
-            jobs.append(job.toDict())
-        else:
-            return jobs
+    jobs = {"Jobs":[]}
+    all_jobs = query_jobs()["Jobs"]
+    for i in range(((num-1)*9), num*9):
+        if i >= len(all_jobs):
+            break
+        job = all_jobs[i]
+        jobs["Jobs"].append(job)
     return jobs
 
 def query_cities(): 
@@ -66,13 +66,14 @@ def query_cities_by_state(state):
 
 def query_cities_by_page(num):
     num = int(num)
-    cities = []
-    for i in range(((num-1)*9+1), num*9+1):
-        city = City.query.get(i)
-        if city is not None:
-            cities.append(city.toDict())
-        else:
-            return cities
+    all_cities = query_cities() 
+    city_names = all_cities.keys()
+    cities = {}
+    for i in range(((num-1)*9), num*9):
+        if i >= len(city_names):
+            break
+        name = city_names[i]
+        cities[name] = all_cities[name]
     return cities
 
 #---------------# 
@@ -81,7 +82,7 @@ def query_cities_by_page(num):
 def query_filter_by_page(query_results, num): 
     num = int(num)
     results = [] 
-    for i in range(((num-1)*9+1), num*9+1):
+    for i in range(((num-1)*9), num*9):
         if (i >= len(query_results)): 
             break 
         obj = query_results[i] 

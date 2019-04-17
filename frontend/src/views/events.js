@@ -122,6 +122,9 @@ class Event extends Component {
                 indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }
         }
+        if(indivComp.length > 0){
+            components.push(indivComp);
+          }
         return(
             <div className="cities">
             <div className="main" style={{marginTop: "10vh"}}>
@@ -160,11 +163,11 @@ class Event extends Component {
             console.log(this.state.events)
             let jobID = []
             let jobNames = []
-            if(this.state.hasMounted === 1){
-            let eventCity = this.state.events[this.eid].city
+            let eventCity = ''
+            try{
+            eventCity = this.state.events[this.eid].city
             // let cityID = 0
             // let cityName = '?!?!'
-            if(eventCity != null){
               for(let pos in this.state.jobs){
                   let location = this.state.jobs[pos].location.city
                   let equals = location.toUpperCase() === eventCity.toUpperCase();
@@ -177,10 +180,9 @@ class Event extends Component {
                     break;
                   }
               }
-            }
-        }
+        }catch{}
             return (<div className="main" style={{marginTop: "20vh"}}> 
-                <EventInstance {...this.state.events[this.eid]} hasMounted={this.state.hasMounted} jobID={jobID} jobNames={jobNames}></EventInstance>
+                <EventInstance {...this.state.events[this.eid]} hasMounted={this.state.hasMounted} jobID={jobID} jobNames={jobNames}/>
             </div>);
         }
     }

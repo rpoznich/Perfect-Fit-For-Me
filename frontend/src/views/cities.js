@@ -175,6 +175,9 @@ class Cities extends Component {
           )
         }
       }
+      if(indivComp.length > 0){
+        components.push(indivComp);
+      }
       return (
         <div className='cities'>
           <div className='main' style={{ marginTop: '10vh' }}>
@@ -202,7 +205,7 @@ class Cities extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar numPages={9} model='/cities/'></PageBar>
+              <PageBar numPages={10} model='/cities/'></PageBar>
             </section>
           </div>
         </div>
