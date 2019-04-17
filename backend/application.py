@@ -37,13 +37,13 @@ def query_jobs_by_id(identifier):
 
 def query_jobs_by_page(num):
     num = int(num)
-    jobs = []
-    for i in range(((num-1)*9+1), num*9+1):
-        job = Job.query.get(i)
-        if job is not None:
-            jobs.append(job.toDict())
-        else:
-            return jobs
+    jobs = {"Jobs":[]}
+    all_jobs = query_jobs()["Jobs"]
+    for i in range(((num-1)*9), num*9):
+        if i >= len(all_jobs):
+            break
+        job = all_jobs[i]
+        jobs["Jobs"].append(job)
     return jobs
 
 def query_cities(): 
