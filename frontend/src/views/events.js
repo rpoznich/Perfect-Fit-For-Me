@@ -125,12 +125,22 @@ class Event extends Component {
         this.isListing = true
         this.pageNumber = 0
         this.numPages = 0
+        this.isCity = false
+        this.city = ''
+        this.model_url = '/events/'
+        this.title = 'Featured Events'
         // If is an instance?
         let pathName = window.location.pathname.split("/");
         if (pathName.includes('eventInstance')) {
             this.isListing = false
             this.eid = parseInt(pathName[pathName.length-1]) - 1
         }else {
+            if(pathName.includes('filter')){
+                this.isCity = true
+                this.model_url = '/events/filter/'
+                this.city = pathName[pathName.length-2].toLowerCase()
+                this.title = 'Featured Events For ' + this.city
+            }
             this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
         }
         this.state = 
@@ -145,18 +155,33 @@ class Event extends Component {
     
     componentDidMount()
     {
-        fetch('../statics/events.json').then(response => { //change this to actual API
-            return response.json();
-          }).then(data => {
-            // Work with JSON data here
-            this.state.events = data;
-            this.state.hasMounted = 1;
-            this.state.numPages = Math.ceil(this.state.events.length / 9);
-            this.setState(this.state);
-          }).catch(err => {
-            // Do something for an error here
-            console.log("Error Reading data " + err);
-          });
+        if(this.isCity){
+            fetch('../statics/events_austin.json').then(response => { //change this to actual API
+                return response.json();
+              }).then(data => {
+                // Work with JSON data here
+                this.state.events = data;
+                this.state.hasMounted = 1;
+                this.state.numPages = Math.ceil(this.state.events.length / 9);
+                this.setState(this.state);
+              }).catch(err => {
+                // Do something for an error here
+                console.log("Error Reading data " + err);
+              });
+        } else {
+            fetch('../statics/events.json').then(response => { //change this to actual API
+                return response.json();
+            }).then(data => {
+                // Work with JSON data here
+                this.state.events = data;
+                this.state.hasMounted = 1;
+                this.state.numPages = Math.ceil(this.state.events.length / 9);
+                this.setState(this.state);
+            }).catch(err => {
+                // Do something for an error here
+                console.log("Error Reading data " + err);
+            });
+        }
         fetch('../statics/jobs.json').then(response => { //change this to actual API
             return response.json();
           }).then(data => {
@@ -211,12 +236,12 @@ class Event extends Component {
                 <select onChange = {(e) => this.setState({state_filter : e.target.value})}>
                     {states}
                 </select>
-            <Button href={"events/filter/"+this.state.city_filter+this.state.state_filter} type="submit" ariant="outline-primary">Filter</Button>
+            <Button href={"/events/filter/"+this.state.city_filter+"/1"} type="submit" ariant="outline-primary">Filter</Button>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
-                        <h3>Featured Events</h3>
+                        <h3>{this.title}</h3>
                     </div>
                 </div>
             </div>
@@ -231,7 +256,7 @@ class Event extends Component {
                 </div>
             </div> */}
         </div>
-        <PageBar numPages={49} model='/events/'></PageBar>
+        <PageBar numPages={49} model={this.model_url}></PageBar>
     </section>
              </div>
              </div>
