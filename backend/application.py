@@ -200,7 +200,9 @@ def search_results(model, query):
         cities = City.query
         cities = cities.filter(or_(City.name.like('%' + query + '%'),
                                    City.state.like('%' + query + '%')))
-        return jsonify([e.json() for e in events] + [j.toDict() for j in jobs] + [c.toDict() for c in cities])
+        return jsonify({'events' : [e.json() for e in events],
+                        'jobs' : [j.toDict() for j in jobs],
+                        'cities' : [c.toDict() for c in cities]})
     else:
         return "Invalid model: " + str(model)
 
