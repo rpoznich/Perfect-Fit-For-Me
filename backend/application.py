@@ -16,12 +16,12 @@ def query_events():
 def query_events_by_page(num):
     num = int(num)
     events = []
-    for i in range(((num-1)*9+1), num*9+1):
-        event = Event.query.get(i)
-        if event is not None:
-            events.append(event.json())
-        else:
-            return events
+    all_events = query_events()
+    for i in range(((num-1)*9), num*9):
+        if i >= len(all_events):
+            break
+        event = all_events[i]
+        events.append(event)
     return events
 
 def query_jobs(): 
