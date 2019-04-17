@@ -198,22 +198,24 @@ class Jobs extends Component {
     } else {
       let eventID = []
       let eventNames = []
-      let jobCity = 'Austin';
-      try{jobCity = (this.state.jobs[this.pos].location.city)
+      let jobCities = ['Austin']
+      try{jobCities = this.state.jobs[this.pos]["top cities"]
       }catch{}
-      for(let i in this.state.events){
-          let eventCity = 'Austin'
-          try{eventCity = (this.state.events[i].city)
-          }catch{}
-          let equals = false;
-          try{equals = jobCity.toUpperCase() === eventCity.toUpperCase()}catch{}
-          if(equals){
-            let dict = this.state.events[i]
-            eventID.push(dict.eventid)
-            eventNames.push(dict.name)
-          }
-          if(eventID.length >= 3){
-            break;
+      for(let num = 0; num < 3; num++){
+        for(let i in this.state.events){
+            let eventCity = 'Austin'
+            try{eventCity = (this.state.events[i].city)
+            }catch{}
+            let equals = false;
+            try{equals = jobCities[num].toUpperCase() === eventCity.toUpperCase()}catch{}
+            if(equals){
+              let dict = this.state.events[i]
+              eventID.push(dict.eventid)
+              eventNames.push(dict.name)
+            }
+            if(eventID.length >= 3){
+              break;
+            }
           }
         }
         return (<div className="main" style={{marginTop: "20vh"}}> 
