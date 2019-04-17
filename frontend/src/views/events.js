@@ -122,6 +122,9 @@ class Event extends Component {
                 indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }
         }
+        if(indivComp.length > 0){
+            components.push(indivComp);
+          }
         return(
             <div className="cities">
             <div className="main" style={{marginTop: "10vh"}}>

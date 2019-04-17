@@ -140,7 +140,7 @@ class About extends Component {
         username: 'dylankile',
         role: 'Back-end',
         img: dylan,
-        commits: 0,
+        commits: 20,
         issues: 0,
         website: '',
         tests: 10
