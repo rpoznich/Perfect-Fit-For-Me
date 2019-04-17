@@ -82,6 +82,9 @@ def query_cities_by_page(num):
 def query_filter_by_page(query_results, num): 
     num = int(num)
     results = [] 
+    if query_results is None: 
+        print(query_results)
+        return results
     for i in range(((num-1)*9), num*9):
         if (i >= len(query_results)): 
             break 
@@ -92,60 +95,81 @@ def query_filter_by_page(query_results, num):
             results.append(obj.json())
     return results
 
-@application.route("/filter/")
+@application.route("/api/<model>/filter/<attr>/<value>/<page>")
 @cross_origin() 
-def filter_results(): 
-    model = request.args.get('m')
-    page = request.args.get('p')
+def filter_results(model, attr, value, page):
     results = None
     response = None
     if model == 'jobs': 
         # ADD ATTRIBUTES AS NECESSARY # 
-        income = request.args.get('i')
-        location = request.args.get('loc')
-        education = request.args.get('edu') 
         jobs_query = None
-        if income is not None and location is not None: 
-            # DO QUERY IN DATABASE WHERE JOBS POTENTIAL INCOME IS > CASH SIGN # 
-            # NEED TO FIGURE OUT WHAT A CASH SIGN MEANS IN TERMS OF VALUES 
-            #salary = 90000 # SOME FILLER UNTIL I FIGURE OUT WHAT A CASH SIGN MEANS 
-            loc = location.split(",")[0]
-            jobs_query = Job.query.filter(Job.salary >= 90000).all() # Can't really filter by location since job doesn't give that info
-        elif income is not None: 
-            #salary = 90000
-            jobs_query = Job.query.filter(Job.salary >= 90000).all()
-        elif education is not None: 
-            if (education == 'bac'):
+        if attr == 'income': 
+            if value == '1': 
+                jobs_query = Job.query.filter(Job.salary < 30000).all()
+            elif value == '2': 
+                jobs_query = Job.query.filter(Job.salary >= 30000, Job.salary < 50000).all()
+            elif value == '3': 
+                jobs_query = Job.query.filter(Job.salary >= 50000, Job.salary < 70000).all()
+            elif value == '4': 
+                jobs_query = Job.query.filter(Job.salary >= 70000, Job.salary < 90000).all()
+            elif value == '5':              
+                jobs_query = Job.query.filter(Job.salary >= 90000).all()
+        elif attr == 'edu': 
+            if (value == 'bac'):
                 jobs_query = Job.query.filter_by(education="Bachelor's degree").all()
-            if (education == 'mas'): 
+            elif (value == 'mas'): 
                 jobs_query = Job.query.filter_by(education="Master's degree").all()
+            elif (value == 'phd'):
+                jobs_query = Job.query.filter_by(education="Doctoral or professional degree").all()
+        elif attr == 'loc': 
+            jobs_query = Job.query.filter(or_(Job.city1 == value,
+                                             Job.city2 == value, 
+                                             Job.city3 == value, 
+                                             Job.city4 == value, 
+                                             Job.city5 == value)).all()
         response = jsonify(query_filter_by_page(jobs_query,page))
 
 
 
     elif model == 'cities': # May Need to add average score to filter by average score
-        cost_of_living = request.args.get('col') 
-        population = request.args.get('pop')
         # avg_score = request.get.args.get('avg')
         cities = None
-        if cost_of_living is not None: 
-            col = 4 # Not sure what the Cash sign means again - is it more expensive/less expensive? 
-            cities = City.query.filter_by(col >= 4).all()
-        elif population is not None: 
-            if population == 1:
-                cities = City.query.filter_by(population<=200000).all()
-            elif population == 2: 
-                cities = City.query.filter_by(population > 200000, population < 999999).all()
-            elif population == 3:
-                cities = City.query.filter_by(population >= 1000000).all()
+        if attr == 'col': 
+            col = 2*int(value)# Not sure what the Cash sign means again - is it more expensive/less expensive? 
+            if (col <= 2): 
+                cities = City.query.filter(City.cost_of_living <= 2.0).all();
+            elif (col <= 4): 
+                cities = City.query.filter(City.cost_of_living > 2.0, City.cost_of_living <= 4.0).all()
+            elif (col <= 6): 
+                cities = City.query.filter(City.cost_of_living > 4.0, City.cost_of_living <= 6.0).all()
+            elif (col <= 8): 
+                cities = City.query.filter(City.cost_of_living > 6.0, City.cost_of_living <= 8.0).all()
+            elif (col <= 10): 
+                cities = City.query.filter(City.cost_of_living > 8.0, City.cost_of_living <= 10.0).all()
+        elif attr == 'pop': 
+            population = value
+            if population == '1':
+                cities = City.query.filter(City.population<=200000).all()
+            elif population == '2': 
+                cities = City.query.filter(City.population > 200000, City.population < 999999).all()
+            elif population == '3':
+                cities = City.query.filter(City.population >= 1000000).all()
+        elif attr == 'state': 
+            cities = City.query.filter_by(state=state).all()
         response = jsonify(query_filter_by_page(cities,page))
 
     elif model == 'events':
-        location = request.args.get('loc')
+        city = request.args.get('city')
+        start = request.args.get('start')
+        state = request.args.get('state')
+
         events = None
-        if location is not None: 
-            loc = location.split(",")[0]
-            events = Event.query.filter_by(city=loc).all()
+        if city is not None: 
+            events = Event.query.filter_by(city=city).all()
+        elif state is not None:
+            events = Event.query.filter_by(state=state).all()
+        elif start is not None: 
+            events = Event.query.filter_by(start=start).all()
         response = jsonify(query_filter_by_page(events))
     else: 
         assert(False) # Just to debug and check if proper input is given
