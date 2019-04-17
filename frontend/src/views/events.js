@@ -28,7 +28,7 @@ class EventListing extends Component{
                             <a href={"/eventInstance/"+this.props.eventid}>
                             <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
                             <div className="container">
-                                <span className={this.state.circleColor} title="Status">{}</span>
+                                <span className={this.state.circleColor} title="Time">{'AM'}</span>
                             </div>
                             <div class="featured-title-box">
                                 <h6 >{this.props.name}</h6>
@@ -60,6 +60,67 @@ class Event extends Component {
     constructor(props)
     {
         super(props);
+        this.states_50 = {
+            "AL": "Alabama",
+            "AK": "Alaska",
+            "AS": "American Samoa",
+            "AZ": "Arizona",
+            "AR": "Arkansas",
+            "CA": "California",
+            "CO": "Colorado",
+            "CT": "Connecticut",
+            "DE": "Delaware",
+            "DC": "District Of Columbia",
+            "FM": "Federated States Of Micronesia",
+            "FL": "Florida",
+            "GA": "Georgia",
+            "GU": "Guam",
+            "HI": "Hawaii",
+            "ID": "Idaho",
+            "IL": "Illinois",
+            "IN": "Indiana",
+            "IA": "Iowa",
+            "KS": "Kansas",
+            "KY": "Kentucky",
+            "LA": "Louisiana",
+            "ME": "Maine",
+            "MH": "Marshall Islands",
+            "MD": "Maryland",
+            "MA": "Massachusetts",
+            "MI": "Michigan",
+            "MN": "Minnesota",
+            "MS": "Mississippi",
+            "MO": "Missouri",
+            "MT": "Montana",
+            "NE": "Nebraska",
+            "NV": "Nevada",
+            "NH": "New Hampshire",
+            "NJ": "New Jersey",
+            "NM": "New Mexico",
+            "NY": "New York",
+            "NC": "North Carolina",
+            "ND": "North Dakota",
+            "MP": "Northern Mariana Islands",
+            "OH": "Ohio",
+            "OK": "Oklahoma",
+            "OR": "Oregon",
+            "PW": "Palau",
+            "PA": "Pennsylvania",
+            "PR": "Puerto Rico",
+            "RI": "Rhode Island",
+            "SC": "South Carolina",
+            "SD": "South Dakota",
+            "TN": "Tennessee",
+            "TX": "Texas",
+            "UT": "Utah",
+            "VT": "Vermont",
+            "VI": "Virgin Islands",
+            "VA": "Virginia",
+            "WA": "Washington",
+            "WV": "West Virginia",
+            "WI": "Wisconsin",
+            "WY": "Wyoming"
+        }
         this.eid = -1
         this.isListing = true
         this.pageNumber = 0
@@ -76,7 +137,9 @@ class Event extends Component {
         {
             "events": [],
             "jobs": [],
-            hasMounted : 0
+            hasMounted : 0,
+            city_filter : null,
+            state_filter : null
         }
     }
     
@@ -124,16 +187,32 @@ class Event extends Component {
         }
         if(indivComp.length > 0){
             components.push(indivComp);
-          }
+        }
+        let states = []
+        for(let key in this.states_50)
+        {
+            states.push(<option>{this.states_50[key]}</option>)
+        }
         return(
             <div className="cities">
             <div className="main" style={{marginTop: "10vh"}}>
     <section class="main-block light-bg">
         <div class="container">
-        <div>
+            <div>
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
+            <div className="col-md-3 mb-6">
+                <label htmlFor="city">City</label>
+                <input type="search" id ="city" className="form-control" placeholder="..." onChange={(e) => this.setState({city_filter : e.target.value})}></input>
+            </div>
+            <div className="col-md-3 mb-6">
+                <label htmlFor="state">State</label>
+                <select onChange = {(e) => this.setState({state_filter : e.target.value})}>
+                    {states}
+                </select>
+            <Button href={"events/filter/"+this.state.city_filter+this.state.state_filter} type="submit" ariant="outline-primary">Filter</Button>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
