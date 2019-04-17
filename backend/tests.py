@@ -44,16 +44,30 @@ class TestModels (TestCase):
         self.assertEqual(city_stats_test, city.toDict())
 
     def test_job_to_dict(self): 
-        job = Job(1,"name", "city", "tx", 1.0, "A Job") 
+        job = Job(job_id=1,job_title="name", education="Bachelor", 
+            description="a job", salary=1.0, city1="city1", city2="city2",
+            city3="city3", city4="city4", city5="city5", salary1=1.0, 
+            salary2=1.0, salary3=1.0, salary4=1.0, salary5=1.0) 
         job_stats_test = {
             "id":1, 
             "job title":"name",
             "annual salary":1.0, 
-            "location": {
-                "city":"city",
-                "state":"tx"
-            }, 
-            "description":"A Job"
+            "education":"Bachelor",
+            "top cities": [
+                "city1",
+                "city2",
+                "city3",
+                "city4",
+                "city5"
+            ], 
+            "top cities salaries": {
+                "city1":1.0,
+                "city2":1.0,
+                "city3":1.0,
+                "city4":1.0,
+                "city5":1.0,
+            },
+            "description":"a job"
         }
 
         self.assertEqual(job_stats_test, job.toDict())
@@ -88,10 +102,10 @@ class TestModels (TestCase):
         self.assertEqual(type(job), Job)
 
     def test_jobs_all_same_city(self): 
-        jobs = Job.query.filter_by(city_name="Austin", state="Texas")
+        jobs = Job.query.filter_by(city1="Austin")
         all_same = True 
         for job in jobs: 
-            if job.city_name != "Austin": 
+            if job.city1 != "Austin": 
                 all_same = False 
                 break
         self.assertEqual(all_same, True)
