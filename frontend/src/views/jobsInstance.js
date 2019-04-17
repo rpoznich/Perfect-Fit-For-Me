@@ -86,12 +86,16 @@ render () {
                 {education}
                 <br />
                 <br />
-                <strong>Learn More About the City of</strong>
+                <strong>Learn More About the Top Cities for this Career!</strong>
                 <br />
                 <a href={'/cityInstance/' + top_cities[0]}>{top_cities[0] + ' '}</a>
                 <br />
+                <a href={'/cityInstance/' + top_cities[1]}>{top_cities[1] + ' '}</a>
                 <br />
-                <strong>Events Nearby</strong>
+                <a href={'/cityInstance/' + top_cities[2]}>{top_cities[2] + ' '}</a>
+                <br />
+                <br />
+                <strong>Events in the Top Cities!</strong>
                 <br />
                 {items}
               </address>
