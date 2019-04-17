@@ -76,9 +76,9 @@ def query_cities_by_page(num):
         cities[name] = all_cities[name]
     return cities
 
-#---------------# 
-# FILTER/SEARCH #
-#---------------# 
+#--------------------# 
+# FILTER/SEARCH/SORT #
+#--------------------# 
 def query_filter_by_page(query_results, num): 
     num = int(num)
     results = [] 
@@ -201,6 +201,188 @@ def search_results(model, query):
         cities = cities.filter(or_(City.name.like('%' + query + '%'),
                                    City.state.like('%' + query + '%')))
         return jsonify([e.json() for e in events] + [j.toDict() for j in jobs] + [c.toDict() for c in cities])
+    else:
+        return "Invalid model: " + str(model)
+
+@application.route('/api/<model>/sort/<attribute>')
+@cross_origin()
+def sort_results(model, attribute):
+    if model == 'events':
+        events = Event.query
+        if attribute == 'eventid':
+            events = events.filter(Event.eventid.isnot(None)).order_by(Event.eventid)
+        elif attribute == 'name':
+            events = events.filter(Event.name.isnot(None)).order_by(Event.name)
+        elif attribute == 'summary':
+            events = events.filter(Event.summary.isnot(None)).order_by(Event.summary)
+        elif attribute == 'address':
+            events = events.filter(Event.address.isnot(None)).order_by(Event.address)
+        elif attribute == 'city':
+            events = events.filter(Event.city.isnot(None)).order_by(Event.city)
+        elif attribute == 'state':
+            events = events.filter(Event.state.isnot(None)).order_by(Event.state)
+        elif attribute == 'venue':
+            events = events.filter(Event.venue.isnot(None)).order_by(Event.venue)
+        elif attribute == 'start':
+            events = events.filter(Event.start.isnot(None)).order_by(Event.start)
+        elif attribute == 'end':
+            events = events.filter(Event.end.isnot(None)).order_by(Event.end)
+        elif attribute == 'timezone':
+            events = events.filter(Event.timezone.isnot(None)).order_by(Event.timezone)
+        else:
+            return "Invalid attribute: " + str(attribute)
+        return jsonify([e.json() for e in events])
+    elif model == 'jobs':
+        jobs = Job.query
+        if attribute == 'job_id':
+            jobs = jobs.order_by(Job.job_id)
+        elif attribute == 'job_title':
+            jobs = jobs.order_by(Job.job_title)
+        elif attribute == 'description':
+            jobs = jobs.order_by(Job.description)
+        elif attribute == 'education':
+            jobs = jobs.order_by(Job.education)
+        elif attribute == 'salary':
+            jobs = jobs.order_by(Job.salary)
+        elif attribute == 'city1':
+            jobs = jobs.order_by(Job.city1)
+        elif attribute == 'city2':
+            jobs = jobs.order_by(Job.city2)
+        elif attribute == 'city3':
+            jobs = jobs.order_by(Job.city3)
+        elif attribute == 'city4':
+            jobs = jobs.order_by(Job.city4)
+        elif attribute == 'city5':
+            jobs = jobs.order_by(Job.city5)
+        elif attribute == 'salary1':
+            jobs = jobs.order_by(Job.salary1)
+        elif attribute == 'salary2':
+            jobs = jobs.order_by(Job.salary2)
+        elif attribute == 'salary3':
+            jobs = jobs.order_by(Job.salary3)
+        elif attribute == 'salary4':
+            jobs = jobs.order_by(Job.salary4)
+        elif attribute == 'salary5':
+            jobs = jobs.order_by(Job.salary5)
+        else:
+            return "Invalid attribute: " + str(attribute)
+        return jsonify([j.toDict() for j in jobs])
+    elif model == 'cities':
+        cities = City.query
+        if attribute == 'id':
+            cities = cities.order_by(City.id)
+        elif attribute == 'name':
+            cities = cities.order_by(City.name)
+        elif attribute == 'state':
+            cities = cities.order_by(City.state)
+        elif attribute == 'population':
+            cities = cities.order_by(City.population)
+        elif attribute == 'latitude':
+            cities = cities.order_by(City.latitude)
+        elif attribute == 'longitude':
+            cities = cities.order_by(City.longitude)
+        elif attribute == 'housing':
+            cities = cities.order_by(City.housing)
+        elif attribute == 'cost_of_living':
+            cities = cities.order_by(City.cost_of_living)
+        elif attribute == 'tolerance':
+            cities = cities.order_by(City.tolerance)
+        elif attribute == 'commute':
+            cities = cities.order_by(City.commute)
+        else:
+            return "Invalid attribute: " + str(attribute)
+        return jsonify([c.toDict() for c in cities])
+    else:
+        return "Invalid model: " + str(model)
+
+@application.route('/api/<model>/desc_sort/<attribute>')
+@cross_origin()
+def desc_sort_results(model, attribute):
+    if model == 'events':
+        events = Event.query
+        if attribute == 'eventid':
+            events = events.filter(Event.eventid.isnot(None)).order_by(Event.eventid.desc())
+        elif attribute == 'name':
+            events = events.filter(Event.name.isnot(None)).order_by(Event.name.desc())
+        elif attribute == 'summary':
+            events = events.filter(Event.summary.isnot(None)).order_by(Event.summary.desc())
+        elif attribute == 'address':
+            events = events.filter(Event.address.isnot(None)).order_by(Event.address.desc())
+        elif attribute == 'city':
+            events = events.filter(Event.city.isnot(None)).order_by(Event.city.desc())
+        elif attribute == 'state':
+            events = events.filter(Event.state.isnot(None)).order_by(Event.state.desc())
+        elif attribute == 'venue':
+            events = events.filter(Event.venue.isnot(None)).order_by(Event.venue.desc())
+        elif attribute == 'start':
+            events = events.filter(Event.start.isnot(None)).order_by(Event.start.desc())
+        elif attribute == 'end':
+            events = events.filter(Event.end.isnot(None)).order_by(Event.end.desc())
+        elif attribute == 'timezone':
+            events = events.filter(Event.timezone.isnot(None)).order_by(Event.timezone.desc())
+        else:
+            return "Invalid attribute: " + str(attribute)
+        return jsonify([e.json() for e in events])
+    elif model == 'jobs':
+        jobs = Job.query
+        if attribute == 'job_id':
+            jobs = jobs.order_by(Job.job_id.desc())
+        elif attribute == 'job_title':
+            jobs = jobs.order_by(Job.job_title.desc())
+        elif attribute == 'description':
+            jobs = jobs.order_by(Job.description.desc())
+        elif attribute == 'education':
+            jobs = jobs.order_by(Job.education.desc())
+        elif attribute == 'salary':
+            jobs = jobs.order_by(Job.salary.desc())
+        elif attribute == 'city1':
+            jobs = jobs.order_by(Job.city1.desc())
+        elif attribute == 'city2':
+            jobs = jobs.order_by(Job.city2.desc())
+        elif attribute == 'city3':
+            jobs = jobs.order_by(Job.city3.desc())
+        elif attribute == 'city4':
+            jobs = jobs.order_by(Job.city4.desc())
+        elif attribute == 'city5':
+            jobs = jobs.order_by(Job.city5.desc())
+        elif attribute == 'salary1':
+            jobs = jobs.order_by(Job.salary1.desc())
+        elif attribute == 'salary2':
+            jobs = jobs.order_by(Job.salary2.desc())
+        elif attribute == 'salary3':
+            jobs = jobs.order_by(Job.salary3.desc())
+        elif attribute == 'salary4':
+            jobs = jobs.order_by(Job.salary4.desc())
+        elif attribute == 'salary5':
+            jobs = jobs.order_by(Job.salary5.desc())
+        else:
+            return "Invalid attribute: " + str(attribute)
+        return jsonify([j.toDict() for j in jobs])
+    elif model == 'cities':
+        cities = City.query
+        if attribute == 'id':
+            cities = cities.order_by(City.id.desc())
+        elif attribute == 'name':
+            cities = cities.order_by(City.name.desc())
+        elif attribute == 'state':
+            cities = cities.order_by(City.state.desc())
+        elif attribute == 'population':
+            cities = cities.order_by(City.population.desc())
+        elif attribute == 'latitude':
+            cities = cities.order_by(City.latitude.desc())
+        elif attribute == 'longitude':
+            cities = cities.order_by(City.longitude.desc())
+        elif attribute == 'housing':
+            cities = cities.order_by(City.housing.desc())
+        elif attribute == 'cost_of_living':
+            cities = cities.order_by(City.cost_of_living.desc())
+        elif attribute == 'tolerance':
+            cities = cities.order_by(City.tolerance.desc())
+        elif attribute == 'commute':
+            cities = cities.order_by(City.commute.desc())
+        else:
+            return "Invalid attribute: " + str(attribute)
+        return jsonify([c.toDict() for c in cities])
     else:
         return "Invalid model: " + str(model)
 
