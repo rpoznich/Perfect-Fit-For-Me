@@ -3,6 +3,7 @@ import logo from './68fdaa828d60e1828ee849c1f72bbc4c.png';
 import Home from './views/home.js'
 import Jobs from './views/jobs.js'
 import Cities from './views/cities.js'
+import CitiesSearch from './views/citySearch.js'
 import About from './views/about.js'
 import Events from './views/events.js'
 import Search from './views/search.js'
@@ -26,6 +27,7 @@ class Routing extends Component{
             <Route exact path="/jobs/:id" component={Jobs}/>
             <Route exact path="/jobInstance/:id" component={Jobs}/>
             <Route exact path="/cities/:id" component={Cities}/>
+            <Route exact path="/cities/search/:query" component={CitiesSearch}/>     
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/events/filter/:query/:id" component={Events}/>
