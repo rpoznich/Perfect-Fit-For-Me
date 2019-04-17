@@ -84,7 +84,7 @@ class TestModels (TestCase):
     #######################
 
     def test_single_instance_job(self): 
-        job = Job.query.get(1)
+        job = Job.query.get(10)
         self.assertEqual(type(job), Job)
 
     def test_jobs_all_same_city(self): 
@@ -101,7 +101,7 @@ class TestModels (TestCase):
         self.assertEqual(job, [])
 
     def test_single_instance_city(self): 
-        city = City.query.get(1) 
+        city = City.query.get(2) 
         self.assertEqual(type(city), City)
 
     def test_city_not_in_cb(self): 
