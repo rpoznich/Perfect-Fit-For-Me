@@ -56,7 +56,7 @@ class EventListing extends Component{
     }
 }
 
-class Event extends Component {
+class EventsFilter extends Component {
     constructor(props)
     {
         super(props);
@@ -137,8 +137,8 @@ class Event extends Component {
         }else {
             if(pathName.includes('filter')){
                 this.isCity = true
+                this.model_url = '/events/filter/'
                 this.city = pathName[pathName.length-2].toLowerCase()
-                this.model_url = '/events/filter/' + this.city + '/';
                 this.title = 'Featured Events For ' + this.city
             }
             this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
@@ -155,22 +155,18 @@ class Event extends Component {
     
     componentDidMount()
     {
-        let fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events'
-        if(this.isCity){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/search/' + this.city
-        }
-        fetch(fetchLocation).then(response => { //change this to actual API
-            return response.json();
-        }).then(data => {
-            // Work with JSON data here
-            this.state.events = data;
-            this.state.hasMounted = 1;
-            this.state.numPages = Math.ceil(this.state.events.length / 9);
-            this.setState(this.state);
-        }).catch(err => {
-            // Do something for an error here
-            console.log("Error Reading data " + err);
-        });
+            fetch('../public/statics/events.json').then(response => { //change this to actual API
+                return response.json();
+            }).then(data => {
+                // Work with JSON data here
+                this.state.events = data;
+                this.state.hasMounted = 1;
+                this.state.numPages = Math.ceil(this.state.events.length / 9);
+                this.setState(this.state);
+            }).catch(err => {
+                // Do something for an error here
+                console.log("Error Reading data " + err);
+            });
         fetch('../statics/jobs.json').then(response => { //change this to actual API
             return response.json();
           }).then(data => {
@@ -191,16 +187,12 @@ class Event extends Component {
         let indivComp = [];
         for(let i in this.state.events)
         {
-            if(this.isCity){
+            if(indivComp.length < 9){
                 indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }else{
-                if(indivComp.length < 9){
-                    indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
-                }else{
-                    components.push(indivComp);
-                    indivComp = [];
-                    indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
-                }
+                components.push(indivComp);
+                indivComp = [];
+                indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }
         }
         if(indivComp.length > 0){
@@ -210,10 +202,6 @@ class Event extends Component {
         for(let key in this.states_50)
         {
             states.push(<option>{this.states_50[key]}</option>)
-        }
-        let pageBar = []
-        if(!this.isCity){
-            pageBar.push(<PageBar numPages={49} model={this.model_url}></PageBar>)
         }
         return(
             <div className="cities">
@@ -245,8 +233,15 @@ class Event extends Component {
             <div class="row">
                 {components[this.pageNumber]}
             </div>
+            {/* <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="featured-btn-wrap">
+                        <a href="" class="btn btn-danger">VIEW ALL</a>
+                    </div>
+                </div>
+            </div> */}
         </div>
-        {pageBar}
+        <PageBar numPages={49} model={this.model_url}></PageBar>
     </section>
              </div>
              </div>
@@ -281,4 +276,4 @@ class Event extends Component {
         }
     }
 }
-export default Event;
+export default EventsFilter;
