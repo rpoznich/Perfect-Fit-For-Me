@@ -18,7 +18,9 @@ class CityInstance extends Component {
     let salaryAvgYear = 0
     let salaryAvgMonth = 0
     let overallQuality = 0;
+    let population = 0
     try{
+      population = this.props.population
       location = this.props.location
       image = this.props.images.web
       salaries = this.props.salaries
@@ -55,6 +57,7 @@ class CityInstance extends Component {
         break;
       }
     }
+    console.log(this.props)
     try{
     return (
       <div className='city-instance'>
@@ -84,10 +87,10 @@ class CityInstance extends Component {
         <body id='page-top'>
           <div class='container-fluid'>
             <div class='d-sm-flex align-items-center justify-content-between mb-4'>
-              <h1 class='h3 mb-0 text-gray-800'>{this.props.id}</h1>
+              <h1 class='h3 mb-0 text-gray-800'>{this.props.name}</h1>
             </div>
             <div class='row'>
-              <div class='col-xl-3 col-md-6 mb-4'>
+              {/* <div class='col-xl-3 col-md-6 mb-4'>
                 <div class='card border-left-primary shadow h-100 py-2'>
                   <div class='card-body'>
                     <div class='row no-gutters align-items-center'>
@@ -108,8 +111,8 @@ class CityInstance extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class='col-xl-3 col-md-6 mb-4'>
+              </div> */}
+              {/* <div class='col-xl-3 col-md-6 mb-4'>
                 <div class='card border-left-success shadow h-100 py-2'>
                   <div class='card-body'>
                     <div class='row no-gutters align-items-center'>
@@ -130,7 +133,7 @@ class CityInstance extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div class='col-xl-3 col-md-6 mb-4'>
                 <div class='card border-left-info shadow h-100 py-2'>
                   <div class='card-body'>
@@ -177,7 +180,7 @@ class CityInstance extends Component {
                           Population
                         </div>
                         <div class='h5 mb-0 font-weight-bold text-gray-800'>
-                          {('' + location.population).replace(
+                          {('' + population).replace(
                             /\B(?=(\d{3})+(?!\d))/g,
                             ','
                           )}
@@ -219,7 +222,7 @@ class CityInstance extends Component {
                     <h4 class='small font-weight-bold'>
                       Housing{' '}
                       <span class='float-right'>
-                        {Math.round(qualities.Housing * 10) + '%'}
+                        {Math.round(qualities.housing * 10) + '%'}
                       </span>
                     </h4>
                     <div class='progress mb-4'>
@@ -227,7 +230,7 @@ class CityInstance extends Component {
                         class='progress-bar bg-warning'
                         role='progressbar'
                         style={{
-                          width: Math.round(qualities.Housing * 10) + '%'
+                          width: Math.round(qualities.housing * 10) + '%'
                         }}
                         aria-valuenow='40'
                         aria-valuemin='0'
@@ -237,7 +240,7 @@ class CityInstance extends Component {
                     <h4 class='small font-weight-bold'>
                       Cost of Living{' '}
                       <span class='float-right'>
-                        {Math.round(qualities['Cost of Living'] * 10) + '%'}
+                        {Math.round(qualities['cost of living'] * 10) + '%'}
                       </span>
                     </h4>
                     <div class='progress mb-4'>
@@ -246,7 +249,7 @@ class CityInstance extends Component {
                         role='progressbar'
                         style={{
                           width:
-                            Math.round(qualities['Cost of Living'] * 10) + '%'
+                            Math.round(qualities['cost of living'] * 10) + '%'
                         }}
                         aria-valuenow='60'
                         aria-valuemin='0'
@@ -256,7 +259,7 @@ class CityInstance extends Component {
                     <h4 class='small font-weight-bold'>
                       Commute{' '}
                       <span class='float-right'>
-                        {Math.round(qualities.Commute * 10) + '%'}
+                        {Math.round(qualities.commute * 10) + '%'}
                       </span>
                     </h4>
                     <div class='progress mb-4'>
@@ -264,7 +267,7 @@ class CityInstance extends Component {
                         class='progress-bar bg-info'
                         role='progressbar'
                         style={{
-                          width: Math.round(qualities.Commute * 10) + '%'
+                          width: Math.round(qualities.commute * 10) + '%'
                         }}
                         aria-valuenow='80'
                         aria-valuemin='0'
@@ -274,7 +277,7 @@ class CityInstance extends Component {
                     <h4 class='small font-weight-bold'>
                       Tolerence{' '}
                       <span class='float-right'>
-                        {Math.round(qualities.Tolerance * 10) + '%'}
+                        {Math.round(qualities.tolerance * 10) + '%'}
                       </span>
                     </h4>
                     <div class='progress'>
@@ -282,7 +285,7 @@ class CityInstance extends Component {
                         class='progress-bar bg-success'
                         role='progressbar'
                         style={{
-                          width: Math.round(qualities.Tolerance * 10) + '%'
+                          width: Math.round(qualities.tolerance * 10) + '%'
                         }}
                         aria-valuenow='100'
                         aria-valuemin='0'

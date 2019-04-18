@@ -332,7 +332,7 @@ class Event extends Component {
             // let cityID = 0
             // let cityName = '?!?!'
               for(let pos in this.state.jobs){
-                  let location = this.state.jobs[pos].location.city
+                  let location = this.state.jobs[pos]['top cities'][0]
                   let equals = location.toUpperCase() === eventCity.toUpperCase();
                   if(equals){
                       let dict = this.state.jobs[pos]
