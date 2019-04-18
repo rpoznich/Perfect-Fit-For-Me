@@ -41,7 +41,8 @@ class City(db.Model):
     def toDict(self): 
         name = self.name
         city = { 
-            "id":self.id, 
+            "id":self.id,
+            "name":self.name,
             "population":self.population,
             "images": {
                 "web":self.web_img,

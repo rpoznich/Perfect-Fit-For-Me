@@ -49,6 +49,133 @@ class EventListing extends Component{
             name.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
         }
       }
+
+      let venue_comp = []
+      try{
+      venue_comp = this.props.venue.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+      let venue = []
+      firstInstance = true;
+      for(let elems in venue_comp){
+        if(firstInstance){
+          let word = venue_comp[elems].toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          venue.push(
+            word
+          )
+          firstInstance = false;
+        }else{
+          venue.push(venue_comp[elems])
+        }
+        if(elems != venue_comp.length - 1){
+          if(firstInstance){
+            let word = this.props.searchWord.toLowerCase();
+            let upper = word.substring(0, 1);
+            word = word.replace(upper, upper.toUpperCase())
+            venue.push(<mark>{word}</mark>)
+            firstInstance = false;
+          }else{
+            venue.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+        }
+      }
+
+      let city_comp = []
+      try{
+      city_comp = this.props.city.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+      let city = []
+      firstInstance = true;
+      for(let elems in city_comp){
+        if(firstInstance){
+          let word = city_comp[elems].toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          city.push(
+            word
+          )
+          firstInstance = false;
+        }else{
+          city.push(city_comp[elems])
+        }
+        if(elems != city_comp.length - 1){
+          if(firstInstance){
+            let word = this.props.searchWord.toLowerCase();
+            let upper = word.substring(0, 1);
+            word = word.replace(upper, upper.toUpperCase())
+            city.push(<mark>{word}</mark>)
+            firstInstance = false;
+          }else{
+            city.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+        }
+      }
+
+      let state_comp = []
+      try{
+      state_comp = this.props.state.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+      let state = []
+      firstInstance = true;
+      for(let elems in state_comp){
+        if(firstInstance){
+          let word = state_comp[elems].toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          state.push(
+            word
+          )
+          firstInstance = false;
+        }else{
+          state.push(state_comp[elems])
+        }
+        if(elems != state_comp.length - 1){
+          if(firstInstance){
+            let word = this.props.searchWord.toLowerCase();
+            let upper = word.substring(0, 1);
+            word = word.replace(upper, upper.toUpperCase())
+            state.push(<mark>{word}</mark>)
+            firstInstance = false;
+          }else{
+            state.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+        }
+      }
+
+      let link_comp = []
+      try{
+      link_comp = this.props.url.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+      let link = []
+      firstInstance = true;
+      for(let elems in link_comp){
+        if(firstInstance){
+          let word = link_comp[elems].toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          link.push(
+            word
+          )
+          firstInstance = false;
+        }else{
+          link.push(link_comp[elems])
+        }
+        if(elems != link_comp.length - 1){
+          if(firstInstance){
+            let word = this.props.searchWord.toLowerCase();
+            let upper = word.substring(0, 1);
+            word = word.replace(upper, upper.toUpperCase())
+            link.push(<mark>{word}</mark>)
+            firstInstance = false;
+          }else{
+            link.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+        }
+      }
+
+      let description_comp = ''
+      try{
+      description_comp = this.props.summary.toLowerCase()}catch{}
+      let description = []
+      if(description_comp.includes(this.props.searchWord)){
+        description.push('Description: ...')
+        description.push(<mark>{this.props.searchWord}</mark>)
+        description.push('...')
+      }
+
         return (<div class="featured-place-wrap">
                             <a href={"/eventInstance/"+this.props.eventid}>
                             <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
@@ -57,14 +184,15 @@ class EventListing extends Component{
                             </div>
                             <div class="featured-title-box">
                                 <h6 >{name}</h6>
-                                <p>{this.props.venue}</p> 
+                                <p>{venue}</p> 
                                 <ul>
                                     <li><span class="icon-location-pin"></span>
-                                        <p>{this.props.city + ', ' + this.props.state}</p>
+                                        <p>{city}  {', '}  {state}</p>
                                     </li>
                                     <li><span class="icon-link"></span>
-                                        <p>{this.props.url}</p>
+                                        <p>{link}</p>
                                     </li>
+                                    <li>{description}</li>
                                 </ul>
                             </div>
                             </a>

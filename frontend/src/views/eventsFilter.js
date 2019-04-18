@@ -155,7 +155,7 @@ class EventsFilter extends Component {
     
     componentDidMount()
     {
-            fetch('../public/statics/events.json').then(response => { //change this to actual API
+            fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events').then(response => { //change this to actual API
                 return response.json();
             }).then(data => {
                 // Work with JSON data here
@@ -167,7 +167,7 @@ class EventsFilter extends Component {
                 // Do something for an error here
                 console.log("Error Reading data " + err);
             });
-        fetch('../statics/jobs.json').then(response => { //change this to actual API
+        fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
             return response.json();
           }).then(data => {
             // Work with JSON data here

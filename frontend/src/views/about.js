@@ -94,7 +94,7 @@ class About extends Component {
     super(props)
     this.total_commits = 0;
     this.total_issues = 0;
-    this.total_tests = 40;
+    this.total_tests = 90;
     this.state = {}
     this.state.memData = {
       'Ryan Poznich': {
@@ -107,7 +107,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: 'https://www.linkedin.com/in/ryan-poznich-670293154',
-        tests: 10
+        tests: 20
       },
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
@@ -116,10 +116,10 @@ class About extends Component {
         username: 'GammaJohn',
         role: 'Front-end',
         img: jonathan,
-        commits: 0,
+        commits: 40,
         issues: 0,
         website: '',
-        tests: 10
+        tests: 20
       },
       'Ozone Kafley': {
         name: 'Ozone Kafley',
@@ -143,7 +143,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: '',
-        tests: 10
+        tests: 15
       },
       'Daniel Thai': {
         name: 'Daniel Thai',
@@ -155,7 +155,7 @@ class About extends Component {
         commits: 0,
         issues: 0,
         website: '',
-        tests: 10
+        tests: 35
       }
     }
     this.state.toolsData = {

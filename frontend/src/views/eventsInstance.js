@@ -44,7 +44,7 @@ class EventInstance extends Component {
     let i = 0
     for(let jobs in this.props.jobID){
       items.push(
-        <a href={'/jobInstance/' + jobs}>{this.props.jobNames[i]}
+        <a href={'/jobInstance/' + this.props.jobID[jobs]}>{this.props.jobNames[i]}
           <br />
         </a>
       );

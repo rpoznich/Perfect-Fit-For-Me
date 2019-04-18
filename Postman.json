@@ -39,7 +39,7 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"JSON Length\"] = Object.keys(jsonData).length > 50"
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 67"
 						]
 					}
 				}
@@ -49,7 +49,7 @@
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Cities received"
+				"description": "All cities received"
 			},
 			"response": []
 		},
@@ -115,7 +115,7 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"JSON Length\"] = jsonData[\"Jobs\"].length > 4000"
+							"tests[\"JSON Length\"] = jsonData[\"Jobs\"].length === 40"
 						]
 					}
 				}
@@ -139,18 +139,18 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Software Engineer\"",
-							"tests[\"Job ID\"] = jsonData[\"id\"] === 51"
+							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Photographer\"",
+							"tests[\"Job ID\"] = jsonData[\"id\"] === 10"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/51",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/10",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Job ID 50 received"
+				"description": "Job ID 10 received"
 			},
 			"response": []
 		},
@@ -164,23 +164,23 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Financial Analyst\"",
-							"tests[\"Job ID\"] = jsonData[\"id\"] === 1234"
+							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Electrician\"",
+							"tests[\"Job ID\"] = jsonData[\"id\"] === 20"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/1234",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/20",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Job ID 1234 received"
+				"description": "Job ID 20 received"
 			},
 			"response": []
 		},
 		{
-			"name": "Jobs by City",
+			"name": "Jobs by Page",
 			"event": [
 				{
 					"listen": "test",
@@ -189,23 +189,24 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][1][\"job title\"] === \"Electrical Engineer\"",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][3][\"job title\"] === \"Chef\""
+							"tests[\"Job ID\"] = jsonData[\"Jobs\"][0][\"id\"] === 2",
+							"tests[\"Job ID\"] = jsonData[\"Jobs\"][8][\"id\"] === 10",
+							"tests[\"Page Length\"] = jsonData[\"Jobs\"].length === 9"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/city/Austin",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/page/1",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Jobs in Austin received"
+				"description": "Job Page 1 received"
 			},
 			"response": []
 		},
 		{
-			"name": "Jobs by City",
+			"name": "Jobs by Page",
 			"event": [
 				{
 					"listen": "test",
@@ -214,18 +215,19 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][7][\"job title\"] === \"UX Designer\"",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][50][\"job title\"] === \"Software Engineer\""
+							"tests[\"Job ID\"] = jsonData[\"Jobs\"][0][\"id\"] === 38",
+							"tests[\"Job ID\"] = jsonData[\"Jobs\"][3][\"id\"] === 41",
+							"tests[\"Page Length\"] = jsonData[\"Jobs\"].length === 4"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/city/Houston",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/page/5",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Jobs in Houston received"
+				"description": "Job Page 5 received"
 			},
 			"response": []
 		},
@@ -239,7 +241,7 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"JSON Length\"] = jsonData.length > 400"
+							"tests[\"JSON Length\"] = jsonData.length === 500"
 						]
 					}
 				}
@@ -250,6 +252,664 @@
 				"header": [],
 				"body": {},
 				"description": "Events received"
+			},
+			"response": []
+		},
+		{
+			"name": "Events by Page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event ID\"] = jsonData[0][\"eventid\"] === 1",
+							"tests[\"Event ID\"] = jsonData[8][\"eventid\"] === 9",
+							"tests[\"Page Length\"] = jsonData.length === 9"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/page/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Event Page 1 received"
+			},
+			"response": []
+		},
+		{
+			"name": "Events by Page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event ID\"] = jsonData[0][\"eventid\"] === 496",
+							"tests[\"Event ID\"] = jsonData[4][\"eventid\"] === 500",
+							"tests[\"Page Length\"] = jsonData.length === 5"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/page/56",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Event Page 56 received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Cities by State",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City State\"] = jsonData[\"Austin\"][\"location\"][\"state\"] === \"Texas\"",
+							"tests[\"City State\"] = jsonData[\"Houston\"][\"location\"][\"state\"] === \"Texas\"",
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 4"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/state/Texas",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Cities in Texas received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Cities by Population",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Population\"] = jsonData[\"Asheville\"][\"population\"] === \"88512\"",
+							"tests[\"City Population\"] = jsonData[\"Providence\"][\"population\"] === \"179207\"",
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 14"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/pop/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Cities with <200000 Population received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Cities by Cost of Living",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Cost of Living\"] = jsonData[\"Dallas\"][\"qualities\"][\"cost of living\"] > 6",
+							"tests[\"City Cost of Living\"] = jsonData[\"Dallas\"][\"qualities\"][\"cost of living\"] <= 8",
+							"tests[\"City Cost of Living\"] = jsonData[\"San Jose\"][\"qualities\"][\"cost of living\"] > 6",
+							"tests[\"City Cost of Living\"] = jsonData[\"San Jose\"][\"qualities\"][\"cost of living\"] <= 8",
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 16"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/col/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Cities with 6 < Cost Of Living <= 8 received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Jobs by Income",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Income\"] = jsonData[0][\"annual salary\"] >= 50000",
+							"tests[\"Job Income\"] = jsonData[0][\"annual salary\"] < 70000",
+							"tests[\"Job Income\"] = jsonData[5][\"annual salary\"] >= 50000",
+							"tests[\"Job Income\"] = jsonData[5][\"annual salary\"] < 70000",
+							"tests[\"JSON Length\"] = jsonData.length === 8"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/income/3",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Jobs with 50000 <= Salary < 70000 received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Jobs by Education",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Education\"] = jsonData[0][\"education\"] === \"Doctoral or professional degree\"",
+							"tests[\"Job Education\"] = jsonData[3][\"education\"] === \"Doctoral or professional degree\"",
+							"tests[\"Job Education\"] = jsonData[6][\"education\"] === \"Doctoral or professional degree\"",
+							"tests[\"JSON Length\"] = jsonData.length === 7"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/edu/phd",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Jobs with PHD as Education received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Jobs by Location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Location\"] = jsonData[0][\"top cities salaries\"][\"Austin\"] > 0",
+							"tests[\"Job Location\"] = jsonData[1][\"top cities salaries\"][\"Austin\"] > 0",
+							"tests[\"JSON Length\"] = jsonData.length === 2"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/loc/Austin",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Jobs with Austin in Top Cities received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Events by City",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event City\"] = jsonData[0][\"city\"] === \"Houston\"",
+							"tests[\"Event City\"] = jsonData[5][\"city\"] === \"Houston\"",
+							"tests[\"Event City\"] = jsonData[10][\"city\"] === \"Houston\"",
+							"tests[\"JSON Length\"] = jsonData.length === 18"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/city/Houston",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Events in Houston received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Events by State",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event State\"] = jsonData[0][\"state\"] === \"TX\"",
+							"tests[\"Event State\"] = jsonData[20][\"state\"] === \"TX\"",
+							"tests[\"Event State\"] = jsonData[40][\"state\"] === \"TX\"",
+							"tests[\"JSON Length\"] = jsonData.length === 74"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/state/TX",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Events in Texas received"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter Events by State",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event Duration\"] = jsonData[0][\"duration\"] < 1",
+							"tests[\"Event Duration\"] = jsonData[5][\"duration\"] < 1",
+							"tests[\"Event Duration\"] = jsonData[10][\"duration\"] < 1",
+							"tests[\"JSON Length\"] = jsonData.length === 14"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/duration/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Events with <1 Duration received"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Cities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Name\"] = jsonData[\"San Antonio\"][\"name\"] === \"San Antonio\"",
+							"tests[\"City Name\"] = jsonData[\"San Diego\"][\"name\"] === \"San Diego\"",
+							"tests[\"City Name\"] = jsonData[\"San Jose\"][\"name\"] === \"San Jose\"",
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 5"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/search/San",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Search Cities with San received"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Jobs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[0][\"job title\"] === \"Chemical Engineer\"",
+							"tests[\"Job Title\"] = jsonData[2][\"job title\"] === \"Electrical Engineer\"",
+							"tests[\"Job Title\"] = jsonData[4][\"job title\"] === \"Petroleum Engineer\"",
+							"tests[\"JSON Length\"] = jsonData.length === 5"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/search/Engineer",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Search Jobs with Engineer received"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"JSON Length\"] = jsonData.length === 15"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/search/Dance",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Search Events with Dance received"
+			},
+			"response": []
+		},
+		{
+			"name": "Search All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Cities Length\"] = jsonData[\"cities\"].length === 1",
+							"tests[\"Jobs Length\"] = jsonData[\"jobs\"].length === 2",
+							"tests[\"Events Length\"] = jsonData[\"events\"].length === 22"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/all/search/Austin",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Search All with Austin received"
+			},
+			"response": []
+		},
+		{
+			"name": "Sort Cities by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Name\"] = jsonData[0][\"name\"] === \"Albuquerque\"",
+							"tests[\"City Name\"] = jsonData[66][\"name\"] === \"Washington, D.C.\"",
+							"tests[\"JSON Length\"] = jsonData.length === 67"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/sort/name",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Sort Cities by Name received"
+			},
+			"response": []
+		},
+		{
+			"name": "Descending Sort Cities by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Name\"] = jsonData[0][\"name\"] === \"Washington, D.C.\"",
+							"tests[\"City Name\"] = jsonData[66][\"name\"] === \"Albuquerque\"",
+							"tests[\"JSON Length\"] = jsonData.length === 67"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/desc_sort/name",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Descending Sort Cities by Name received"
+			},
+			"response": []
+		},
+		{
+			"name": "Sort Cities by Tolerance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Tolerance\"] = jsonData[0][\"qualities\"][\"tolerance\"] < 4",
+							"tests[\"City Tolerance\"] = jsonData[66][\"qualities\"][\"tolerance\"] > 9",
+							"tests[\"JSON Length\"] = jsonData.length === 67"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/sort/tolerance",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Sort Cities by Tolerance received"
+			},
+			"response": []
+		},
+		{
+			"name": "Descending Sort Cities by Tolerance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"City Tolerance\"] = jsonData[0][\"qualities\"][\"tolerance\"] > 9",
+							"tests[\"City Tolerance\"] = jsonData[66][\"qualities\"][\"tolerance\"] < 4",
+							"tests[\"JSON Length\"] = jsonData.length === 67"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/desc_sort/tolerance",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Descending Sort Cities by Tolerance received"
+			},
+			"response": []
+		},
+		{
+			"name": "Sort Jobs by Title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[0][\"job title\"] === \"Accountant\"",
+							"tests[\"Job Title\"] = jsonData[39][\"job title\"] === \"Web Developer\"",
+							"tests[\"JSON Length\"] = jsonData.length === 40"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Sort Jobs by Title received"
+			},
+			"response": []
+		},
+		{
+			"name": "Descending Sort Jobs by Title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Title\"] = jsonData[0][\"job title\"] === \"Web Developer\"",
+							"tests[\"Job Title\"] = jsonData[39][\"job title\"] === \"Accountant\"",
+							"tests[\"JSON Length\"] = jsonData.length === 40"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Descending Sort Jobs by Title received"
+			},
+			"response": []
+		},
+		{
+			"name": "Sort Jobs by Salary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Salary\"] = jsonData[0][\"annual salary\"] < 25000",
+							"tests[\"Job Salary\"] = jsonData[39][\"annual salary\"] > 200000",
+							"tests[\"JSON Length\"] = jsonData.length === 40"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/salary",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Sort Jobs by Salary received"
+			},
+			"response": []
+		},
+		{
+			"name": "Descending Sort Jobs by Salary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Job Salary\"] = jsonData[0][\"annual salary\"] > 200000",
+							"tests[\"Job Salary\"] = jsonData[39][\"annual salary\"] < 25000",
+							"tests[\"JSON Length\"] = jsonData.length === 40"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/salary",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Descending Sort Jobs by Salary received"
+			},
+			"response": []
+		},
+		{
+			"name": "Sort Events by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event Name\"] = jsonData[1][\"name\"] === \" AHA ACLS Renewal ($120) $60.00 Seat Hold \"",
+							"tests[\"Event Name\"] = jsonData[499][\"name\"] === \"¿De donde somos? La Mezcla\"",
+							"tests[\"JSON Length\"] = jsonData.length === 500"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/sort/name",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Sort Events by Name received"
+			},
+			"response": []
+		},
+		{
+			"name": "Descending Sort Events by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status Code\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Event Name\"] = jsonData[0][\"name\"] === \"¿De donde somos? La Mezcla\"",
+							"tests[\"Event Name\"] = jsonData[498][\"name\"] === \" AHA ACLS Renewal ($120) $60.00 Seat Hold \"",
+							"tests[\"JSON Length\"] = jsonData.length === 500"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/desc_sort/name",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Descending Sort Events by Name received"
 			},
 			"response": []
 		}

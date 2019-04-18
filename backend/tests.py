@@ -34,6 +34,7 @@ class TestModels (TestCase):
             "mobile_link", 0.0, 0.0, 5.5, 5.5, 5.5, 5.5)
         city_stats_test = { 
             "id":1, 
+            "name":"name",
             "population":"100000",
             "images": {
                 "web":"link",

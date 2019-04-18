@@ -44,7 +44,10 @@ class JobListing extends Component {
     let education = ''
     try{
       top_cities = this.props["top cities"]
-      top_city = top_cities[0]
+      for(let i in top_cities){
+        top_city += top_cities[i] + ', '
+      }
+      top_city = top_city.slice(0, -2)
       job_id = this.props.id
       job_title = this.props["job title"]
       education = this.props["education"]
@@ -72,7 +75,7 @@ class JobListing extends Component {
             {/* <p><span>{this.state.highlightedDS}</span>{this.state.unhighlightedDS}</p> */}
             <ul>
             <li>
-                <span>{'Top City'}</span>
+                <span>{'Top Cities'}</span>
                 <span class='icon-location-pin' />
                 <p><span>{top_city}</span></p>
               </li>
@@ -106,49 +109,105 @@ class Jobs extends Component {
     this.pos = -1
     this.pageNumber = 0
     this.numPages = 0
-    this.isCity = false
+    this.isLoc = false
+    this.loc = ''
+    this.isEdu = false
+    this.edu = ''
+    this.isIncome = false
+    this.income = 1
     this.model_url = '/jobs/'
-    this.title = 'Featured jobs'
+    this.title = 'Featured Jobs'
     this.ascSort = false
     this.descSort = false
     // If is an instance?
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('jobInstance')) {
       this.isListing = false
-      this.pos = parseInt(pathName[pathName.length-1]) - 1
+      this.pos = parseInt(pathName[pathName.length-1]) - 2
     } else {
-      if(pathName.includes('Title=A-Z')){
-          this.ascSort = true
-          this.model_url = '/jobs/Title=A-Z/'
-          this.title = 'Featured Jobs - Title A-Z' 
+      if(pathName.includes('loc')){
+        this.isLoc = true
+        this.loc = pathName[pathName.length-1].toLowerCase()
+        this.model_url = '/jobs/filter/loc/' + this.loc
+        this.title = 'Featured Jobs In ' + this.loc
+      } else if(pathName.includes('income')){
+        this.isIncome = true
+        let choice = pathName[pathName.length-1]
+        if(choice == '$'){
+          this.income = 1
+          this.title = 'Featured Jobs - Average Income < $30,000'
+        } else if(choice == '$$'){
+          this.income = 2
+          this.title = 'Featured Jobs - Average Income $30,000 - $50,000'
+        } else if(choice == '$$$'){
+          this.income = 3
+          this.title = 'Featured Jobs - Average Income $50,000 - $70,000'
+        } else if(choice == '$$$$'){
+          this.income = 4
+          this.title = 'Featured Jobs - Average Income $70,000 - $90,000'
+        } else {
+          this.income = 5
+          this.title = 'Featured Jobs - Average Income > $90,000'
+        }
+        this.model_url = '/jobs/filter/income/' + choice
+      } else if(pathName.includes('edu')){
+        this.isEdu = true
+        let choice = pathName[pathName.length-1].toLowerCase()
+        if(choice == 'bachelor\'s'){
+          this.edu = 'bac'
+          this.title = 'Featured Jobs - Bachelor\'s Degree Requirement'
+        } else if(choice == 'master\'s'){
+          this.edu = 'mas'
+          this.title = 'Featured Jobs - Master\'s Degree Requirement'
+        } else {
+          this.edu = 'phd'
+          this.title = 'Featured Jobs - Doctor\'s Degree Requirement'
+        }
+        this.model_url = '/jobs/filter/edu/' + this.edu
+      } else if(pathName.includes('Title=A-Z')){
+        this.ascSort = true
+        this.model_url = '/jobs/Title=A-Z/'
+        this.title = 'Featured Jobs - Title A-Z'
+        this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
       } else if(pathName.includes('Title=Z-A')){
-          this.descSort = true
-          this.model_url = '/jobs/Title=Z-A/'
-          this.title = 'Featured Jobs - Title Z-A' 
+        this.descSort = true
+        this.model_url = '/jobs/Title=Z-A/'
+        this.title = 'Featured Jobs - Title Z-A'
+        this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
+      } else {
+        this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
       }
-      this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
     }
     this.state = {
       "events": [],
       "jobs": [],
+      loc_filter : null,
+      income_filter : null,
+      edu_filter : null,
       sort : null,
       hasMounted : 0
     }
   }
   componentDidMount () {
-    let fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs'
-        if(this.ascSort){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title'
-        } else if(this.descSort){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title'
-        }
+    let fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs'
+    if(this.isLoc){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/loc/' + this.loc
+    } else if(this.isIncome){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/income/' + this.income
+    } else if(this.isEdu){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/edu/' + this.edu
+    } else if(this.ascSort){
+        fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title'
+    } else if(this.descSort){
+        fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title'
+    }
     fetch(fetchLocation).then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here
-      if(this.ascSort || this.descSort){
+      if(this.ascSort || this.descSort || this.isLoc || this.isIncome || this.isEdu){
         this.state.jobs = data;
-      }else if(!this.ascSort && !this.descSort){
+      }else {
         this.state.jobs = (data["Jobs"]);
       }
       this.state.hasMounted = 1;
@@ -157,7 +216,7 @@ class Jobs extends Component {
       // Do something for an error here
       console.log("Error Reading data " + err);
     });
-    fetch('../statics/events.json').then(response => { //change this to actual API
+    fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here
@@ -176,38 +235,77 @@ class Jobs extends Component {
       let indivComp = [];
       for(let i in this.state.jobs)
       {
+        if(this.isLoc || this.isIncome || this.isEdu){
+          indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
+        } else {
           if(indivComp.length < 9){
               indivComp.push( <div className="col-md-4 featured-responsive"><JobListing {...this.state.jobs[i]}/></div>)
           }else{
               components.push(indivComp);
               indivComp = [];
           }
+        }
       }
       if(indivComp.length > 0){
         components.push(indivComp);
       }
       let pageBar = []
-      if(!this.isCity){
+      if(!this.isLoc && !this.isIncome && !this.isEdu){
         pageBar.push(<PageBar numPages={4} model={this.model_url}></PageBar>)
       }
       return (
         <div className='cities'>
           <div className='main' style={{ marginTop: '10vh' }}>
             <section class='main-block light-bg'>
-              <div class='container'>
+            <div class='container'>
               <div>
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
-                <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+                <Button href={"/jobs/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+              </div>
+            <div className='row justify-content-center'>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="city">City</label>
+                <input type="search" id ="city" className="form-control" placeholder="..." onChange={(e) => this.setState({loc_filter : e.target.value})}></input>
+                <Button href={"/jobs/filter/loc/"+this.state.loc_filter} type="submit" ariant="outline-primary">Filter By City</Button>
+              </div>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">Income</label>
+                <br />
+                <select onChange = {(e) => this.setState({income_filter : e.target.value})}>
+                    <option>{null}</option>
+                    <option>{'$'}</option>
+                    <option>{'$$'}</option>
+                    <option>{'$$$'}</option>
+                    <option>{'$$$$'}</option>
+                    <option>{'$$$$$'}</option>
+                </select>
+                <br/>
+                <Button href={"/jobs/filter/income/"+this.state.income_filter} type="submit" ariant="outline-primary">Filter By Income</Button>
+              </div>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">Degree Requirement</label>
+                <br/>
+                <select onChange = {(e) => this.setState({edu_filter : e.target.value})}>
+                    <option>{null}</option>
+                    <option>{'Bachelor\'s'}</option>
+                    <option>{'Master\'s'}</option>
+                    <option>{'Doctor\'s'}</option>
+                </select>
+                <br/>
+                <Button href={"/jobs/filter/edu/"+this.state.edu_filter} type="submit" ariant="outline-primary">Filter By Degree</Button>
               </div>
               <div className="col-md-3 mb-6">
                 <label htmlFor="state">Sort</label>
+                <br/>
                 <select onChange = {(e) => this.setState({sort : e.target.value})}>
                     <option>{null}</option>
                     <option>{'Title=A-Z'}</option>
                     <option>{'Title=Z-A'}</option>
                 </select>
-              <Button href={"/jobs/"+this.state.sort+"/1"} type="submit" ariant="outline-primary">Sort</Button>
+                <br/>
+                <Button href={"/jobs/"+this.state.sort+"/1"} type="submit" ariant="outline-primary">Sort</Button>
               </div>
+            </div>
                 <div class='row justify-content-center'>
                   <div class='col-md-5'>
                     <div class='styled-heading'>

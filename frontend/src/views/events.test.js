@@ -15,3 +15,11 @@ describe("Tests events.js", () => {
   });
 
 });
+
+describe("Tests events.js 2", () => {
+  test("events is reasonable", () => {
+  	const wrapper = shallow(<Events />);
+    expect(wrapper.length).toBe(1);
+  });
+
+});

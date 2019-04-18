@@ -352,7 +352,7 @@ def sort_query(model, attribute):
 @cross_origin()
 def sort_results(model, attribute):
     if model == 'events':
-        return jsonify([m.json() for m in sort_query(model, attribute)])
+        return jsonify([e.json() for e in sort_query(model, attribute)])
     elif model == 'cities' or model == 'jobs':
         return jsonify([m.toDict() for m in sort_query(model, attribute)])
     else:
@@ -459,9 +459,9 @@ def desc_sort_query(model, attribute):
 @cross_origin()
 def desc_sort_results(model, attribute):
     if model == 'events':
-        return jsonify([m.json() for m in desc_sort_query(model, attribute)])
+        return jsonify([e.json() for e in desc_sort_query(model, attribute)])
     elif model == 'cities' or model == 'jobs':
-        return jsonify([m.toDict() for m in desc_sort_query(model, attribute)])
+        return jsonify([j.toDict() for j in desc_sort_query(model, attribute)])
     else:
         return "Invalid model: " + str(model)
 

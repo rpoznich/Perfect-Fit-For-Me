@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './68fdaa828d60e1828ee849c1f72bbc4c.png';
 import Home from './views/home.js'
 import Jobs from './views/jobs.js'
+import JobsSearch from './views/jobSearch.js'
 import Cities from './views/cities.js'
 import CitiesSearch from './views/citySearch.js'
 import About from './views/about.js'
@@ -26,16 +27,26 @@ class Routing extends Component{
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/jobs/:id" component={Jobs}/>
+            <Route exact path="/jobs/filter/loc/:query" component={Jobs}/>
+            <Route exact path="/jobs/filter/income/:query" component={Jobs}/>
+            <Route exact path="/jobs/filter/edu/:query" component={Jobs}/>
             <Route exact path="/jobs/Title=A-Z/:id" component={Jobs}/>
             <Route exact path="/jobs/Title=Z-A/:id" component={Jobs}/>
+            <Route exact path="/jobs/search/:query" component={JobsSearch}/>
             <Route exact path="/jobInstance/:id" component={Jobs}/>
             <Route exact path="/cities/:id" component={Cities}/>
+            <Route exact path="/cities/filter/col/:query" component={Cities}/>
+            <Route exact path="/cities/filter/state/:query" component={Cities}/>
+            <Route exact path="/cities/filter/pop/:query" component={Cities}/>
+            <Route exact path="/cities/Name=A-Z/:id" component={Cities}/>
+            <Route exact path="/cities/Name=Z-A/:id" component={Cities}/>
             <Route exact path="/cities/search/:query" component={CitiesSearch}/>     
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/events/search/:query" component={EventsSearch}/>
-            <Route exact path="/events/filter/city/:query/:id" component={Events}/>
-            <Route exact path="/events/filter/state/:query/:id" component={Events}/>
+            <Route exact path="/events/filter/city/:query" component={Events}/>
+            <Route exact path="/events/filter/state/:query" component={Events}/>
+            <Route exact path="/events/filter/duration/:query" component={Events}/>
             <Route exact path="/events/Name=A-Z/:id" component={Events}/>
             <Route exact path="/events/Name=Z-A/:id" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       
