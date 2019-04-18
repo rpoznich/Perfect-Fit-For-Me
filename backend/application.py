@@ -227,8 +227,10 @@ def search_query(model, query):
 def search_results(model, query):
     if model == 'events':
         return jsonify([m.json() for m in search_query(model, query)])
-    elif model == 'cities' or model == 'jobs':
+    elif model == 'jobs':
         return jsonify([m.toDict() for m in search_query(model, query)])
+    elif model == 'cities': 
+        return jsonify({m.name:m.toDict() for m in search_query(model,query)})
     elif model == 'all':
         events = search_query('events', query)
         jobs   = search_query('jobs'  , query)
