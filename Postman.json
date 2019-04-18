@@ -637,8 +637,8 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Cities Length\"] = jsonData[\"cities\"].length === 1"
-							"tests[\"Jobs Length\"] = jsonData[\"jobs\"].length === 22"
+							"tests[\"Cities Length\"] = jsonData[\"cities\"].length === 1",
+							"tests[\"Jobs Length\"] = jsonData[\"jobs\"].length === 22",
 							"tests[\"Events Length\"] = jsonData[\"events\"].length === 2"
 						]
 					}
