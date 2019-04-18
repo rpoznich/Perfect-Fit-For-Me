@@ -105,58 +105,6 @@
 			},
 			"response": []
 		},
-		// {
-		// 	"name": "Cities by Page",
-		// 	"event": [
-		// 		{
-		// 			"listen": "test",
-		// 			"script": {
-		// 				"type": "text/javascript",
-		// 				"exec": [
-		// 					"tests[\"Status Code\"] = responseCode.code === 200;",
-		// 					"var jsonData = JSON.parse(responseBody);",
-		// 					"tests[\"Los Angeles ID\"] = jsonData[\"Los Angeles\"][\"id\"] === 4",
-		// 					"tests[\"San Diego ID\"] = jsonData[\"San Diego\"][\"id\"] === 21",
-		// 					"tests[\"San Francisco ID\"] = jsonData[\"San Francisco Bay Area\"][\"id\"] === 19"
-		// 				]
-		// 			}
-		// 		}
-		// 	],
-		// 	"request": {
-		// 		"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/state/California",
-		// 		"method": "GET",
-		// 		"header": [],
-		// 		"body": {},
-		// 		"description": "Cities in California received"
-		// 	},
-		// 	"response": []
-		// },
-		// {
-		// 	"name": "Cities by Page",
-		// 	"event": [
-		// 		{
-		// 			"listen": "test",
-		// 			"script": {
-		// 				"type": "text/javascript",
-		// 				"exec": [
-		// 					"tests[\"Status Code\"] = responseCode.code === 200;",
-		// 					"var jsonData = JSON.parse(responseBody);",
-		// 					"tests[\"Los Angeles ID\"] = jsonData[\"Los Angeles\"][\"id\"] === 4",
-		// 					"tests[\"San Diego ID\"] = jsonData[\"San Diego\"][\"id\"] === 21",
-		// 					"tests[\"San Francisco ID\"] = jsonData[\"San Francisco Bay Area\"][\"id\"] === 19"
-		// 				]
-		// 			}
-		// 		}
-		// 	],
-		// 	"request": {
-		// 		"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/state/California",
-		// 		"method": "GET",
-		// 		"header": [],
-		// 		"body": {},
-		// 		"description": "Cities in California received"
-		// 	},
-		// 	"response": []
-		// },
 		{
 			"name": "Jobs",
 			"event": [
