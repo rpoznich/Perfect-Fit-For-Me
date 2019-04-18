@@ -38,6 +38,7 @@ class CityListing extends Component {
     for (let j = 0; j < 5 - this.state.highlightedDS.length; ++j) {
       this.state.unhighlightedDS += '$'
     }
+    console.log(this.state)
   }
 
   render () {
@@ -59,6 +60,10 @@ class CityListing extends Component {
               {this.state.unhighlightedDS}
             </p>
             <ul>
+              <li>
+                <span> {'Cost of Living Rating: '}</span>
+                <p>{this.props.qualities["cost of living"]}</p>
+              </li>              
               <li>
                 <span class='icon-location-pin' />
                 <p>{this.props.location.state}</p>
@@ -84,23 +89,145 @@ class CityListing extends Component {
 class Cities extends Component {
   constructor (props) {
     super(props)
+    this.states_50 = {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AS": "American Samoa",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "DC": "District Of Columbia",
+      "FM": "Federated States Of Micronesia",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "GU": "Guam",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MH": "Marshall Islands",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "North Carolina",
+      "ND": "North Dakota",
+      "MP": "Northern Mariana Islands",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PW": "Palau",
+      "PA": "Pennsylvania",
+      "PR": "Puerto Rico",
+      "RI": "Rhode Island",
+      "SC": "South Carolina",
+      "SD": "South Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VI": "Virgin Islands",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "West Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming"
+    }
     this.isListing = true
     this.pageNumber = 0;
+    this.isCol = false
+    this.col = 1
+    this.isPop = false
+    this.pop = 1
+    this.isState = false
+    this.currState = ''
+    this.model_url = '/cities/'
+    this.title = 'Featured Cities'
     // If is an instance?
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('cityInstance')) {
       this.isListing = false
       this.id = props.match.params.id
     }else{
-      this.pageNumber = parseInt(pathName[pathName.length-1]) - 1;
+      if(pathName.includes('state')){
+        this.isState = true
+        this.currState = pathName[pathName.length-1]
+        this.model_url = '/cities/filter/state/' + this.currState
+        this.title = 'Featured Cities in ' + this.currState
+      } else if(pathName.includes('pop')) {
+        this.isPop = true
+        let choice = pathName[pathName.length-1]
+        console.log(choice)
+        if(choice === '%3E1,000,000'){
+          this.pop = 3
+          this.title = 'Featured Cities with Population > 1,000,000'
+        } else if(choice === '%3C200,000'){
+          this.pop = 1
+          this.title = 'Featured Cities with Population < 200,000'
+        } else {
+          this.pop = 2
+          this.title = 'Featured Cities with Population Between 200,000 - 1,000,000'
+        }
+        this.model_url = '/cities/filter/pop/' + choice
+      } else if(pathName.includes('col')){
+        this.isCol = true
+        let choice = pathName[pathName.length-1]
+        if(choice === '$'){
+          this.col = 1
+          this.title = 'Featured Cities with CoL Rating Between 0 - 2'
+        } else if(choice === '$$'){
+          this.col = 2
+          this.title = 'Featured Cities with CoL Rating Between 2 - 4'
+        } else if(choice === '$$$'){
+          this.col = 3
+          this.title = 'Featured Cities with CoL Rating Between 4 - 6'
+        } else {
+          this.col = 4
+          this.title = 'Featured Cities with CoL Rating 6+'
+        }
+        console.log(choice)
+        this.model_url = '/cities/filter/col/' + choice
+      } else {
+        this.pageNumber = parseInt(pathName[pathName.length-1]) - 1;
+      }
     }
     this.state = {
-      cities: {}, events: {}, hasMounted : 0
+      cities: {}, 
+      events: {},
+      col_filter : null,
+      pop_filter : null,
+      state_filter : null,
+      hasMounted : 0
     }
   }
 
   componentDidMount () {
-    fetch('../statics/jobs.json')
+    let fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities'
+    if(this.isCol){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/col/' + this.col
+    } else if(this.isPop){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/pop/' + this.pop
+    } else if(this.isState){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/state/' + this.currState
+    }
+    fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
       .then(response => {
         // change this to actual API
         return response.json()
@@ -117,7 +244,7 @@ class Cities extends Component {
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-    fetch('../statics/cities.json')
+    fetch(fetchLocation)
       .then(response => {
         // change this to actual API
         return response.json()
@@ -134,7 +261,7 @@ class Cities extends Component {
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-      fetch('../statics/events.json')
+      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
       .then(response => {
         // change this to actual API
         return response.json()
@@ -158,25 +285,39 @@ class Cities extends Component {
       let components = [];
       let indivComp = [];
       for (let id in this.state.cities) {
-        console.log(id);
-        if(indivComp.length < 9){  
-          indivComp.push(
-              <div className='col-md-4 featured-responsive'>
-                <CityListing nameId={id} {...this.state.cities[id]} />
-              </div>
-          )
+        if(this.isCol || this.isPop || this.isState){
+          indivComp.push( <div className="col-md-4 featured-responsive"><CityListing nameId={id} {...this.state.cities[id]}/></div>)
+          console.log("HEREERR")
         }else{
-          components.push(indivComp);
-          indivComp = [];
-          indivComp.push(
-            <div className='col-md-4 featured-responsive'>
-                <CityListing id={id} {...this.state.cities[id]} />
-              </div>
-          )
+          if(indivComp.length < 9){  
+            indivComp.push(
+                <div className='col-md-4 featured-responsive'>
+                  <CityListing nameId={id} {...this.state.cities[id]} />
+                </div>
+            )
+          }else{
+            components.push(indivComp);
+            indivComp = [];
+            indivComp.push(
+              <div className='col-md-4 featured-responsive'>
+                  <CityListing nameId={id} {...this.state.cities[id]} />
+                </div>
+            )
+          }
         }
       }
       if(indivComp.length > 0){
         components.push(indivComp);
+        console.log(components)
+      }
+      let states = []
+      for(let key in this.states_50)
+      {
+          states.push(<option>{this.states_50[key]}</option>)
+      }
+      let pageBar = []
+      if(!this.isCol && !this.isPop && !this.isState){
+          pageBar.push(<PageBar numPages={10} model={this.model_url}></PageBar>)
       }
       return (
         <div className='cities'>
@@ -187,10 +328,44 @@ class Cities extends Component {
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/cities/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
+              <br/>
+              <div className='row justify-content-center'>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">State</label>
+                <select onChange = {(e) => this.setState({state_filter : e.target.value})}>
+                    {states}
+                </select>
+              <Button href={"/cities/filter/state/"+this.state.state_filter} type="submit" ariant="outline-primary">Filter By State</Button>
+              </div>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">Cost of Living</label>
+                <br/>
+                <select onChange = {(e) => this.setState({col_filter: e.target.value})}>
+                    <option>{null}</option>
+                    <option>{'$'}</option>
+                    <option>{'$$'}</option>
+                    <option>{'$$$'}</option>
+                    <option>{'$$$$+'}</option>
+                </select>
+              <Button href={"/cities/filter/col/"+this.state.col_filter} type="submit" ariant="outline-primary">Filter By Cost of Living</Button>
+              </div>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">Population</label>
+                <br/>
+                <select onChange = {(e) => this.setState({pop_filter: e.target.value})}>
+                    <option>{null}</option>
+                    <option>{'<200,000'}</option>
+                    <option>{'200,000-1,000,000'}</option>
+                    <option>{'>1,000,000'}</option>
+                </select>
+              <Button href={"/cities/filter/pop/"+this.state.pop_filter} type="submit" ariant="outline-primary">Filter By Population</Button>
+              </div>
+              </div>
+              <br/>
                 <div class='row justify-content-center'>
                   <div class='col-md-5'>
                     <div class='styled-heading'>
-                      <h3>Featured Places</h3>
+                      <h3>{this.title}</h3>
                     </div>
                   </div>
                 </div>
@@ -205,7 +380,7 @@ class Cities extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar numPages={10} model='/cities/'></PageBar>
+              {pageBar}
             </section>
           </div>
         </div>

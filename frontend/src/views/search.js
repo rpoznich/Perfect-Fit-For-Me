@@ -33,6 +33,7 @@ class JobListing extends Component {
       this.state.unhighlightedDS = '$$$$'
     }
   }
+
   render () {
     let top_cities = {}
     let top_city = ''
@@ -46,11 +47,114 @@ class JobListing extends Component {
       job_title = this.props["job title"]
       education = this.props["education"]
     }catch{}
+
+    let title_comp = []
+    try{
+    title_comp = job_title.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+    let title = []
+    let firstInstance = true;
+    for(let elems in title_comp){
+      if(firstInstance){
+        let word = title_comp[elems].toLowerCase();
+        let upper = word.substring(0, 1);
+        word = word.replace(upper, upper.toUpperCase())
+        title.push(
+          word
+        )
+        firstInstance = false;
+      }else{
+        title.push(title_comp[elems])
+      }
+      if(elems != title_comp.length - 1){
+        if(firstInstance){
+          let word = this.props.searchWord.toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          title.push(<mark>{word}</mark>)
+          firstInstance = false;
+        }else{
+          title.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+      }
+    }
+
+    let education_comp = []
+    try{
+    education_comp = education.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+    let education_ = []
+    firstInstance = true;
+    for(let elems in education_comp){
+      if(firstInstance){
+        let word = education_comp[elems].toLowerCase();
+        let upper = word.substring(0, 1);
+        word = word.replace(upper, upper.toUpperCase())
+        education_.push(
+          word
+        )
+        firstInstance = false;
+      }else{
+        education_.push(education_comp[elems])
+      }
+      if(elems != education_comp.length - 1){
+        if(firstInstance){
+          let word = this.props.searchWord.toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          education_.push(<mark>{word}</mark>)
+          firstInstance = false;
+        }else{
+          education_.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+      }
+    }
+
+        for(let c in top_cities){
+            if(top_cities[c].toLowerCase().includes(this.props.searchWord.toLowerCase())){
+                top_city = top_cities[c]
+            }
+        }
+
+    let tc_comp = []
+    try{ tc_comp = top_city.toLowerCase().split(this.props.searchWord.toLowerCase());}catch{}
+    let tc = []
+    firstInstance = true;
+    for(let elems in tc_comp){
+      if(firstInstance){
+        let word = tc_comp[elems].toLowerCase();
+        let upper = word.substring(0, 1);
+        word = word.replace(upper, upper.toUpperCase())
+        tc.push(
+          word
+        )
+        firstInstance = false;
+      }else{
+        tc.push(tc_comp[elems])
+      }
+      if(elems != tc_comp.length - 1){
+        if(firstInstance){
+          let word = this.props.searchWord.toLowerCase();
+          let upper = word.substring(0, 1);
+          word = word.replace(upper, upper.toUpperCase())
+          tc.push(<mark>{word}</mark>)
+          firstInstance = false;
+        }else{
+          tc.push(<mark>{this.props.searchWord.toLowerCase()}</mark>)          }
+      }
+    }
+
+    let description_comp = ''
+    try{
+    description_comp = this.props.description.toLowerCase()}catch{}
+    let description = []
+    if(description_comp.includes(this.props.searchWord)){
+      description.push('Description: ...')
+      description.push(<mark>{this.props.searchWord}</mark>)
+      description.push('...')
+    }
+
     return (
       <div class='featured-place-wrap'>
         <a href={'/jobInstance/' + job_id}>
           <div class='featured-title-box'>
-            <h6>{job_title}</h6>
+            <h6>{title}</h6>
             <p>
               {'Average Income: '}
               <span>{this.state.highlightedDS}</span>
@@ -58,13 +162,16 @@ class JobListing extends Component {
             </p>
             <p>
               {'Education Requirement: '}
-              <span>{education}</span>
+              <span>{education_}</span>
             </p>
             <ul>
             <li>
                 <span>{'Top City'}</span>
                 <span class='icon-location-pin' />
-                <p><span>{top_city}</span></p>
+                <p><span>{tc}</span></p>
+              </li>
+              <li>
+                  <p>{description}</p>
               </li>
             </ul>
           </div>

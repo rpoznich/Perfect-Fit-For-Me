@@ -136,11 +136,11 @@ class Jobs extends Component {
     }
   }
   componentDidMount () {
-    let fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs'
+    let fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs'
         if(this.ascSort){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title'
+            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title'
         } else if(this.descSort){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title'
+            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title'
         }
     fetch(fetchLocation).then(response => { //change this to actual API
       return response.json();

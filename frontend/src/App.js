@@ -32,12 +32,16 @@ class Routing extends Component{
             <Route exact path="/jobs/search/:query" component={JobsSearch}/>
             <Route exact path="/jobInstance/:id" component={Jobs}/>
             <Route exact path="/cities/:id" component={Cities}/>
+            <Route exact path="/cities/filter/col/:query" component={Cities}/>
+            <Route exact path="/cities/filter/state/:query" component={Cities}/>
+            <Route exact path="/cities/filter/pop/:query" component={Cities}/>
             <Route exact path="/cities/search/:query" component={CitiesSearch}/>     
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/events/search/:query" component={EventsSearch}/>
-            <Route exact path="/events/filter/city/:query/:id" component={Events}/>
-            <Route exact path="/events/filter/state/:query/:id" component={Events}/>
+            <Route exact path="/events/filter/city/:query" component={Events}/>
+            <Route exact path="/events/filter/state/:query" component={Events}/>
+            <Route exact path="/events/filter/duration/:query" component={Events}/>
             <Route exact path="/events/Name=A-Z/:id" component={Events}/>
             <Route exact path="/events/Name=Z-A/:id" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       

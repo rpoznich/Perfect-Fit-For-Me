@@ -140,6 +140,16 @@ class JobListing extends Component {
         }
       }
 
+      let description_comp = ''
+      try{
+      description_comp = this.props.description.toLowerCase()}catch{}
+      let description = []
+      if(description_comp.includes(this.props.searchWord)){
+        description.push('Description: ...')
+        description.push(<mark>{this.props.searchWord}</mark>)
+        description.push('...')
+      }
+
       return (
         <div class='featured-place-wrap'>
           <a href={'/jobInstance/' + job_id}>
@@ -159,6 +169,9 @@ class JobListing extends Component {
                   <span>{'Top City'}</span>
                   <span class='icon-location-pin' />
                   <p><span>{tc}</span></p>
+                </li>
+                <li>
+                    <p>{description}</p>
                 </li>
               </ul>
             </div>
