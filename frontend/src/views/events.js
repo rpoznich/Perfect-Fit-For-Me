@@ -28,7 +28,7 @@ class EventListing extends Component{
                             <a href={"/eventInstance/"+this.props.eventid}>
                             <img src={""+ this.props.logo} height="200" width="100" alt="#"></img>
                             <div className="container">
-                                <span className={this.state.circleColor} title="Time">{'AM'}</span>
+                                <span className={this.state.circleColor} title="Time"></span>
                             </div>
                             <div class="featured-title-box">
                                 <h6 >{this.props.name}</h6>
@@ -248,7 +248,7 @@ class Event extends Component {
         <div class="container">
             <div>
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
-                <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+                <Button href={"/events/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
             <div className="col-md-3 mb-6">
                 <label htmlFor="city">City</label>

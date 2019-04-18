@@ -115,7 +115,7 @@ class Jobs extends Component {
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('jobInstance')) {
       this.isListing = false
-      this.pos = parseInt(pathName[pathName.length-1]) - 1
+      this.pos = parseInt(pathName[pathName.length-1]) - 2
     } else {
       if(pathName.includes('Title=A-Z')){
           this.ascSort = true
@@ -197,7 +197,7 @@ class Jobs extends Component {
               <div class='container'>
               <div>
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
-                <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+                <Button href={"/jobs/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
               <div className="col-md-3 mb-6">
                 <label htmlFor="state">Sort</label>

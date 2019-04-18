@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './68fdaa828d60e1828ee849c1f72bbc4c.png';
 import Home from './views/home.js'
 import Jobs from './views/jobs.js'
+import JobsSearch from './views/jobSearch.js'
 import Cities from './views/cities.js'
 import CitiesSearch from './views/citySearch.js'
 import About from './views/about.js'
@@ -28,6 +29,7 @@ class Routing extends Component{
             <Route exact path="/jobs/:id" component={Jobs}/>
             <Route exact path="/jobs/Title=A-Z/:id" component={Jobs}/>
             <Route exact path="/jobs/Title=Z-A/:id" component={Jobs}/>
+            <Route exact path="/jobs/search/:query" component={JobsSearch}/>
             <Route exact path="/jobInstance/:id" component={Jobs}/>
             <Route exact path="/cities/:id" component={Cities}/>
             <Route exact path="/cities/search/:query" component={CitiesSearch}/>     
