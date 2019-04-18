@@ -273,36 +273,44 @@ class Event extends Component {
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/events/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
+            <div className='row justify-content-center'>
             <div className="col-md-3 mb-6">
                 <label htmlFor="city">City</label>
                 <input type="search" id ="city" className="form-control" placeholder="..." onChange={(e) => this.setState({city_filter : e.target.value})}></input>
+                <Button href={"/events/filter/city/"+this.state.city_filter} type="submit" ariant="outline-primary">Filter By City</Button>
             </div>
-            <Button href={"/events/filter/city/"+this.state.city_filter} type="submit" ariant="outline-primary">Filter By City</Button>
             <div className="col-md-3 mb-6">
                 <label htmlFor="state">State</label>
+                <br />
                 <select onChange = {(e) => this.setState({state_filter : e.target.value})}>
                     {states}
                 </select>
+                <br/>
             <Button href={"/events/filter/state/"+this.state.state_filter} type="submit" ariant="outline-primary">Filter By State</Button>
             </div>
             <div className="col-md-3 mb-6">
                 <label htmlFor="state">Event Duration</label>
+                <br/>
                 <select onChange = {(e) => this.setState({dur_filter : e.target.value})}>
                     <option>{null}</option>
                     <option>{'<1hour'}</option>
                     <option>{'1-3hours'}</option>
                     <option>{'>4hours'}</option>
                 </select>
+                <br/>
             <Button href={"/events/filter/duration/"+this.state.dur_filter} type="submit" ariant="outline-primary">Filter By Duration</Button>
             </div>
             <div className="col-md-3 mb-6">
                 <label htmlFor="state">Sort</label>
+                <br/>
                 <select onChange = {(e) => this.setState({sort : e.target.value})}>
                     <option>{null}</option>
                     <option>{'Name=A-Z'}</option>
                     <option>{'Name=Z-A'}</option>
                 </select>
+                <br/>
             <Button href={"/events/"+this.state.sort+"/1"} type="submit" ariant="outline-primary">Sort</Button>
+            </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-5">
@@ -332,7 +340,7 @@ class Event extends Component {
             // let cityID = 0
             // let cityName = '?!?!'
               for(let pos in this.state.jobs){
-                  let location = this.state.jobs[pos].location.city
+                  let location = this.state.jobs[pos]['top cities'][0]
                   let equals = location.toUpperCase() === eventCity.toUpperCase();
                   if(equals){
                       let dict = this.state.jobs[pos]

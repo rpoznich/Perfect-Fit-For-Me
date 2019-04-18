@@ -44,7 +44,7 @@ class CityListing extends Component {
   render () {
     return (
       <div class='featured-place-wrap'>
-        <a href={'/cityInstance/' + this.props.nameId}>
+        <a href={'/cityInstance/' + this.props.name}>
           <img src={'' + this.props.images.web} height='200' width='100' alt='#' />
           <div className='container'>
             <span className={this.state.circleColor} title='Overall Rating'>
@@ -52,7 +52,7 @@ class CityListing extends Component {
             </span>
           </div>
           <div class='featured-title-box'>
-            <h6>{this.props.nameId}</h6>
+            <h6>{this.props.name}</h6>
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
             <p>
@@ -296,13 +296,13 @@ class Cities extends Component {
       let indivComp = [];
       for (let id in this.state.cities) {
         if(this.isCol || this.isPop || this.isState){
-          indivComp.push( <div className="col-md-4 featured-responsive"><CityListing nameId={id} {...this.state.cities[id]}/></div>)
+          indivComp.push( <div className="col-md-4 featured-responsive"><CityListing {...this.state.cities[id]}/></div>)
           console.log("HEREERR")
         }else{
           if(indivComp.length < 9){  
             indivComp.push(
                 <div className='col-md-4 featured-responsive'>
-                  <CityListing nameId={id} {...this.state.cities[id]} />
+                  <CityListing {...this.state.cities[id]} />
                 </div>
             )
           }else{
@@ -310,7 +310,7 @@ class Cities extends Component {
             indivComp = [];
             indivComp.push(
               <div className='col-md-4 featured-responsive'>
-                  <CityListing nameId={id} {...this.state.cities[id]} />
+                  <CityListing {...this.state.cities[id]} />
                 </div>
             )
           }
@@ -408,19 +408,31 @@ class Cities extends Component {
       )
     } else {
             let city = this.id;
+            if(this.ascSort || this.descSort){
+              for(let i in this.state.cities){
+                if(this.state.cities[i].name == city){
+                  this.id = i
+                  break
+                }  
+              }
+            }
             let jobID = []
             let jobNames = []
             let eventID = []
             let eventNames = []
             try{
             for(let jobs in this.state.jobs){
-                let location = this.state.jobs[jobs].location.city;
+              let hasAlreadyIncluded = false
+              for(let counter = 0; counter < 5; ++counter){
+                let location = this.state.jobs[jobs]['top cities'][counter];
                 let equals = location.toUpperCase() === city.toUpperCase();
-                if(equals){
+                if(equals && !hasAlreadyIncluded){
                     jobID.push(this.state.jobs[jobs].id);
                     jobNames.push(this.state.jobs[jobs]['job title'])
+                    hasAlreadyIncluded = true
                 }
               }
+            }
             for(let eve in this.state.events){
                 let location = this.state.events[eve].city;
                 let equals = false;
@@ -435,7 +447,7 @@ class Cities extends Component {
           }catch{}
       return (
         <div className='main' style={{ marginTop: '20vh' }}>
-          <CityInstance {...this.state.cities[this.id]} hasMounted={this.state.hasMounted} id={this.id} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>
+          <CityInstance {...this.state.cities[this.id]} hasMounted={this.state.hasMounted} jobID={jobID} jobNames={jobNames} eventID={eventID} eventNames={eventNames}/>
         </div>
       )
     }
