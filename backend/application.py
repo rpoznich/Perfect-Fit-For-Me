@@ -175,7 +175,7 @@ def filter_results(model, attr, value, page):
                 events = Event.query.filter(Event.duration >= 1, Event.duration < 4).all()
             elif value == '3': 
                 events = Event.query.filter(Event.duration >= 4).all()
-        response = jsonify(query_filter_by_page(events))
+        response = jsonify(query_filter_by_page(events,page))
     else: 
         assert(False) # Just to debug and check if proper input is given
 
