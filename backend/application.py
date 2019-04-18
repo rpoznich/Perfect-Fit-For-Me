@@ -92,6 +92,21 @@ def query_filter(query_results):
             results.append(obj.json())
     return results
 
+def query_filter_by_page(query_results, num):
+    results = []
+    page = (int)num
+    if query_results is None: 
+        print(query_results)
+        return results
+    for i in range((page-1)*9, page*9):
+        if i >= len(query_results): 
+            break 
+        obj = query_results[i] 
+        if type(obj) is Job or type(obj) is City:
+            results.append(obj.toDict())
+        elif type(obj) is Event: 
+            results.append(obj.json())
+    return results
 @application.route("/api/<model>/filter/<attr>/<value>/")
 @cross_origin() 
 def filter_results(model, attr, value):
