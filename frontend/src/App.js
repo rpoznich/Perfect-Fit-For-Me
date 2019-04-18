@@ -31,6 +31,8 @@ class Routing extends Component{
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>
             <Route exact path="/events/filter/:query/:id" component={Events}/>
+            <Route exact path="/events/Name=A-Z/:id" component={Events}/>
+            <Route exact path="/events/Name=Z-A/:id" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       
             <Route exact path="/about" component={About}/>
             <Route exact path="/search/:query" component={Search}/>
