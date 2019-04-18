@@ -83,10 +83,14 @@ def query_filter(query_results):
     results = [] 
     if query_results is None: 
         return results
+    if type(query_results[0]) is City: 
+        results = {}
     for i in range(len(query_results)):
         obj = query_results[i] 
-        if type(obj) is Job or type(obj) is City:
+        if type(obj) is Job:
             results.append(obj.toDict())
+        elif type(obj) is City: 
+            results[obj.name] = obj.toDict()
         elif type(obj) is Event: 
             results.append(obj.json())
     return results
@@ -96,12 +100,16 @@ def query_filter_by_page(query_results, num):
     page = int(num)
     if query_results is None: 
         return results
+    if type(query_results[0]) is City: 
+        results = {}
     for i in range((page-1)*9, page*9):
         if i >= len(query_results): 
             break 
         obj = query_results[i] 
-        if type(obj) is Job or type(obj) is City:
+        if type(obj) is Job:
             results.append(obj.toDict())
+        elif type(obj) is City: 
+            results[obj.name] = obj.toDict()
         elif type(obj) is Event: 
             results.append(obj.json())
     return results
@@ -219,8 +227,10 @@ def search_query(model, query):
 def search_results(model, query):
     if model == 'events':
         return jsonify([m.json() for m in search_query(model, query)])
-    elif model == 'cities' or model == 'jobs':
+    elif model == 'jobs':
         return jsonify([m.toDict() for m in search_query(model, query)])
+    elif model == 'cities': 
+        return jsonify({m.name:m.toDict() for m in search_query(model,query)})
     elif model == 'all':
         events = search_query('events', query)
         jobs   = search_query('jobs'  , query)
