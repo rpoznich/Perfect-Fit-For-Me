@@ -227,8 +227,10 @@ def search_query(model, query):
 def search_results(model, query):
     if model == 'events':
         return jsonify([m.json() for m in search_query(model, query)])
-    elif model == 'jobs' or model == 'cities':
-        return jsonify([m.toDict() for m in search_query(model,query)])
+    elif model == 'jobs':
+        return jsonify([m.toDict() for m in search_query(model, query)])
+    elif model == 'cities': 
+        return jsonify({m.name:m.toDict() for m in search_query(model,query)})
     elif model == 'all':
         events = search_query('events', query)
         jobs   = search_query('jobs'  , query)
@@ -458,9 +460,7 @@ def desc_sort_query(model, attribute):
 def desc_sort_results(model, attribute):
     if model == 'events':
         return jsonify([e.json() for e in desc_sort_query(model, attribute)])
-    elif model == 'cities':
-        return jsonify({c.name : c.toDict() for c in desc_sort_query(model, attribute)})
-    elif model == 'jobs':
+    elif model == 'cities' or model == 'jobs':
         return jsonify([j.toDict() for j in desc_sort_query(model, attribute)])
     else:
         return "Invalid model: " + str(model)

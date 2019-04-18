@@ -39,7 +39,7 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"JSON Length\"] = Object.keys(jsonData).length > 50"
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length > 80"
 						]
 					}
 				}
@@ -49,7 +49,7 @@
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Cities received"
+				"description": "All cities received"
 			},
 			"response": []
 		},
@@ -105,6 +105,58 @@
 			},
 			"response": []
 		},
+		// {
+		// 	"name": "Cities by Page",
+		// 	"event": [
+		// 		{
+		// 			"listen": "test",
+		// 			"script": {
+		// 				"type": "text/javascript",
+		// 				"exec": [
+		// 					"tests[\"Status Code\"] = responseCode.code === 200;",
+		// 					"var jsonData = JSON.parse(responseBody);",
+		// 					"tests[\"Los Angeles ID\"] = jsonData[\"Los Angeles\"][\"id\"] === 4",
+		// 					"tests[\"San Diego ID\"] = jsonData[\"San Diego\"][\"id\"] === 21",
+		// 					"tests[\"San Francisco ID\"] = jsonData[\"San Francisco Bay Area\"][\"id\"] === 19"
+		// 				]
+		// 			}
+		// 		}
+		// 	],
+		// 	"request": {
+		// 		"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/state/California",
+		// 		"method": "GET",
+		// 		"header": [],
+		// 		"body": {},
+		// 		"description": "Cities in California received"
+		// 	},
+		// 	"response": []
+		// },
+		// {
+		// 	"name": "Cities by Page",
+		// 	"event": [
+		// 		{
+		// 			"listen": "test",
+		// 			"script": {
+		// 				"type": "text/javascript",
+		// 				"exec": [
+		// 					"tests[\"Status Code\"] = responseCode.code === 200;",
+		// 					"var jsonData = JSON.parse(responseBody);",
+		// 					"tests[\"Los Angeles ID\"] = jsonData[\"Los Angeles\"][\"id\"] === 4",
+		// 					"tests[\"San Diego ID\"] = jsonData[\"San Diego\"][\"id\"] === 21",
+		// 					"tests[\"San Francisco ID\"] = jsonData[\"San Francisco Bay Area\"][\"id\"] === 19"
+		// 				]
+		// 			}
+		// 		}
+		// 	],
+		// 	"request": {
+		// 		"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/state/California",
+		// 		"method": "GET",
+		// 		"header": [],
+		// 		"body": {},
+		// 		"description": "Cities in California received"
+		// 	},
+		// 	"response": []
+		// },
 		{
 			"name": "Jobs",
 			"event": [
@@ -115,7 +167,7 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"JSON Length\"] = jsonData[\"Jobs\"].length > 4000"
+							"tests[\"JSON Length\"] = jsonData[\"Jobs\"].length > 35"
 						]
 					}
 				}
@@ -139,18 +191,18 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Software Engineer\"",
-							"tests[\"Job ID\"] = jsonData[\"id\"] === 51"
+							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Photographer\"",
+							"tests[\"Job ID\"] = jsonData[\"id\"] === 10"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/51",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/10",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Job ID 50 received"
+				"description": "Job ID 10 received"
 			},
 			"response": []
 		},
@@ -164,68 +216,18 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Financial Analyst\"",
-							"tests[\"Job ID\"] = jsonData[\"id\"] === 1234"
+							"tests[\"Job Title\"] = jsonData[\"job title\"] === \"Electrician\"",
+							"tests[\"Job ID\"] = jsonData[\"id\"] === 20"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/1234",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/id/20",
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "Job ID 1234 received"
-			},
-			"response": []
-		},
-		{
-			"name": "Jobs by City",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status Code\"] = responseCode.code === 200;",
-							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][1][\"job title\"] === \"Electrical Engineer\"",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][3][\"job title\"] === \"Chef\""
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/city/Austin",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": "Jobs in Austin received"
-			},
-			"response": []
-		},
-		{
-			"name": "Jobs by City",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status Code\"] = responseCode.code === 200;",
-							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][7][\"job title\"] === \"UX Designer\"",
-							"tests[\"Job Title\"] = jsonData[\"Jobs\"][50][\"job title\"] === \"Software Engineer\""
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/city/Houston",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": "Jobs in Houston received"
+				"description": "Job ID 20 received"
 			},
 			"response": []
 		},
