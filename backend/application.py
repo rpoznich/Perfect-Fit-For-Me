@@ -354,7 +354,7 @@ def sort_results(model, attribute):
     if model == 'events':
         return jsonify([e.json() for e in sort_query(model, attribute)])
     elif model == 'cities':
-        return jsonify({c.name : c.toDict() for m in sort_query(model, attribute)})
+        return jsonify({c.name : c.toDict() for c in sort_query(model, attribute)})
     elif model == 'jobs':
         return jsonify([j.toDict() for j in sort_query(model, attribute)])
     else:
@@ -463,7 +463,7 @@ def desc_sort_results(model, attribute):
     if model == 'events':
         return jsonify([e.json() for e in desc_sort_query(model, attribute)])
     elif model == 'cities':
-        return jsonify({c.name : c.toDict() for c in sort_query(model, attribute)})
+        return jsonify({c.name : c.toDict() for c in desc_sort_query(model, attribute)})
     elif model == 'jobs':
         return jsonify([j.toDict() for j in desc_sort_query(model, attribute)])
     else:
