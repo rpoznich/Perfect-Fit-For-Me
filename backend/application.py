@@ -149,7 +149,7 @@ def filter_results(model, attr, value, page):
         elif attr == 'pop': 
             population = value
             if population == '1':
-                cities = City.query.filter(City.population<=200000).all()
+                cities = City.query.filter(City.population <= 200000).all()
             elif population == '2': 
                 cities = City.query.filter(City.population > 200000, City.population < 999999).all()
             elif population == '3':
@@ -164,12 +164,17 @@ def filter_results(model, attr, value, page):
         state = request.args.get('state')
 
         events = None
-        if city is not None: 
-            events = Event.query.filter_by(city=city).all()
-        elif state is not None:
-            events = Event.query.filter_by(state=state).all()
-        elif start is not None: 
-            events = Event.query.filter_by(start=start).all()
+        if attr == 'city': 
+            events = Event.query.filter_by(city=value).all()
+        elif attr == 'state':
+            events = Event.query.filter_by(state=value).all()
+        elif attr == 'duration': 
+            if value == '1': 
+                events = Event.query.filter(Event.duration < 1).all()
+            elif value == '2': 
+                events = Event.query.filter(Event.duration >= 1, Event.duration < 4).all()
+            elif value == '3': 
+                events = Event.query.filter(Event.duration >= 4).all()
         response = jsonify(query_filter_by_page(events))
     else: 
         assert(False) # Just to debug and check if proper input is given
