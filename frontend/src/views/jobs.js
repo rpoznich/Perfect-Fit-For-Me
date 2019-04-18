@@ -44,7 +44,10 @@ class JobListing extends Component {
     let education = ''
     try{
       top_cities = this.props["top cities"]
-      top_city = top_cities[0]
+      for(let i in top_cities){
+        top_city += top_cities[i] + ', '
+      }
+      top_city = top_city.slice(0, -2)
       job_id = this.props.id
       job_title = this.props["job title"]
       education = this.props["education"]
@@ -72,7 +75,7 @@ class JobListing extends Component {
             {/* <p><span>{this.state.highlightedDS}</span>{this.state.unhighlightedDS}</p> */}
             <ul>
             <li>
-                <span>{'Top City'}</span>
+                <span>{'Top Cities'}</span>
                 <span class='icon-location-pin' />
                 <p><span>{top_city}</span></p>
               </li>
@@ -213,7 +216,7 @@ class Jobs extends Component {
       // Do something for an error here
       console.log("Error Reading data " + err);
     });
-    fetch('../statics/events.json').then(response => { //change this to actual API
+    fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here

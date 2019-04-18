@@ -42,6 +42,10 @@ class CityListing extends Component {
   }
 
   render () {
+    let col = this.props.qualities["cost of living"]
+    col *= 10
+    col = Math.round(col)
+    col /= 10
     return (
       <div class='featured-place-wrap'>
         <a href={'/cityInstance/' + this.props.name}>
@@ -62,7 +66,7 @@ class CityListing extends Component {
             <ul>
               <li>
                 <span> {'Cost of Living Rating: '}</span>
-                <p>{this.props.qualities["cost of living"]}</p>
+                <p>{col}</p>
               </li>              
               <li>
                 <span class='icon-location-pin' />
