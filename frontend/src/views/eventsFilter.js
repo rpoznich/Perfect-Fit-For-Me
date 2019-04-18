@@ -56,7 +56,7 @@ class EventListing extends Component{
     }
 }
 
-class Event extends Component {
+class EventsFilter extends Component {
     constructor(props)
     {
         super(props);
@@ -129,28 +129,17 @@ class Event extends Component {
         this.city = ''
         this.model_url = '/events/'
         this.title = 'Featured Events'
-        this.ascSort = false
-        this.descSort = false
         // If is an instance?
         let pathName = window.location.pathname.split("/");
         if (pathName.includes('eventInstance')) {
             this.isListing = false
             this.eid = parseInt(pathName[pathName.length-1]) - 1
         }else {
-            console.log(pathName)
             if(pathName.includes('filter')){
                 this.isCity = true
+                this.model_url = '/events/filter/'
                 this.city = pathName[pathName.length-2].toLowerCase()
-                this.model_url = '/events/filter/' + this.city + '/';
                 this.title = 'Featured Events For ' + this.city
-            } else if(pathName.includes('Name=A-Z')){
-                this.ascSort = true
-                this.model_url = '/events/Name=A-Z/'
-                this.title = 'Featured Events - Name A-Z' 
-            } else if(pathName.includes('Name=Z-A')){
-                this.descSort = true
-                this.model_url = '/events/Name=Z-A/'
-                this.title = 'Featured Events - Name Z-A' 
             }
             this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
         }
@@ -160,34 +149,24 @@ class Event extends Component {
             "jobs": [],
             hasMounted : 0,
             city_filter : null,
-            state_filter : null,
-            sort : null
+            state_filter : null
         }
     }
-
+    
     componentDidMount()
     {
-        let fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events'
-        if(this.isCity){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/search/' + this.city
-        } else if(this.ascSort){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/sort/name'
-        } else if(this.descSort){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/desc_sort/name'
-        }
-        console.log(fetchLocation)
-        fetch(fetchLocation).then(response => { //change this to actual API
-            return response.json();
-        }).then(data => {
-            // Work with JSON data here
-            this.state.events = data;
-            this.state.hasMounted = 1;
-            this.state.numPages = Math.ceil(this.state.events.length / 9);
-            this.setState(this.state);
-        }).catch(err => {
-            // Do something for an error here
-            console.log("Error Reading data " + err);
-        });
+            fetch('../public/statics/events.json').then(response => { //change this to actual API
+                return response.json();
+            }).then(data => {
+                // Work with JSON data here
+                this.state.events = data;
+                this.state.hasMounted = 1;
+                this.state.numPages = Math.ceil(this.state.events.length / 9);
+                this.setState(this.state);
+            }).catch(err => {
+                // Do something for an error here
+                console.log("Error Reading data " + err);
+            });
         fetch('../statics/jobs.json').then(response => { //change this to actual API
             return response.json();
           }).then(data => {
@@ -208,16 +187,12 @@ class Event extends Component {
         let indivComp = [];
         for(let i in this.state.events)
         {
-            if(this.isCity){
+            if(indivComp.length < 9){
                 indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }else{
-                if(indivComp.length < 9){
-                    indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
-                }else{
-                    components.push(indivComp);
-                    indivComp = [];
-                    indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
-                }
+                components.push(indivComp);
+                indivComp = [];
+                indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }
         }
         if(indivComp.length > 0){
@@ -227,10 +202,6 @@ class Event extends Component {
         for(let key in this.states_50)
         {
             states.push(<option>{this.states_50[key]}</option>)
-        }
-        let pageBar = []
-        if(!this.isCity){
-            pageBar.push(<PageBar numPages={49} model={this.model_url}></PageBar>)
         }
         return(
             <div className="cities">
@@ -252,15 +223,6 @@ class Event extends Component {
                 </select>
             <Button href={"/events/filter/"+this.state.city_filter+"/1"} type="submit" ariant="outline-primary">Filter</Button>
             </div>
-            <div className="col-md-3 mb-6">
-                <label htmlFor="state">Sort</label>
-                <select onChange = {(e) => this.setState({sort : e.target.value})}>
-                    <option>{null}</option>
-                    <option>{'Name=A-Z'}</option>
-                    <option>{'Name=Z-A'}</option>
-                </select>
-            <Button href={"/events/"+this.state.sort+"/1"} type="submit" ariant="outline-primary">Sort</Button>
-            </div>
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
@@ -271,8 +233,15 @@ class Event extends Component {
             <div class="row">
                 {components[this.pageNumber]}
             </div>
+            {/* <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="featured-btn-wrap">
+                        <a href="" class="btn btn-danger">VIEW ALL</a>
+                    </div>
+                </div>
+            </div> */}
         </div>
-        {pageBar}
+        <PageBar numPages={49} model={this.model_url}></PageBar>
     </section>
              </div>
              </div>
@@ -307,4 +276,4 @@ class Event extends Component {
         }
     }
 }
-export default Event;
+export default EventsFilter;

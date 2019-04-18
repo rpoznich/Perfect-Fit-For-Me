@@ -190,7 +190,7 @@ class Jobs extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar numPages={50} model='/jobs/'></PageBar>
+              <PageBar numPages={4} model='/jobs/'></PageBar>
             </section>
           </div>
         </div>

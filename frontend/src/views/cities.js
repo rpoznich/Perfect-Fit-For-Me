@@ -31,7 +31,7 @@ class CityListing extends Component {
     }
     this.state.highlightedDS = ''
     this.state.unhighlightedDS = ''
-    let bound = Math.ceil(this.props.qualities['Cost of Living'] / 2)
+    let bound = Math.ceil(this.props.qualities['cost of living'] / 2)
     for (let i = 0; i < bound; ++i) {
       this.state.highlightedDS += '$'
     }
@@ -43,7 +43,7 @@ class CityListing extends Component {
   render () {
     return (
       <div class='featured-place-wrap'>
-        <a href={'/cityInstance/' + this.props.id}>
+        <a href={'/cityInstance/' + this.props.nameId}>
           <img src={'' + this.props.images.web} height='200' width='100' alt='#' />
           <div className='container'>
             <span className={this.state.circleColor} title='Overall Rating'>
@@ -51,7 +51,7 @@ class CityListing extends Component {
             </span>
           </div>
           <div class='featured-title-box'>
-            <h6>{this.props.id}</h6>
+            <h6>{this.props.nameId}</h6>
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
             <p>
@@ -162,7 +162,7 @@ class Cities extends Component {
         if(indivComp.length < 9){  
           indivComp.push(
               <div className='col-md-4 featured-responsive'>
-                <CityListing id={id} {...this.state.cities[id]} />
+                <CityListing nameId={id} {...this.state.cities[id]} />
               </div>
           )
         }else{
@@ -185,7 +185,7 @@ class Cities extends Component {
               <div class='container'>
               <div>
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
-                <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
+                <Button href={"/cities/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
                 <div class='row justify-content-center'>
                   <div class='col-md-5'>
