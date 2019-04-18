@@ -67,7 +67,7 @@ def query_cities_by_state(state):
 def query_cities_by_page(num):
     num = int(num)
     all_cities = query_cities() 
-    city_names = all_cities.keys()
+    city_names = list(all_cities.keys())
     cities = {}
     for i in range(((num-1)*9), num*9):
         if i >= len(city_names):
