@@ -35,6 +35,8 @@ class Routing extends Component{
             <Route exact path="/cities/filter/col/:query" component={Cities}/>
             <Route exact path="/cities/filter/state/:query" component={Cities}/>
             <Route exact path="/cities/filter/pop/:query" component={Cities}/>
+            <Route exact path="/cities/Name=A-Z/:id" component={Cities}/>
+            <Route exact path="/cities/Name=Z-A/:id" component={Cities}/>
             <Route exact path="/cities/search/:query" component={CitiesSearch}/>     
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>

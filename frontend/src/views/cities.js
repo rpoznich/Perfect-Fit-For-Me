@@ -92,7 +92,6 @@ class Cities extends Component {
     this.states_50 = {
       "AL": "Alabama",
       "AK": "Alaska",
-      "AS": "American Samoa",
       "AZ": "Arizona",
       "AR": "Arkansas",
       "CA": "California",
@@ -103,7 +102,6 @@ class Cities extends Component {
       "FM": "Federated States Of Micronesia",
       "FL": "Florida",
       "GA": "Georgia",
-      "GU": "Guam",
       "HI": "Hawaii",
       "ID": "Idaho",
       "IL": "Illinois",
@@ -113,7 +111,6 @@ class Cities extends Component {
       "KY": "Kentucky",
       "LA": "Louisiana",
       "ME": "Maine",
-      "MH": "Marshall Islands",
       "MD": "Maryland",
       "MA": "Massachusetts",
       "MI": "Michigan",
@@ -133,7 +130,6 @@ class Cities extends Component {
       "OH": "Ohio",
       "OK": "Oklahoma",
       "OR": "Oregon",
-      "PW": "Palau",
       "PA": "Pennsylvania",
       "PR": "Puerto Rico",
       "RI": "Rhode Island",
@@ -204,7 +200,17 @@ class Cities extends Component {
         }
         console.log(choice)
         this.model_url = '/cities/filter/col/' + choice
-      } else {
+      } else if (pathName.includes('Name=A-Z')){
+            this.ascSort = true
+            this.model_url = '/cities/Name=A-Z/'
+            this.title = 'Featured Cities - Name A-Z' 
+            this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
+      } else if(pathName.includes('Name=Z-A')){
+            this.descSort = true
+            this.model_url = '/cities/Name=Z-A/'
+            this.title = 'Featured Cities - Name Z-A' 
+            this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
+      }else {
         this.pageNumber = parseInt(pathName[pathName.length-1]) - 1;
       }
     }
@@ -226,6 +232,10 @@ class Cities extends Component {
       fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/pop/' + this.pop
     } else if(this.isState){
       fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/state/' + this.currState
+    }else if(this.ascSort){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/sort/name'
+    }else if(this.descSort){
+      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/desc_sort/name'
     }
     fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
       .then(response => {
@@ -261,7 +271,7 @@ class Cities extends Component {
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-      fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
+      fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
       .then(response => {
         // change this to actual API
         return response.json()
@@ -359,6 +369,17 @@ class Cities extends Component {
                     <option>{'>1,000,000'}</option>
                 </select>
               <Button href={"/cities/filter/pop/"+this.state.pop_filter} type="submit" ariant="outline-primary">Filter By Population</Button>
+              </div>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">Sort</label>
+                <br/>
+                <select onChange = {(e) => this.setState({sort : e.target.value})}>
+                    <option>{null}</option>
+                    <option>{'Name=A-Z'}</option>
+                    <option>{'Name=Z-A'}</option>
+                </select>
+                <br/>
+              <Button href={"/cities/"+this.state.sort+"/1"} type="submit" ariant="outline-primary">Sort</Button>
               </div>
               </div>
               <br/>
