@@ -27,6 +27,9 @@ class Routing extends Component{
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/jobs/:id" component={Jobs}/>
+            <Route exact path="/jobs/filter/loc/:query" component={Jobs}/>
+            <Route exact path="/jobs/filter/income/:query" component={Jobs}/>
+            <Route exact path="/jobs/filter/edu/:query" component={Jobs}/>
             <Route exact path="/jobs/Title=A-Z/:id" component={Jobs}/>
             <Route exact path="/jobs/Title=Z-A/:id" component={Jobs}/>
             <Route exact path="/jobs/search/:query" component={JobsSearch}/>

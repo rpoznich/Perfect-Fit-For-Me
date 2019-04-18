@@ -273,6 +273,7 @@ class Event extends Component {
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/events/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
+              <br/>
             <div className='row justify-content-center'>
             <div className="col-md-3 mb-6">
                 <label htmlFor="city">City</label>
