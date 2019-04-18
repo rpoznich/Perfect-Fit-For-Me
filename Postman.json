@@ -715,8 +715,8 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"City Tolerance\"] = jsonData[0][\"tolerance\"] < 4",
-							"tests[\"City Tolerance\"] = jsonData[66][\"tolerance\"] > 9",
+							"tests[\"City Tolerance\"] = jsonData[0][\"qualities\"][\"tolerance\"] < 4",
+							"tests[\"City Tolerance\"] = jsonData[66][\"qualities\"][\"tolerance\"] > 9",
 							"tests[\"JSON Length\"] = jsonData.length === 67"
 						]
 					}
@@ -741,8 +741,8 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"City Tolerance\"] = jsonData[0][\"tolerance\"] > 9",
-							"tests[\"City Tolerance\"] = jsonData[66][\"tolerance\"] < 4",
+							"tests[\"City Tolerance\"] = jsonData[0][\"qualities\"][\"tolerance\"] > 9",
+							"tests[\"City Tolerance\"] = jsonData[66][\"qualities\"][\"tolerance\"] < 4",
 							"tests[\"JSON Length\"] = jsonData.length === 67"
 						]
 					}
