@@ -67,7 +67,6 @@ class JobListing extends Component {
               {'Education Requirement: '}
               <span>{education}</span>
             </p>
-
             {/* <p>Restaurant </p> <span>• </span>
                                 <p>3 Reviews</p> <span> • </span> */}
             {/* <p><span>{this.state.highlightedDS}</span>{this.state.unhighlightedDS}</p> */}
@@ -77,7 +76,6 @@ class JobListing extends Component {
                 <span class='icon-location-pin' />
                 <p><span>{top_city}</span></p>
               </li>
-
               {/* <li>
                 <span />
                 <p>{this.props.company}</p>
@@ -108,26 +106,51 @@ class Jobs extends Component {
     this.pos = -1
     this.pageNumber = 0
     this.numPages = 0
+    this.isCity = false
+    this.model_url = '/jobs/'
+    this.title = 'Featured jobs'
+    this.ascSort = false
+    this.descSort = false
     // If is an instance?
     let pathName = window.location.pathname.split("/");
     if (pathName.includes('jobInstance')) {
       this.isListing = false
       this.pos = parseInt(pathName[pathName.length-1]) - 1
     } else {
+      if(pathName.includes('Title=A-Z')){
+          this.ascSort = true
+          this.model_url = '/jobs/Title=A-Z/'
+          this.title = 'Featured Jobs - Title A-Z' 
+      } else if(pathName.includes('Title=Z-A')){
+          this.descSort = true
+          this.model_url = '/jobs/Title=Z-A/'
+          this.title = 'Featured Jobs - Title Z-A' 
+      }
       this.pageNumber = parseInt(pathName[pathName.length-1]) - 1
     }
     this.state = {
       "events": [],
       "jobs": [],
+      sort : null,
       hasMounted : 0
     }
   }
   componentDidMount () {
-    fetch('../statics/jobs.json').then(response => { //change this to actual API
+    let fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs'
+        if(this.ascSort){
+            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title'
+        } else if(this.descSort){
+            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title'
+        }
+    fetch(fetchLocation).then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here
-      this.state.jobs = (data["Jobs"]);
+      if(this.ascSort || this.descSort){
+        this.state.jobs = data;
+      }else if(!this.ascSort && !this.descSort){
+        this.state.jobs = (data["Jobs"]);
+      }
       this.state.hasMounted = 1;
       this.setState(this.state);
     }).catch(err => {
@@ -163,6 +186,10 @@ class Jobs extends Component {
       if(indivComp.length > 0){
         components.push(indivComp);
       }
+      let pageBar = []
+      if(!this.isCity){
+        pageBar.push(<PageBar numPages={4} model={this.model_url}></PageBar>)
+      }
       return (
         <div className='cities'>
           <div className='main' style={{ marginTop: '10vh' }}>
@@ -172,10 +199,19 @@ class Jobs extends Component {
                 <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
+              <div className="col-md-3 mb-6">
+                <label htmlFor="state">Sort</label>
+                <select onChange = {(e) => this.setState({sort : e.target.value})}>
+                    <option>{null}</option>
+                    <option>{'Title=A-Z'}</option>
+                    <option>{'Title=Z-A'}</option>
+                </select>
+              <Button href={"/jobs/"+this.state.sort+"/1"} type="submit" ariant="outline-primary">Sort</Button>
+              </div>
                 <div class='row justify-content-center'>
                   <div class='col-md-5'>
                     <div class='styled-heading'>
-                      <h3>Featured Jobs</h3>
+                      <h3>{this.title}</h3>
                     </div>
                   </div>
                 </div>
@@ -190,7 +226,7 @@ class Jobs extends Component {
                   </div>
                 </div> */}
               </div>
-              <PageBar numPages={4} model='/jobs/'></PageBar>
+              {pageBar}
             </section>
           </div>
         </div>

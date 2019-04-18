@@ -112,7 +112,7 @@ class About extends Component {
       'Jonathan Nguyen': {
         name: 'Jonathan Nguyen',
         bio: 'Junior Computer Science major, pursuing a Business minor, at the University of Texas at Austin',
-        alias: ['Jonathan Nguyen', 'Van', 'root'],
+        alias: ['Jonathan Nguyen', 'Van'],
         username: 'GammaJohn',
         role: 'Front-end',
         img: jonathan,
@@ -136,11 +136,11 @@ class About extends Component {
       'Dylan Kile': {
         name: 'Dylan Kile',
         bio: 'Senior Computer Science major at the University of Texas at Austin',
-        alias: ['Dylan Kile'],
+        alias: ['Dylan Kile', 'root'],
         username: 'dylankile',
         role: 'Back-end',
         img: dylan,
-        commits: 20,
+        commits: 0,
         issues: 0,
         website: '',
         tests: 10
@@ -234,6 +234,28 @@ class About extends Component {
         .catch(e => {
           console.log(e)
         })
+        fetch(
+          'https://gitlab.com/api/v4/projects/11069679/repository/commits?all=true&per_page=100&page=3'
+        )
+          .then(response => response.json())
+          .then(data => {
+            // process the data
+            for (var i in data) {
+              let commit_data = data[i]
+              for (var member in this.state.memData) {
+                if (
+                  this.state.memData[member].alias.includes(commit_data.author_name)
+                ) {
+                  this.state.memData[member].commits += 1;
+                  this.total_commits += 1;
+                }
+              }
+            }
+            this.setState({})
+          })
+          .catch(e => {
+            console.log(e)
+          })
 
     fetch('https://gitlab.com/api/v4/projects/11069679/issues?state=closed&per_page=100&page=1')
       .then(issues => issues.json())
@@ -253,6 +275,7 @@ class About extends Component {
       .catch(e => {
         console.log(e)
       })
+      
   }
 
   render () {

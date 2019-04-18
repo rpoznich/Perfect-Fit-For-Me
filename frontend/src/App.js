@@ -6,6 +6,7 @@ import Cities from './views/cities.js'
 import CitiesSearch from './views/citySearch.js'
 import About from './views/about.js'
 import Events from './views/events.js'
+import EventsSearch from './views/eventSearch.js'
 import Search from './views/search.js'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
@@ -25,12 +26,16 @@ class Routing extends Component{
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/jobs/:id" component={Jobs}/>
+            <Route exact path="/jobs/Title=A-Z/:id" component={Jobs}/>
+            <Route exact path="/jobs/Title=Z-A/:id" component={Jobs}/>
             <Route exact path="/jobInstance/:id" component={Jobs}/>
             <Route exact path="/cities/:id" component={Cities}/>
             <Route exact path="/cities/search/:query" component={CitiesSearch}/>     
             <Route exact path="/cityInstance/:id" component={Cities}/> 
             <Route exact path="/events/:id" component={Events}/>
-            <Route exact path="/events/filter/:query/:id" component={Events}/>
+            <Route exact path="/events/search/:query" component={EventsSearch}/>
+            <Route exact path="/events/filter/city/:query/:id" component={Events}/>
+            <Route exact path="/events/filter/state/:query/:id" component={Events}/>
             <Route exact path="/events/Name=A-Z/:id" component={Events}/>
             <Route exact path="/events/Name=Z-A/:id" component={Events}/>
             <Route exact path="/eventInstance/:id" component={Events}/>       
