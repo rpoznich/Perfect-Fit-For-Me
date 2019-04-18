@@ -3,15 +3,17 @@ from unittest import main, TestCase
 import sys, os 
 sys.path.append(os.path.abspath(os.path.join('..','..', 'back-end')))
 
-from models import City, Job, Event, db
+import json
+import application
+from models import City, Job, Event, db, app
 from scrape import date_string_to_float
 
 
 class TestModels (TestCase): 
 
-    # def setUp(self): 
-    #     self.app = app.test_client() 
-    #     self.app.testing = True
+    def setUp(self): 
+        self.app = app.test_client() 
+        self.app.testing = True
 
     ####################
     # Scraping Methods #
@@ -140,6 +142,123 @@ class TestModels (TestCase):
     def test_event_not_in_cb(self): 
         event = Event.query.filter_by(name="Superhero Slumber Symphony").all() 
         self.assertEqual(event, [])
+
+    #####################
+    # API Functionality #
+    #####################
+    def test_site_api(self): 
+        r = self.app.get('/api', follow_redirects=True) 
+        self.assertEqual(r.status_code, 200)
+
+    def test_site_jobs(self): 
+        r = self.app.get('/api/jobs', follow_redirects=True) 
+        self.assertEqual(r.status_code, 200)
+
+    def test_site_cities(self):
+        r = self.app.get('/api/cities', follow_redirects=True) 
+        self.assertEqual(r.status_code, 200)
+
+    def test_site_events(self): 
+        r = self.app.get('/api/jobs', follow_redirects=True) 
+        self.assertEqual(r.status_code, 200)
+
+
+    ######################
+    # Search/Filter/Sort #
+    ######################
+
+   
+
+    def test_search_event(self): 
+        r = self.app.get('/api/events/search/austin', follow_redirects=True)
+        self.assertEqual(r.status_code, 200)
+
+    def test_filter_event(self): 
+        r = self.app.get('/api/events/filter/city/austin', follow_redirects=True)
+        self.assertEqual(r.status_code, 200)
+        events = json.loads(r.data.decode('utf-8'))
+        same = True
+        for e in events: 
+            if e['city'] != "Austin": 
+                same = False 
+                break
+        self.assertEqual(same, True)
+
+    def test_sort_event(self): 
+        r = self.app.get('/api/events/sort/eventid', follow_redirects=True)
+        self.assertEqual(r.status_code, 200) 
+        events = json.loads(r.data.decode('utf-8'))
+        in_order = True
+        previous = -1 
+        for e in events:
+            cur = e['eventid']
+            if previous > cur: 
+                print(previous + " vs " + cur)
+                in_order = False 
+                break
+            previous = cur
+        self.assertEqual(in_order, True)
+
+    def test_search_city(self): 
+        r = self.app.get('/api/cities/search/austin', follow_redirects=True)
+        self.assertEqual(r.status_code, 200)
+
+    def test_filter_city(self): 
+        r = self.app.get('/api/cities/filter/state/texas', follow_redirects=True)
+        self.assertEqual(r.status_code, 200)
+        cities = json.loads(r.data.decode('utf-8'))
+        same = True
+        for c in cities: 
+            city = cities[c]
+            if city['location']['state'].lower() != "texas": 
+                same = False 
+                break
+        self.assertEqual(same, True)
+
+    def test_sort_city(self): 
+        r = self.app.get('/api/cities/sort/id', follow_redirects=True)
+        self.assertEqual(r.status_code, 200) 
+        cities = json.loads(r.data.decode('utf-8'))
+        in_order = True
+        previous = -1 
+        for c in cities:
+            cur = c['id']
+            if previous > cur: 
+                print(previous + " vs " + cur)
+                in_order = False 
+                break
+            previous = cur
+        self.assertEqual(in_order, True)
+
+    def test_search_job(self): 
+        r = self.app.get('/api/jobs/search/austin', follow_redirects=True)
+        self.assertEqual(r.status_code, 200)
+
+    def test_filter_job(self): 
+        r = self.app.get('/api/jobs/filter/income/1', follow_redirects=True)
+        self.assertEqual(r.status_code, 200)
+        jobs = json.loads(r.data.decode('utf-8'))
+        same = True
+        for j in jobs: 
+            if j['annual salary'] >= 30000: 
+                same = False 
+                break
+        self.assertEqual(same, True)
+
+    def test_sort_job(self): 
+        r = self.app.get('/api/jobs/sort/job_id', follow_redirects=True)
+        self.assertEqual(r.status_code, 200) 
+        jobs = json.loads(r.data.decode('utf-8'))
+        in_order = True
+        previous = -1 
+        for j in jobs:
+            cur = j['id']
+            if previous > cur: 
+                print(previous + " vs " + cur)
+                in_order = False 
+                break
+            previous = cur
+        self.assertEqual(in_order, True)
 
 if __name__ == '__main__': 
     main()

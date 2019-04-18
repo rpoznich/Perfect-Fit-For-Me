@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 from sqlalchemy import or_
-from models import City, Job, Event, application, db
+from models import City, Job, Event, app, db
 import json
 import requests
 
-cors = CORS(application)
+cors = CORS(app)
 
 #------------------#
 # DATABASE QUERIES #
@@ -113,7 +113,7 @@ def query_filter_by_page(query_results, num):
         elif type(obj) is Event: 
             results.append(obj.json())
     return results
-@application.route("/api/<model>/filter/<attr>/<value>/")
+@app.route("/api/<model>/filter/<attr>/<value>/")
 @cross_origin() 
 def filter_results(model, attr, value):
     response = None
@@ -222,7 +222,7 @@ def search_query(model, query):
     else:
         return "Invalid model: " + str(model)
 
-@application.route("/api/<model>/search/<query>")
+@app.route("/api/<model>/search/<query>")
 @cross_origin() 
 def search_results(model, query):
     if model == 'events':
@@ -241,7 +241,7 @@ def search_results(model, query):
     else:
         return "Invalid model: " + str(model)
 
-@application.route("/api/<model>/search/<query>/<page>")
+@app.route("/api/<model>/search/<query>/<page>")
 @cross_origin()
 def search_results_page(model, query, page):
     if model == 'events' or model == 'cities' or model == 'jobs':
@@ -348,7 +348,7 @@ def sort_query(model, attribute):
     else:
         return "Invalid model: " + str(model)
 
-@application.route('/api/<model>/sort/<attribute>')
+@app.route('/api/<model>/sort/<attribute>')
 @cross_origin()
 def sort_results(model, attribute):
     if model == 'events':
@@ -358,7 +358,7 @@ def sort_results(model, attribute):
     else:
         return "Invalid model: " + str(model)
 
-@application.route('/api/<model>/sort/<attribute>/<page>')
+@app.route('/api/<model>/sort/<attribute>/<page>')
 @cross_origin()
 def sort_results_page(model, attribute, page):
     if model == 'events' or model == 'cities' or model == 'jobs':
@@ -455,7 +455,7 @@ def desc_sort_query(model, attribute):
     else:
         return "Invalid model: " + str(model)
 
-@application.route('/api/<model>/desc_sort/<attribute>')
+@app.route('/api/<model>/desc_sort/<attribute>')
 @cross_origin()
 def desc_sort_results(model, attribute):
     if model == 'events':
@@ -465,7 +465,7 @@ def desc_sort_results(model, attribute):
     else:
         return "Invalid model: " + str(model)
 
-@application.route('/api/<model>/desc_sort/<attribute>/<page>')
+@app.route('/api/<model>/desc_sort/<attribute>/<page>')
 @cross_origin()
 def desc_sort_results_page(model, attribute, page):
     if model == 'events' or model == 'cities' or model == 'jobs':
@@ -476,55 +476,55 @@ def desc_sort_results_page(model, attribute, page):
 #------------#
 # API ROUTES #
 #------------#
-@application.route('/api/')
+@app.route('/api/')
 @cross_origin()
 def render_home_page():
     return render_template('home.html')
 
-@application.route('/api/events')
+@app.route('/api/events')
 @cross_origin()
 def get_events():
     return jsonify(query_events())
 
-@application.route('/api/events/page/<num>')
+@app.route('/api/events/page/<num>')
 @cross_origin()
 def get_events_by_page(num):
     return jsonify(query_events_by_page(num))
 
-@application.route('/api/jobs')
+@app.route('/api/jobs')
 @cross_origin()
 def get_jobs(): 
     return jsonify(query_jobs())
 
-@application.route('/api/jobs/id/<id>')
+@app.route('/api/jobs/id/<id>')
 @cross_origin()
 def get_one_job_by_id(id):
     return jsonify(query_jobs_by_id(id))
 
-@application.route('/api/jobs/page/<num>')
+@app.route('/api/jobs/page/<num>')
 @cross_origin()
 def get_jobs_by_page(num):
     return jsonify(query_jobs_by_page(num))
 
-@application.route('/api/cities')
+@app.route('/api/cities')
 @cross_origin()
 def get_cities():
     return jsonify(query_cities())
 
-@application.route('/api/cities/state/<state>')
+@app.route('/api/cities/state/<state>')
 @cross_origin()
 def get_cities_by_state(state):
     return jsonify(query_cities_by_state(state))
 
-@application.route('/api/cities/page/<num>')
+@app.route('/api/cities/page/<num>')
 @cross_origin()
 def get_cities_by_page(num):
     return jsonify(query_cities_by_page(num))
 
-@application.after_request
+@app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
 
 if __name__ == '__main__': 
-	application.run()
+	app.run()
