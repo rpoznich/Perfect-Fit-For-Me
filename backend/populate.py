@@ -64,6 +64,7 @@ def populate_events():
                       venue    = e["venue"],
                       start    = e["start"],
                       end      = e["end"],
+                      duration = e["duration"],
                       timezone = e["timezone"],
                       url      = e["url"],
                       logo     = e["logo"])

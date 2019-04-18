@@ -112,6 +112,7 @@ class Event(db.Model):
     venue = db.Column(db.String(200))
     start = db.Column(db.String(25))
     end = db.Column(db.String(25))
+    duration = db.Column(db.Float(5))
     timezone = db.Column(db.String(50))
     url = db.Column(db.String(300))
     logo = db.Column(db.String(300), nullable=True)
@@ -126,6 +127,7 @@ class Event(db.Model):
                 "venue": self.venue,
                 "start": self.start,
                 "end": self.end,
+                "duration": self.duration,
                 "timezone": self.timezone,
                 "url": self.url,
                 "logo": self.logo}

@@ -4,6 +4,7 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.join('..','..', 'back-end')))
 
 from models import City, Job, Event, db
+from scrape import date_string_to_float
 
 
 class TestModels (TestCase): 
@@ -12,6 +13,14 @@ class TestModels (TestCase):
     #     self.app = app.test_client() 
     #     self.app.testing = True
 
+    ####################
+    # Scraping Methods #
+    ####################
+
+    def test_date_to_float(self): 
+        date = "2019-03-3T18:30:00"
+        time = date_string_to_float(date)
+        self.assertEqual(time,90.5)
 
     ##########################
     # Model's toDict Methods #
@@ -75,7 +84,8 @@ class TestModels (TestCase):
     def test_event_to_dict(self):
         event = Event(eventid=1,name="name",summary="sum",
             address="addr",city="city",state="tx",venue="venue",
-            start="start",end="end",timezone="timezone",url="url",logo="logo")
+            start="start",end="end",duration=1.0,timezone="timezone",
+            url="url",logo="logo")
         event_stats_test = {
             "eventid":1, 
             "name":"name", 
@@ -86,6 +96,7 @@ class TestModels (TestCase):
             "venue":"venue",
             "start":"start",
             "end":"end",
+            "duration":1.0,
             "timezone":"timezone",
             "url":"url",
             "logo":"logo"

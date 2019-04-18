@@ -79,15 +79,11 @@ def query_cities_by_page(num):
 #--------------------# 
 # FILTER/SEARCH/SORT #
 #--------------------# 
-def query_filter_by_page(query_results, num): 
-    num = int(num)
+def query_filter(query_results): 
     results = [] 
     if query_results is None: 
-        print(query_results)
         return results
-    for i in range(((num-1)*9), num*9):
-        if (i >= len(query_results)): 
-            break 
+    for i in range(len(query_results)):
         obj = query_results[i] 
         if type(obj) is Job or type(obj) is City:
             results.append(obj.toDict())
@@ -95,10 +91,23 @@ def query_filter_by_page(query_results, num):
             results.append(obj.json())
     return results
 
-@application.route("/api/<model>/filter/<attr>/<value>/<page>")
+def query_filter_by_page(query_results, num):
+    results = []
+    page = int(num)
+    if query_results is None: 
+        return results
+    for i in range((page-1)*9, page*9):
+        if i >= len(query_results): 
+            break 
+        obj = query_results[i] 
+        if type(obj) is Job or type(obj) is City:
+            results.append(obj.toDict())
+        elif type(obj) is Event: 
+            results.append(obj.json())
+    return results
+@application.route("/api/<model>/filter/<attr>/<value>/")
 @cross_origin() 
-def filter_results(model, attr, value, page):
-    results = None
+def filter_results(model, attr, value):
     response = None
     if model == 'jobs': 
         # ADD ATTRIBUTES AS NECESSARY # 
@@ -127,15 +136,14 @@ def filter_results(model, attr, value, page):
                                              Job.city3 == value, 
                                              Job.city4 == value, 
                                              Job.city5 == value)).all()
-        response = jsonify(query_filter_by_page(jobs_query,page))
+        response = jsonify(query_filter(jobs_query))
 
 
 
     elif model == 'cities': # May Need to add average score to filter by average score
-        # avg_score = request.get.args.get('avg')
         cities = None
         if attr == 'col': 
-            col = 2*int(value)# Not sure what the Cash sign means again - is it more expensive/less expensive? 
+            col = 2*int(value)
             if (col <= 2): 
                 cities = City.query.filter(City.cost_of_living <= 2.0).all();
             elif (col <= 4): 
@@ -149,36 +157,35 @@ def filter_results(model, attr, value, page):
         elif attr == 'pop': 
             population = value
             if population == '1':
-                cities = City.query.filter(City.population<=200000).all()
+                cities = City.query.filter(City.population <= 200000).all()
             elif population == '2': 
                 cities = City.query.filter(City.population > 200000, City.population < 999999).all()
             elif population == '3':
                 cities = City.query.filter(City.population >= 1000000).all()
         elif attr == 'state': 
-            cities = City.query.filter_by(state=state).all()
-        response = jsonify(query_filter_by_page(cities,page))
+            cities = City.query.filter_by(state=value).all()
+        response = jsonify(query_filter(cities))
 
     elif model == 'events':
-        city = request.args.get('city')
-        start = request.args.get('start')
-        state = request.args.get('state')
-
         events = None
-        if city is not None: 
-            events = Event.query.filter_by(city=city).all()
-        elif state is not None:
-            events = Event.query.filter_by(state=state).all()
-        elif start is not None: 
-            events = Event.query.filter_by(start=start).all()
-        response = jsonify(query_filter_by_page(events))
+        if attr == 'city': 
+            events = Event.query.filter_by(city=value).all()
+        elif attr == 'state':
+            events = Event.query.filter_by(state=value).all()
+        elif attr == 'duration': 
+            if value == '1': 
+                events = Event.query.filter(Event.duration < 1).all()
+            elif value == '2': 
+                events = Event.query.filter(Event.duration >= 1, Event.duration < 4).all()
+            elif value == '3': 
+                events = Event.query.filter(Event.duration >= 4).all()
+        response = jsonify(query_filter(events))
     else: 
         assert(False) # Just to debug and check if proper input is given
 
     return response
 
-@application.route("/api/<model>/search/<query>")
-@cross_origin() 
-def search_results(model, query):
+def search_query(model, query):
     if model == 'events':
         events = Event.query
         events = events.filter(or_(Event.name.like('%' + query + '%'),
@@ -187,7 +194,7 @@ def search_results(model, query):
                                    Event.city.like('%' + query + '%'),
                                    Event.state.like('%' + query + '%'),
                                    Event.venue.like('%' + query + '%')))
-        return jsonify([e.json() for e in events])
+        return [e for e in events]
     elif model == 'jobs':
         jobs = Job.query
         jobs = jobs.filter(or_(Job.job_title.like('%' + query + '%'),
@@ -198,41 +205,51 @@ def search_results(model, query):
                                Job.city3.like('%' + query + '%'),
                                Job.city4.like('%' + query + '%'),
                                Job.city5.like('%' + query + '%')))
-        return jsonify([j.toDict() for j in jobs])
+        return [j for j in jobs]
     elif model == 'cities':
         cities = City.query
         cities = cities.filter(or_(City.name.like('%' + query + '%'),
                                    City.state.like('%' + query + '%')))
-        return jsonify([c.toDict() for c in cities])
+        return [c for c in cities]
+    else:
+        return "Invalid model: " + str(model)
+
+@application.route("/api/<model>/search/<query>")
+@cross_origin() 
+def search_results(model, query):
+    if model == 'events':
+        return jsonify([m.json() for m in search_query(model, query)])
+    elif model == 'cities' or model == 'jobs':
+        return jsonify([m.toDict() for m in search_query(model, query)])
     elif model == 'all':
-        events = Event.query
-        events = events.filter(or_(Event.name.like('%' + query + '%'),
-                                   Event.summary.like('%' + query + '%'),
-                                   Event.address.like('%' + query + '%'),
-                                   Event.city.like('%' + query + '%'),
-                                   Event.state.like('%' + query + '%'),
-                                   Event.venue.like('%' + query + '%')))
-        jobs = Job.query
-        jobs = jobs.filter(or_(Job.job_title.like('%' + query + '%'),
-                               Job.description.like('%' + query + '%'),
-                               Job.education.like('%' + query + '%'),
-                               Job.city1.like('%' + query + '%'),
-                               Job.city2.like('%' + query + '%'),
-                               Job.city3.like('%' + query + '%'),
-                               Job.city4.like('%' + query + '%'),
-                               Job.city5.like('%' + query + '%')))
-        cities = City.query
-        cities = cities.filter(or_(City.name.like('%' + query + '%'),
-                                   City.state.like('%' + query + '%')))
+        events = search_query('events', query)
+        jobs   = search_query('jobs'  , query)
+        cities = search_query('cities', query)
         return jsonify({'events' : [e.json() for e in events],
-                        'jobs' : [j.toDict() for j in jobs],
+                        'jobs'   : [j.toDict() for j in jobs],
                         'cities' : [c.toDict() for c in cities]})
     else:
         return "Invalid model: " + str(model)
 
-@application.route('/api/<model>/sort/<attribute>')
+@application.route("/api/<model>/search/<query>/<page>")
 @cross_origin()
-def sort_results(model, attribute):
+def search_results_page(model, query, page):
+    if model == 'events' or model == 'cities' or model == 'jobs':
+        return jsonify(query_filter_by_page([m for m in search_query(model, query)], page))
+    elif model == 'all':
+        events = search_query('events', query)
+        jobs   = search_query('jobs'  , query)
+        cities = search_query('cities', query)
+        events_page = query_filter_by_page([e for e in events], page)
+        jobs_page   = query_filter_by_page([j for j in jobs], page)
+        cities_page = query_filter_by_page([c for c in cities], page)
+        return jsonify({'events' : events_page,
+                        'jobs'   : jobs_page,
+                        'cities' : cities_page})
+    else:
+        return "Invalid model: " + str(model)
+
+def sort_query(model, attribute):
     if model == 'events':
         events = Event.query
         if attribute == 'eventid':
@@ -257,7 +274,7 @@ def sort_results(model, attribute):
             events = events.filter(Event.timezone.isnot(None)).order_by(Event.timezone)
         else:
             return "Invalid attribute: " + str(attribute)
-        return jsonify([e.json() for e in events])
+        return events
     elif model == 'jobs':
         jobs = Job.query
         if attribute == 'job_id':
@@ -292,7 +309,7 @@ def sort_results(model, attribute):
             jobs = jobs.order_by(Job.salary5)
         else:
             return "Invalid attribute: " + str(attribute)
-        return jsonify([j.toDict() for j in jobs])
+        return jobs
     elif model == 'cities':
         cities = City.query
         if attribute == 'id':
@@ -317,13 +334,29 @@ def sort_results(model, attribute):
             cities = cities.order_by(City.commute)
         else:
             return "Invalid attribute: " + str(attribute)
-        return jsonify([c.toDict() for c in cities])
+        return cities
     else:
         return "Invalid model: " + str(model)
 
-@application.route('/api/<model>/desc_sort/<attribute>')
+@application.route('/api/<model>/sort/<attribute>')
 @cross_origin()
-def desc_sort_results(model, attribute):
+def sort_results(model, attribute):
+    if model == 'events':
+        return jsonify([m.json() for m in sort_query(model, attribute)])
+    elif model == 'cities' or model == 'jobs':
+        return jsonify([m.toDict() for m in sort_query(model, attribute)])
+    else:
+        return "Invalid model: " + str(model)
+
+@application.route('/api/<model>/sort/<attribute>/<page>')
+@cross_origin()
+def sort_results_page(model, attribute, page):
+    if model == 'events' or model == 'cities' or model == 'jobs':
+        return jsonify(query_filter_by_page([m for m in sort_query(model, attribute)], page))
+    else:
+        return "Invalid model: " + str(model)
+
+def desc_sort_query(model, attribute):
     if model == 'events':
         events = Event.query
         if attribute == 'eventid':
@@ -348,7 +381,7 @@ def desc_sort_results(model, attribute):
             events = events.filter(Event.timezone.isnot(None)).order_by(Event.timezone.desc())
         else:
             return "Invalid attribute: " + str(attribute)
-        return jsonify([e.json() for e in events])
+        return [e for e in events]
     elif model == 'jobs':
         jobs = Job.query
         if attribute == 'job_id':
@@ -383,7 +416,7 @@ def desc_sort_results(model, attribute):
             jobs = jobs.order_by(Job.salary5.desc())
         else:
             return "Invalid attribute: " + str(attribute)
-        return jsonify([j.toDict() for j in jobs])
+        return [j for j in jobs]
     elif model == 'cities':
         cities = City.query
         if attribute == 'id':
@@ -408,7 +441,25 @@ def desc_sort_results(model, attribute):
             cities = cities.order_by(City.commute.desc())
         else:
             return "Invalid attribute: " + str(attribute)
-        return jsonify([c.toDict() for c in cities])
+        return [c for c in cities]
+    else:
+        return "Invalid model: " + str(model)
+
+@application.route('/api/<model>/desc_sort/<attribute>')
+@cross_origin()
+def desc_sort_results(model, attribute):
+    if model == 'events':
+        return jsonify([m.json() for m in desc_sort_query(model, attribute)])
+    elif model == 'cities' or model == 'jobs':
+        return jsonify([m.toDict() for m in desc_sort_query(model, attribute)])
+    else:
+        return "Invalid model: " + str(model)
+
+@application.route('/api/<model>/desc_sort/<attribute>/<page>')
+@cross_origin()
+def desc_sort_results_page(model, attribute, page):
+    if model == 'events' or model == 'cities' or model == 'jobs':
+        return jsonify(query_filter_by_page([m for m in desc_sort_query(model, attribute)], page))
     else:
         return "Invalid model: " + str(model)
 
