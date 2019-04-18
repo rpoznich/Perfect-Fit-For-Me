@@ -492,7 +492,6 @@ def get_events_by_page(num):
     return jsonify(query_events_by_page(num))
 
 @app.route('/api/jobs')
-@cross_origin()
 def get_jobs(): 
     return jsonify(query_jobs())
 
