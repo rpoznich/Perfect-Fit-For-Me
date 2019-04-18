@@ -127,6 +127,8 @@ class Event extends Component {
         this.numPages = 0
         this.isCity = false
         this.city = ''
+        this.isState = false
+        this.currstate = ''
         this.model_url = '/events/'
         this.title = 'Featured Events'
         this.ascSort = false
@@ -138,11 +140,16 @@ class Event extends Component {
             this.eid = parseInt(pathName[pathName.length-1]) - 1
         }else {
             console.log(pathName)
-            if(pathName.includes('filter')){
+            if(pathName.includes('city')){
                 this.isCity = true
                 this.city = pathName[pathName.length-2].toLowerCase()
-                this.model_url = '/events/filter/' + this.city + '/';
+                this.model_url = '/events/filter/city/' + this.city + '/';
                 this.title = 'Featured Events For ' + this.city
+            } else if(pathName.includes('state')){
+                this.isState = true
+                this.currstate = pathName[pathName.length-2].toUpperCase()
+                this.model_url = '/events/filter/state/' + this.currstate + '/';
+                this.title = 'Featured Events For ' + this.states_50[this.currstate]
             } else if(pathName.includes('Name=A-Z')){
                 this.ascSort = true
                 this.model_url = '/events/Name=A-Z/'
@@ -169,7 +176,9 @@ class Event extends Component {
     {
         let fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events'
         if(this.isCity){
-            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/search/' + this.city
+            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/city/' + this.city + '/'
+        } else if(this.isState){
+            fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/state/' + this.currstate + '/'
         } else if(this.ascSort){
             fetchLocation = 'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/sort/name'
         } else if(this.descSort){
@@ -208,7 +217,7 @@ class Event extends Component {
         let indivComp = [];
         for(let i in this.state.events)
         {
-            if(this.isCity){
+            if(this.isCity || this.isState){
                 indivComp.push( <div className="col-md-4 featured-responsive"><EventListing {...this.state.events[i]}/></div>)
             }else{
                 if(indivComp.length < 9){
@@ -226,10 +235,10 @@ class Event extends Component {
         let states = []
         for(let key in this.states_50)
         {
-            states.push(<option>{this.states_50[key]}</option>)
+            states.push(<option>{key}</option>)
         }
         let pageBar = []
-        if(!this.isCity){
+        if(!this.isCity && !this.isState){
             pageBar.push(<PageBar numPages={49} model={this.model_url}></PageBar>)
         }
         return(
@@ -245,12 +254,13 @@ class Event extends Component {
                 <label htmlFor="city">City</label>
                 <input type="search" id ="city" className="form-control" placeholder="..." onChange={(e) => this.setState({city_filter : e.target.value})}></input>
             </div>
+            <Button href={"/events/filter/city/"+this.state.city_filter+"/1"} type="submit" ariant="outline-primary">Filter By City</Button>
             <div className="col-md-3 mb-6">
                 <label htmlFor="state">State</label>
                 <select onChange = {(e) => this.setState({state_filter : e.target.value})}>
                     {states}
                 </select>
-            <Button href={"/events/filter/"+this.state.city_filter+"/1"} type="submit" ariant="outline-primary">Filter</Button>
+            <Button href={"/events/filter/state/"+this.state.state_filter+"/1"} type="submit" ariant="outline-primary">Filter By State</Button>
             </div>
             <div className="col-md-3 mb-6">
                 <label htmlFor="state">Sort</label>

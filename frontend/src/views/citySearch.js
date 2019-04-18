@@ -128,7 +128,7 @@ class CitySearch extends Component{
     }
 
     componentDidMount(){
-        fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/search/'  + this.state.searchWord)
+        fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/search/'  + this.state.searchWord)
       .then(response => {
         // change this to actual API
         return response.json()
