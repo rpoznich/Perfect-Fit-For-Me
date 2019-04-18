@@ -79,15 +79,12 @@ def query_cities_by_page(num):
 #--------------------# 
 # FILTER/SEARCH/SORT #
 #--------------------# 
-def query_filter_by_page(query_results, num): 
-    num = int(num)
+def query_filter(query_results): 
     results = [] 
     if query_results is None: 
         print(query_results)
         return results
-    for i in range(((num-1)*9), num*9):
-        if (i >= len(query_results)): 
-            break 
+    for i in range(len(query_results)):
         obj = query_results[i] 
         if type(obj) is Job or type(obj) is City:
             results.append(obj.toDict())
@@ -95,10 +92,9 @@ def query_filter_by_page(query_results, num):
             results.append(obj.json())
     return results
 
-@application.route("/api/<model>/filter/<attr>/<value>/<page>")
+@application.route("/api/<model>/filter/<attr>/<value>/")
 @cross_origin() 
-def filter_results(model, attr, value, page):
-    results = None
+def filter_results(model, attr, value):
     response = None
     if model == 'jobs': 
         # ADD ATTRIBUTES AS NECESSARY # 
@@ -127,15 +123,14 @@ def filter_results(model, attr, value, page):
                                              Job.city3 == value, 
                                              Job.city4 == value, 
                                              Job.city5 == value)).all()
-        response = jsonify(query_filter_by_page(jobs_query,page))
+        response = jsonify(query_filter(jobs_query))
 
 
 
     elif model == 'cities': # May Need to add average score to filter by average score
-        # avg_score = request.get.args.get('avg')
         cities = None
         if attr == 'col': 
-            col = 2*int(value)# Not sure what the Cash sign means again - is it more expensive/less expensive? 
+            col = 2*int(value)
             if (col <= 2): 
                 cities = City.query.filter(City.cost_of_living <= 2.0).all();
             elif (col <= 4): 
@@ -155,14 +150,10 @@ def filter_results(model, attr, value, page):
             elif population == '3':
                 cities = City.query.filter(City.population >= 1000000).all()
         elif attr == 'state': 
-            cities = City.query.filter_by(state=state).all()
-        response = jsonify(query_filter_by_page(cities,page))
+            cities = City.query.filter_by(state=value).all()
+        response = jsonify(query_filter(cities))
 
     elif model == 'events':
-        city = request.args.get('city')
-        start = request.args.get('start')
-        state = request.args.get('state')
-
         events = None
         if attr == 'city': 
             events = Event.query.filter_by(city=value).all()
@@ -175,7 +166,7 @@ def filter_results(model, attr, value, page):
                 events = Event.query.filter(Event.duration >= 1, Event.duration < 4).all()
             elif value == '3': 
                 events = Event.query.filter(Event.duration >= 4).all()
-        response = jsonify(query_filter_by_page(events,page))
+        response = jsonify(query_filter(events))
     else: 
         assert(False) # Just to debug and check if proper input is given
 
