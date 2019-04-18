@@ -82,7 +82,6 @@ def query_cities_by_page(num):
 def query_filter(query_results): 
     results = [] 
     if query_results is None: 
-        print(query_results)
         return results
     for i in range(len(query_results)):
         obj = query_results[i] 
@@ -94,9 +93,8 @@ def query_filter(query_results):
 
 def query_filter_by_page(query_results, num):
     results = []
-    page = (int)num
+    page = int(num)
     if query_results is None: 
-        print(query_results)
         return results
     for i in range((page-1)*9, page*9):
         if i >= len(query_results): 
