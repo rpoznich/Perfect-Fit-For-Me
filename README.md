@@ -16,10 +16,14 @@ Name: Ryan Poznich<br>
 EID: rjp2433<br>
 GitLab ID: rpoznich
 
-Git SHA: 89255096117708711e19aceffd08a9ba68be7b47<br>
+Phase 3 Git SHA: 89255096117708711e19aceffd08a9ba68be7b47<br>
 GitLab Pipelines: https://gitlab.com/rpoznich/perfect-fit/pipelines<br>
 Website: https://www.perfectfitfor.me/<br>
 Comments: backend/main.py -> backend/application.py
+
+Phase 2 Git SHA: 329325a10baec7b48f7f00e340a526141c5f6f27<br>
+
+Phase 1 Git SHA: a4f89d4a0361983141d4f95b8074a03b4d6ffd4e<br>
 
 ## Available Scripts
 
