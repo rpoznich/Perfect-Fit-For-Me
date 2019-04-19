@@ -44,3 +44,54 @@ class MyUnitTests (TestCase):
             pass
         except NoSuchElementException:
             self.fail("The element does not exist")
+
+	# Tests the search on the overall site
+	def test3(self):
+		search_field = self.browser.find_element_by_class_name("mr-sm-2")
+		search_field.click()
+		search_field.send_keys("austin")
+
+		# might need a time/sleep here
+		search_button = self.browser.find_element_by_id("submit_button")
+		search_button.click()
+
+		time.sleep(1)
+
+		try:
+			self.browser.find_element_by_id('Austin').click()
+		except NoSuchElementException:
+			self.fail("The element doesn't exist")
+
+	# Tests the filtering for Jobs page
+	def test4(self):
+		self.browser.find_element_by_link_text('Jobs').click()
+
+		filter_button = self.browser.find_element_by_id("filter_income") # for state
+		filter_button.click()
+
+		# might need a time/sleep here
+		selection = self.browser.find_element_by_id("$$")
+		selection.click()
+
+		# might need a time/sleep here
+		try:
+			self.browser.find_element_by_id('Featured Jobs - Average Income $30,000 - $50,000').click()
+		except NoSuchElementException:
+			self.fail("The element doesn't exist")
+
+	# Tests the sorting for the Cities page
+	def test5(self):
+		self.browser.find_element_by_link_text('Cities').click()
+
+		sort_button = self.browser.find_element_by_id("sort")
+		sort_button.click()
+
+		# might need a time/sleep here
+		selection = self.browser.find_element_by_id("Name=A-Z")
+		selection.click()
+
+		# might need a time/sleep here
+		try:
+			self.browser.find_element_by_id('Albuquerque').click()
+		except NoSuchElementException:
+			self.fail("The element doesn't exist")
