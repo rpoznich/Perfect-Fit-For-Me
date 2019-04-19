@@ -16,7 +16,7 @@ Name: Ryan Poznich<br>
 EID: rjp2433<br>
 GitLab ID: rpoznich
 
-Git SHA: 7c0cc718b4e3996379cee14a49f39aeae92f5792<br>
+Git SHA: 89255096117708711e19aceffd08a9ba68be7b47<br>
 GitLab Pipelines: https://gitlab.com/rpoznich/perfect-fit/pipelines<br>
 Website: https://www.perfectfitfor.me/<br>
 Comments: backend/main.py -> backend/application.py
