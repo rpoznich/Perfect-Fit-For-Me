@@ -5,13 +5,13 @@ sys.path.append(os.path.abspath(os.path.join("..", "..", "back-end")))
 
 import json
 import application
-from models import City, Job, Event, db, app
+from models import City, Job, Event, db, application
 from scrape import date_string_to_float
 
 
 class TestModels(TestCase):
     def setUp(self):
-        self.app = app.test_client()
+        self.app = application.test_client()
         self.app.testing = True
 
     ####################
