@@ -4,12 +4,15 @@ import json
 import requests
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://perfectfit:theozonelair@mysql-db-instance.chdg6as3bxgl.us-east-2.rds.amazonaws.com:3306/perfectfitdb'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config[
+    "SQLALCHEMY_DATABASE_URI"
+] = "mysql+pymysql://perfectfit:theozonelair@mysql-db-instance.chdg6as3bxgl.us-east-2.rds.amazonaws.com:3306/perfectfitdb"
 db = SQLAlchemy(app)
 
-class City(db.Model): 
-    __tablename__ = 'city'
+
+class City(db.Model):
+    __tablename__ = "city"
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(30))
     state = db.Column(db.String(30))
@@ -18,49 +21,46 @@ class City(db.Model):
     mobile_img = db.Column(db.String(100))
     latitude = db.Column(db.Float(10))
     longitude = db.Column(db.Float(10))
-    housing = db.Column(db.Float(4)) 
-    cost_of_living = db.Column(db.Float(4)) 
-    tolerance = db.Column(db.Float(4)) 
-    commute = db.Column(db.Float(4)) 
+    housing = db.Column(db.Float(4))
+    cost_of_living = db.Column(db.Float(4))
+    tolerance = db.Column(db.Float(4))
+    commute = db.Column(db.Float(4))
 
-    def __init__(self, id, n, s, pop, web, mob, lat, lon,
-        housing, col, tol, commute): 
+    def __init__(self, id, n, s, pop, web, mob, lat, lon, housing, col, tol, commute):
         self.id = id
-        self.name = n 
+        self.name = n
         self.state = s
-        self.population = pop 
-        self.web_img = web 
-        self.mobile_img = mob 
-        self.latitude = lat 
+        self.population = pop
+        self.web_img = web
+        self.mobile_img = mob
+        self.latitude = lat
         self.longitude = lon
-        self.housing = housing 
-        self.cost_of_living = col 
-        self.tolerance = tol 
-        self.commute = commute  
+        self.housing = housing
+        self.cost_of_living = col
+        self.tolerance = tol
+        self.commute = commute
 
-    def toDict(self): 
+    def toDict(self):
         name = self.name
-        city = { 
-            "id":self.id,
-            "name":self.name,
-            "population":self.population,
-            "images": {
-                "web":self.web_img,
-                "mobile":self.mobile_img
-            },
+        city = {
+            "id": self.id,
+            "name": self.name,
+            "population": self.population,
+            "images": {"web": self.web_img, "mobile": self.mobile_img},
             "location": {
-                "latitude":self.latitude,
-                "longitude":self.longitude,
-                "state":self.state 
-            }, 
+                "latitude": self.latitude,
+                "longitude": self.longitude,
+                "state": self.state,
+            },
             "qualities": {
-                "housing":self.housing,
-                "cost of living":self.cost_of_living,
-                "tolerance":self.tolerance, 
-                "commute":self.commute
-            }
+                "housing": self.housing,
+                "cost of living": self.cost_of_living,
+                "tolerance": self.tolerance,
+                "commute": self.commute,
+            },
         }
         return city
+
 
 class Job(db.Model):
     job_id = db.Column(db.Integer(), primary_key=True)
@@ -79,29 +79,24 @@ class Job(db.Model):
     salary4 = db.Column(db.Float(10))
     salary5 = db.Column(db.Float(10))
 
-    def toDict(self): 
+    def toDict(self):
         job = {
-            "id":self.job_id, 
-            "job title":self.job_title,
+            "id": self.job_id,
+            "job title": self.job_title,
             "description": self.description,
             "education": self.education,
-            "annual salary":self.salary, 
-            "top cities": [
-                self.city1,
-                self.city2,
-                self.city3,
-                self.city4,
-                self.city5
-            ],
+            "annual salary": self.salary,
+            "top cities": [self.city1, self.city2, self.city3, self.city4, self.city5],
             "top cities salaries": {
-                self.city1 : self.salary1,
-                self.city2 : self.salary2,
-                self.city3 : self.salary3,
-                self.city4 : self.salary4,
-                self.city5 : self.salary5
-            }
+                self.city1: self.salary1,
+                self.city2: self.salary2,
+                self.city3: self.salary3,
+                self.city4: self.salary4,
+                self.city5: self.salary5,
+            },
         }
         return job
+
 
 class Event(db.Model):
     eventid = db.Column(db.Integer, primary_key=True)
@@ -119,16 +114,18 @@ class Event(db.Model):
     logo = db.Column(db.String(300), nullable=True)
 
     def json(self):
-        return {"eventid": self.eventid, 
-                "name": self.name,
-                "summary": self.summary,
-                "address": self.address,
-                "city": self.city,
-                "state": self.state,
-                "venue": self.venue,
-                "start": self.start,
-                "end": self.end,
-                "duration": self.duration,
-                "timezone": self.timezone,
-                "url": self.url,
-                "logo": self.logo}
+        return {
+            "eventid": self.eventid,
+            "name": self.name,
+            "summary": self.summary,
+            "address": self.address,
+            "city": self.city,
+            "state": self.state,
+            "venue": self.venue,
+            "start": self.start,
+            "end": self.end,
+            "duration": self.duration,
+            "timezone": self.timezone,
+            "url": self.url,
+            "logo": self.logo,
+        }
