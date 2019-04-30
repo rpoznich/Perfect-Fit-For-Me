@@ -346,7 +346,7 @@ class About extends Component {
           <a href='https://gitlab.com/rpoznich/perfect-fit'>
             <img src={gitlab} height="110" width="100"></img>
           </a>
-          <a href="https://documenter.getpostman.com/view/6836390/S11LuJgi">
+          <a href="https://documenter.getpostman.com/view/6807504/S17wNmPd">
             <img height="76" width="75" src={pm}></img>
           </a>
         </div>
