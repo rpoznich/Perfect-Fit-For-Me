@@ -13,6 +13,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Visualization1 from './views/visualization1';
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
 class Routing extends Component{
@@ -52,6 +54,7 @@ class Routing extends Component{
             <Route exact path="/eventInstance/:id" component={Events}/>       
             <Route exact path="/about" component={About}/>
             <Route exact path="/search/:query" component={Search}/>
+            <Route exact path="/visualization/1" component={Visualization1}/>
           </Switch>
 
        </div>
@@ -107,6 +110,15 @@ class NavBar extends Component
           </li>
           <li className={this.state.current === "about" ? "nav-item active" : "nav-item" }>
             <Link className="nav-link" to="/about" onClick={() => this.handleClick("about")}>About Us  {this.props.current === "about" ? <span className="sr-only">(current)</span> : null }</Link>
+          </li>
+          <li>
+          <NavDropdown title="Visualizations" id="basic-nav-dropdown">
+        <NavDropdown.Item href="/visualization/1">Job Education Requirements</NavDropdown.Item>
+        <NavDropdown.Item href="/visualization/2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="/visualization/3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+      </NavDropdown>
           </li>
           <div>
           <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
