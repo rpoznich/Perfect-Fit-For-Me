@@ -189,17 +189,17 @@ class Jobs extends Component {
     }
   }
   componentDidMount () {
-    let fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs'
+    let fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/jobs'
     if(this.isLoc){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/loc/' + this.loc
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/jobs/filter/loc/' + this.loc + '/'
     } else if(this.isIncome){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/income/' + this.income
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/jobs/filter/income/' + this.income + '/'
     } else if(this.isEdu){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/filter/edu/' + this.edu
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/jobs/filter/edu/' + this.edu + '/'
     } else if(this.ascSort){
-        fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/sort/job_title'
+        fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/jobs/sort/job_title'
     } else if(this.descSort){
-        fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/desc_sort/job_title'
+        fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/jobs/desc_sort/job_title'
     }
     fetch(fetchLocation).then(response => { //change this to actual API
       return response.json();
@@ -216,7 +216,7 @@ class Jobs extends Component {
       // Do something for an error here
       console.log("Error Reading data " + err);
     });
-    fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
+    fetch('https://d1u00tbnbhznv0.cloudfront.net/api/jobs').then(response => { //change this to actual API
       return response.json();
     }).then(data => {
       // Work with JSON data here

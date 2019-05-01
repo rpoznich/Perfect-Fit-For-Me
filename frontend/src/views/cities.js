@@ -229,19 +229,19 @@ class Cities extends Component {
   }
 
   componentDidMount () {
-    let fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities'
+    let fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/cities'
     if(this.isCol){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/col/' + this.col
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/cities/filter/col/' + this.col + '/'
     } else if(this.isPop){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/pop/' + this.pop
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/cities/filter/pop/' + this.pop + '/'
     } else if(this.isState){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/filter/state/' + this.currState
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/cities/filter/state/' + this.currState + '/'
     }else if(this.ascSort){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/sort/name'
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/cities/sort/name'
     }else if(this.descSort){
-      fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/desc_sort/name'
+      fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/cities/desc_sort/name'
     }
-    fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
+    fetch('https://d1u00tbnbhznv0.cloudfront.net/api/jobs')
       .then(response => {
         // change this to actual API
         return response.json()
@@ -275,7 +275,7 @@ class Cities extends Component {
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-      fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
+      fetch('https://d1u00tbnbhznv0.cloudfront.net/api/events')
       .then(response => {
         // change this to actual API
         return response.json()

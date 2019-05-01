@@ -195,17 +195,17 @@ class Event extends Component {
 
     componentDidMount()
     {
-        let fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events'
+        let fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/events'
         if(this.isCity){
-            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/city/' + this.city + '/'
+            fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/events/filter/city/' + this.city + '/'
         } else if(this.isState){
-            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/state/' + this.currstate + '/'
+            fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/events/filter/state/' + this.currstate + '/'
         } else if(this.isDur){
-            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/filter/duration/' + this.currDur+ '/'
+            fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/events/filter/duration/' + this.currDur+ '/'
         } else if(this.ascSort){
-            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/sort/name'
+            fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/events/sort/name'
         } else if(this.descSort){
-            fetchLocation = 'https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/desc_sort/name'
+            fetchLocation = 'https://d1u00tbnbhznv0.cloudfront.net/api/events/desc_sort/name'
         }
         console.log(fetchLocation)
         fetch(fetchLocation).then(response => { //change this to actual API
@@ -220,7 +220,7 @@ class Event extends Component {
             // Do something for an error here
             console.log("Error Reading data " + err);
         });
-        fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs').then(response => { //change this to actual API
+        fetch('https://d1u00tbnbhznv0.cloudfront.net/api/jobs').then(response => { //change this to actual API
             return response.json();
           }).then(data => {
             // Work with JSON data here

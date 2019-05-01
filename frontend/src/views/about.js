@@ -100,7 +100,7 @@ class About extends Component {
       'Ryan Poznich': {
         name: 'Ryan Poznich',
         bio: 'Junior Computer Science major at the University of Texas at Austin',
-        alias: ['Ryan Poznich'],
+        alias: ['Ryan Poznich', 'Ryan P'],
         username: 'rpoznich',
         role: 'Full-stack',
         img: ryan,

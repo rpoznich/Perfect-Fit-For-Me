@@ -208,7 +208,7 @@ class EventSearch extends Component{
     }
 
     componentDidMount(){
-      fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/search/' + this.state.searchWord)
+      fetch('https://d1u00tbnbhznv0.cloudfront.net/api/events/search/' + this.state.searchWord)
       .then(response => {
         // change this to actual API
         return response.json()

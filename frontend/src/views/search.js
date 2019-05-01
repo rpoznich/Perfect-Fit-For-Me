@@ -497,7 +497,7 @@ class Search extends Component{
     }
 
     componentDidMount(){
-        fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities/search/' + this.state.searchWord)
+        fetch('https://d1u00tbnbhznv0.cloudfront.net/api/cities/search/' + this.state.searchWord)
       .then(response => {
         // change this to actual API
         return response.json()
@@ -514,7 +514,7 @@ class Search extends Component{
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-      fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events/search/' + this.state.searchWord)
+      fetch('https://d1u00tbnbhznv0.cloudfront.net/api/events/search/' + this.state.searchWord)
       .then(response => {
         // change this to actual API
         return response.json()
@@ -531,7 +531,7 @@ class Search extends Component{
         // Do something for an error here
         console.log('Error Reading data ' + err)
       })
-      fetch('https://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs/search/' + this.state.searchWord)
+      fetch('https://d1u00tbnbhznv0.cloudfront.net/api/jobs/search/' + this.state.searchWord)
       .then(response => {
         // change this to actual API
         return response.json()
