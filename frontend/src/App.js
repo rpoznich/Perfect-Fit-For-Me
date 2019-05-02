@@ -14,6 +14,7 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Visualization1 from './views/visualization1';
+import Visualization2 from './views/visualization2';
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
@@ -55,6 +56,7 @@ class Routing extends Component{
             <Route exact path="/about" component={About}/>
             <Route exact path="/search/:query" component={Search}/>
             <Route exact path="/visualization/1" component={Visualization1}/>
+            <Route exact path="/visualization/2" component={Visualization2}/>
           </Switch>
 
        </div>
@@ -114,7 +116,7 @@ class NavBar extends Component
           <li>
           <NavDropdown title="Visualizations" id="basic-nav-dropdown">
         <NavDropdown.Item href="/visualization/1">Job Education Requirements</NavDropdown.Item>
-        <NavDropdown.Item href="/visualization/2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="/visualization/2">City Overall Ratings</NavDropdown.Item>
         <NavDropdown.Item href="/visualization/3">Something</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
