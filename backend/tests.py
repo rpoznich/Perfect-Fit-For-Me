@@ -126,7 +126,7 @@ class TestModels(TestCase):
             "url": "url",
             "logo": "logo",
         }
-        self.assertEqual(event_stats_test, event.json())
+        self.assertEqual(event_stats_test, event.toDict())
 
     #######################
     # Table Query Testing #
