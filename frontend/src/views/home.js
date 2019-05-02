@@ -47,7 +47,7 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6 order-lg-2">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="https://www.gray.com/sites/default/files/styles/article_entry/public/images/blog-entry/main_articleimage_thinkstockphotos-178538809_web.jpg?itok=2OG-4qCq" alt=""></img>
+                        <a href= "/jobs/1"><img class="img-fluid rounded-circle" src="https://www.gray.com/sites/default/files/styles/article_entry/public/images/blog-entry/main_articleimage_thinkstockphotos-178538809_web.jpg?itok=2OG-4qCq" alt=""></img></a>
                     </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
@@ -65,7 +65,7 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="https://instagram.fftw1-1.fna.fbcdn.net/vp/486483d9b9f15ccf93374eae4ba96adf/5D0767A7/t51.2885-15/e35/49363537_136222177392954_7394575524856652646_n.jpg?_nc_ht=instagram.fftw1-1.fna.fbcdn.net" alt=""></img>
+                        <a href= "/cities/1"><img class="img-fluid rounded-circle" src="https://instagram.fftw1-1.fna.fbcdn.net/vp/486483d9b9f15ccf93374eae4ba96adf/5D0767A7/t51.2885-15/e35/49363537_136222177392954_7394575524856652646_n.jpg?_nc_ht=instagram.fftw1-1.fna.fbcdn.net" alt=""></img></a>
                     </div>
                     </div>
                     <div class="col-lg-6">
@@ -83,7 +83,7 @@ class Home extends Component {
                 <div class="row align-items-center">
                     <div class="col-lg-6 order-lg-2">
                     <div class="p-5">
-                        <img class="img-fluid rounded-circle" src="https://assets.visitphilly.com/wp-content/uploads/2018/06/festival-pier-penns-landing-new-crtsy-festival-pier-2200x1237px.jpg" alt=""></img>
+                        <a href= "/events/1"><img class="img-fluid rounded-circle" src="https://assets.visitphilly.com/wp-content/uploads/2018/06/festival-pier-penns-landing-new-crtsy-festival-pier-2200x1237px.jpg" alt=""></img></a>
                     </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
