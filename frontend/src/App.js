@@ -13,8 +13,9 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import Visualization1 from './views/visualization1';
-import Visualization2 from './views/visualization2';
+import Visualization1 from './views/visualization1'
+import Visualization2 from './views/visualization2'
+import Visualization3 from './views/visualization3'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
@@ -57,6 +58,7 @@ class Routing extends Component{
             <Route exact path="/search/:query" component={Search}/>
             <Route exact path="/visualization/1" component={Visualization1}/>
             <Route exact path="/visualization/2" component={Visualization2}/>
+            <Route exact path="/visualization/3" component={Visualization3}/>
           </Switch>
 
        </div>
