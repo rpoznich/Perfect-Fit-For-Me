@@ -25,6 +25,10 @@ Phase 2 Git SHA: 329325a10baec7b48f7f00e340a526141c5f6f27<br>
 
 Phase 1 Git SHA: a4f89d4a0361983141d4f95b8074a03b4d6ffd4e<br>
 
+## Visualizations
+
+You can find the visualizations by clicking the links in our navigation bar under the "Visualizations" dropdown
+
 ## Available Scripts
 
 In the project directory, you can run:
