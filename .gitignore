@@ -5,3 +5,7 @@ backend/requirements.txt
 backend/perfect-fit.zip
 *.pyc
 npm-debug.log
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

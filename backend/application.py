@@ -7,12 +7,12 @@ import requests
 
 cors = CORS(application)
 
-# ------------------#
+# ---------------- #
 # DATABASE QUERIES #
-# ------------------#
+# ---------------- #
 def query_events():
     events = Event.query.all()
-    return [e.json() for e in events]
+    return [e.toDict() for e in events]
 
 
 def query_events_by_page(num):
@@ -84,9 +84,9 @@ def query_cities_by_page(num):
     return cities
 
 
-# --------------------#
+# ------------------ #
 # FILTER/SEARCH/SORT #
-# --------------------#
+# ------------------ #
 def query_filter(query_results):
     results = []
     if query_results is None:
@@ -95,12 +95,10 @@ def query_filter(query_results):
         results = {}
     for i in range(len(query_results)):
         obj = query_results[i]
-        if type(obj) is Job:
-            results.append(obj.toDict())
-        elif type(obj) is City:
+        if type(obj) is City:
             results[obj.name] = obj.toDict()
-        elif type(obj) is Event:
-            results.append(obj.json())
+        else:
+            results.append(obj.toDict())
     return results
 
 
@@ -115,12 +113,10 @@ def query_filter_by_page(query_results, num):
         if i >= len(query_results):
             break
         obj = query_results[i]
-        if type(obj) is Job:
-            results.append(obj.toDict())
-        elif type(obj) is City:
+        if type(obj) is City:
             results[obj.name] = obj.toDict()
-        elif type(obj) is Event:
-            results.append(obj.json())
+        else:
+            results.append(obj.toDict())
     return results
 
 
@@ -269,9 +265,7 @@ def search_query(model, query):
 @application.route("/api/<model>/search/<query>")
 @cross_origin()
 def search_results(model, query):
-    if model == "events":
-        return jsonify([m.json() for m in search_query(model, query)])
-    elif model == "jobs":
+    if model == "jobs" or model == "events":
         return jsonify([m.toDict() for m in search_query(model, query)])
     elif model == "cities":
         return jsonify({m.name: m.toDict() for m in search_query(model, query)})
@@ -281,7 +275,7 @@ def search_results(model, query):
         cities = search_query("cities", query)
         return jsonify(
             {
-                "events": [e.json() for e in events],
+                "events": [e.toDict() for e in events],
                 "jobs": [j.toDict() for j in jobs],
                 "cities": [c.toDict() for c in cities],
             }
@@ -404,9 +398,7 @@ def sort_query(model, attribute):
 @application.route("/api/<model>/sort/<attribute>")
 @cross_origin()
 def sort_results(model, attribute):
-    if model == "events":
-        return jsonify([e.json() for e in sort_query(model, attribute)])
-    elif model == "cities" or model == "jobs":
+    if model == "events" or model == "cities" or model == "jobs":
         return jsonify([m.toDict() for m in sort_query(model, attribute)])
     else:
         return "Invalid model: " + str(model)
@@ -524,9 +516,7 @@ def desc_sort_query(model, attribute):
 @application.route("/api/<model>/desc_sort/<attribute>")
 @cross_origin()
 def desc_sort_results(model, attribute):
-    if model == "events":
-        return jsonify([e.json() for e in desc_sort_query(model, attribute)])
-    elif model == "cities" or model == "jobs":
+    if model == "events" or model == "cities" or model == "jobs":
         return jsonify([j.toDict() for j in desc_sort_query(model, attribute)])
     else:
         return "Invalid model: " + str(model)
@@ -543,9 +533,9 @@ def desc_sort_results_page(model, attribute, page):
         return "Invalid model: " + str(model)
 
 
-# -----------#
+# ---------- #
 # API ROUTES #
-# -----------#
+# ---------- #
 @application.route("/api/")
 @cross_origin()
 def render_home_page():
