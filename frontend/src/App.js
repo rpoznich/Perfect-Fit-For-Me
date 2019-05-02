@@ -122,11 +122,10 @@ class NavBar extends Component
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
       </NavDropdown>
           </li>
-          <div>
-          <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
+          <li>
+          <input placeholder="Search" type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
             <Button href={"/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
-
-          </div>
+          </li>
           
         </Nav>
       </Navbar.Collapse>

@@ -259,7 +259,7 @@ class Jobs extends Component {
             <section class='main-block light-bg'>
             <div class='container'>
               <div>
-                <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
+                <input type="text" placeholder="Search Jobs" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/jobs/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
             <div className='row justify-content-center'>

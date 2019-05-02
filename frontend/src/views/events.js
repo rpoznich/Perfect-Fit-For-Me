@@ -270,7 +270,7 @@ class Event extends Component {
     <section class="main-block light-bg">
         <div class="container">
             <div>
-                <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
+                <input type="text" placeholder="Search Events" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/events/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
               <br/>
