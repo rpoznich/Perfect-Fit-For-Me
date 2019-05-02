@@ -253,5 +253,5 @@ if __name__ == "__main__":
     print("Starting scraping process")
     # scrape_cities() # IF RAN AGAIN, REMOVE NON-US CITIES FROM JSON
     # scrape_jobs()
-    scrape_events()
+    # scrape_events()
     print("Completed scraping process")

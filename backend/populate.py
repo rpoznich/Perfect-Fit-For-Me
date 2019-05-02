@@ -4,11 +4,6 @@ import json
 
 def clear_tables():
     db.drop_all()
-    # db.session.query(City).delete()
-    # db.session.query(Job).delete()
-    # db.session.query(Event).delete()
-    # db.session.commit()
-    # db.drop_all()
     print("   Deleted tables")
 
 

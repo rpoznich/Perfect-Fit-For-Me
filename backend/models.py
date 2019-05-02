@@ -113,7 +113,7 @@ class Event(db.Model):
     url = db.Column(db.String(300))
     logo = db.Column(db.String(300), nullable=True)
 
-    def json(self):
+    def toDict(self):
         return {
             "eventid": self.eventid,
             "name": self.name,
