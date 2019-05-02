@@ -17,6 +17,8 @@ import Visualization1 from './views/visualization1'
 import Visualization2 from './views/visualization2'
 import Visualization3 from './views/visualization3'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 
 class Routing extends Component{
@@ -91,15 +93,11 @@ class NavBar extends Component
   render()
   {
     return(
-    <div>
-        <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <Link className="navbar-brand" to="/" onClick={() => this.handleClick("home")}>   <img width="50" height="40" src={logo} alt=""></img>PerfectFitForMe</Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul className="navbar-nav mr-auto">
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand  href="/" onClick={() => this.handleClick("home")}>   <img width="50" height="40" src={logo} alt=""></img>PerfectFitForMe</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="mr-auto">
           <li className={this.state.current === "home" ? "nav-item active" : "nav-item" }>
             <Link className="nav-link" to="/" onClick={() => this.handleClick("home")}>Home {this.props.current === "home" ? <span className="sr-only">(current)</span> : null }</Link>
           </li>
@@ -119,7 +117,7 @@ class NavBar extends Component
           <NavDropdown title="Visualizations" id="basic-nav-dropdown">
         <NavDropdown.Item href="/visualization/1">Job Education Requirements</NavDropdown.Item>
         <NavDropdown.Item href="/visualization/2">City Overall Ratings</NavDropdown.Item>
-        <NavDropdown.Item href="/visualization/3">Something</NavDropdown.Item>
+        <NavDropdown.Item href="/visualization/3">Hot Zones of Events</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
       </NavDropdown>
@@ -130,11 +128,9 @@ class NavBar extends Component
 
           </div>
           
-        </ul>
-      </div>
-    </nav>
-         
-      </div>);
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>);
   }
 }
 class App extends Component {
