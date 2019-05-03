@@ -21,7 +21,7 @@
 				}
 			],
 			"request": {
-				"url": "http://api.perfectfitfor.me/",
+				"url": "http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -39,7 +39,7 @@
 						"exec": [
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 67"
+							"tests[\"JSON Length\"] = Object.keys(jsonData).length === 68"
 						]
 					}
 				}
@@ -664,8 +664,8 @@
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
 							"tests[\"City Name\"] = jsonData[0][\"name\"] === \"Albuquerque\"",
-							"tests[\"City Name\"] = jsonData[66][\"name\"] === \"Washington, D.C.\"",
-							"tests[\"JSON Length\"] = jsonData.length === 67"
+							"tests[\"City Name\"] = jsonData[67][\"name\"] === \"Washington, D.C.\"",
+							"tests[\"JSON Length\"] = jsonData.length === 68"
 						]
 					}
 				}
@@ -690,8 +690,8 @@
 							"tests[\"Status Code\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
 							"tests[\"City Name\"] = jsonData[0][\"name\"] === \"Washington, D.C.\"",
-							"tests[\"City Name\"] = jsonData[66][\"name\"] === \"Albuquerque\"",
-							"tests[\"JSON Length\"] = jsonData.length === 67"
+							"tests[\"City Name\"] = jsonData[67][\"name\"] === \"Albuquerque\"",
+							"tests[\"JSON Length\"] = jsonData.length === 68"
 						]
 					}
 				}
