@@ -309,17 +309,17 @@ def sort_query(model, attribute):
     if model == "events":
         events = Event.query
         attr = eval("Event." + attribute)
-        events = events.filter(attr.isnot(None)).order_by(attr);
+        events = events.filter(attr.isnot(None)).order_by(attr)
         return events
     elif model == "jobs":
         jobs = Job.query
         attr = eval("Job." + attribute)
-        jobs = jobs.filter(attr.isnot(None)).order_by(attr);
+        jobs = jobs.filter(attr.isnot(None)).order_by(attr)
         return jobs
     elif model == "cities":
         cities = City.query
         attr = eval("City." + attribute)
-        cities = cities.filter(attr.isnot(None)).order_by(attr);
+        cities = cities.filter(attr.isnot(None)).order_by(attr)
         return cities
     else:
         return "Invalid model: " + str(model)
@@ -349,17 +349,17 @@ def desc_sort_query(model, attribute):
     if model == "events":
         events = Event.query
         attr = eval("Event." + attribute)
-        events = events.filter(attr.isnot(None)).order_by(attr.desc());
+        events = events.filter(attr.isnot(None)).order_by(attr.desc())
         return [e for e in events]
     elif model == "jobs":
         jobs = Job.query
         attr = eval("Job." + attribute)
-        jobs = jobs.filter(attr.isnot(None)).order_by(attr.desc());
+        jobs = jobs.filter(attr.isnot(None)).order_by(attr.desc())
         return [j for j in jobs]
     elif model == "cities":
         cities = City.query
         attr = eval("City." + attribute)
-        cities = cities.filter(attr.isnot(None)).order_by(attr.desc());
+        cities = cities.filter(attr.isnot(None)).order_by(attr.desc())
         return [c for c in cities]
     else:
         return "Invalid model: " + str(model)
