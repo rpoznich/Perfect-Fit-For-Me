@@ -339,7 +339,7 @@ class Cities extends Component {
             <section class='main-block light-bg'>
               <div class='container'>
               <div>
-                <input type="text" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
+                <input type="text" placeholder="Search Cities" className="mr-sm-2" onChange={(e) => this.setState({textInput : e.target.value})}></input>
                 <Button href={"/cities/search/"+this.state.textInput} type="submit" ariant="outline-primary">Search</Button>
               </div>
               <br/>
@@ -372,6 +372,7 @@ class Cities extends Component {
                     <option>{'200,000-1,000,000'}</option>
                     <option>{'>1,000,000'}</option>
                 </select>
+                <br/>
               <Button href={"/cities/filter/pop/"+this.state.pop_filter} type="submit" ariant="outline-primary">Filter By Population</Button>
               </div>
               <div className="col-md-3 mb-6">

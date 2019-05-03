@@ -74,7 +74,7 @@ constructor(props) {
     }
     return (
     <div className="container mb-5">
-      <h1 className="vis-header">Number of Total Events per State</h1>
+      <h1 className="vis-header">Hot Zones of Events</h1>
         <div className="container mb-5">
             <div className="row">
             <div id="tooltip"></div>
