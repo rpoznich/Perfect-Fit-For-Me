@@ -61,6 +61,7 @@ class Routing extends Component{
             <Route exact path="/visualization/1" component={Visualization1}/>
             <Route exact path="/visualization/2" component={Visualization2}/>
             <Route exact path="/visualization/3" component={Visualization3}/>
+            <Route exact path="/visualization/4" component={Visualization4}/>
           </Switch>
 
        </div>
@@ -119,7 +120,7 @@ class NavBar extends Component
         <NavDropdown.Item href="/visualization/2">City Overall Ratings</NavDropdown.Item>
         <NavDropdown.Item href="/visualization/3">Hot Zones of Events</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+        <NavDropdown.Item href="/visualization/4">Hot Zones of Facilities</NavDropdown.Item>
       </NavDropdown>
           </li>
           <li>
