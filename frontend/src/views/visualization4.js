@@ -64,7 +64,7 @@ constructor(props) {
           stateData = facData[d]["count"];
         }
         sampleData[d]={total: stateData,
-            color:d3.interpolate("#ffffcc", "#800026")(stateData/40)}; // pick a good constant for num lol
+            color:d3.interpolate("#ffffcc", "#108403")(stateData/20)}; // pick a good constant for num lol
       });
     /* draw states on id #statesvg */
     uStates.draw("#statesvg", sampleData, tooltipHtml);
