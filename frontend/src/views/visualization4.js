@@ -5,7 +5,7 @@ import uStates from './uStates';
 import '../css/Visualizations.css';
 // import './css/style.css';
 
-class Visualization3 extends Component {
+class Visualization4 extends Component {
 
 constructor(props) {
     super(props);
@@ -94,4 +94,4 @@ constructor(props) {
     );
   }
 }
-export default Visualization3;
+export default Visualization4;
