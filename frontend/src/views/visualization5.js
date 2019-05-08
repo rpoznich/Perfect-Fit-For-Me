@@ -30,6 +30,7 @@ class Visualization5 extends Component{
 <div className='main' style={{ marginTop: '20vh' }}>
             <h2 className='row justify-content-center'>Popularity of Activities</h2>
             <VictoryChart
+                padding={{top:10, bottom:150, left:60, right:60}}
             >
             <VictoryAxis dependentAxis label="Number of Cities"/>
             <VictoryAxis independentAxis style={{tickLabels:{angle:-60}}} />
