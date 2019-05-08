@@ -1,6 +1,6 @@
 import React, { createRef, Component } from "react";
 import * as d3 from "d3";
-import { VictoryChart, VictoryBar, VictoryTheme } from "victory";
+import { VictoryChart, VictoryBar, VictoryTheme, VictoryAxis } from "victory";
 
 
 class Visualization5 extends Component{
@@ -30,10 +30,12 @@ class Visualization5 extends Component{
 <div className='main' style={{ marginTop: '20vh' }}>
             <h2 className='row justify-content-center'>Popularity of Activities</h2>
             <VictoryChart
-            domainPadding={1}
             >
+            <VictoryAxis dependentAxis label="Number of Cities"/>
+            <VictoryAxis independentAxis style={{tickLabels:{angle:-60}}} />
             <VictoryBar
-                style={{ data: { fill: "#c43a31" } }}
+                style={{ data: { fill: "#108403", stroke: "#108403", strokeWidth: 1, fillOpacity: 0.7 } }}
+                alignment="start"
                 data={this.data}
             />
 </VictoryChart>
