@@ -18,6 +18,7 @@ import Visualization2 from './views/visualization2'
 import Visualization3 from './views/visualization3'
 import Visualization4 from './views/visualization4'
 import Visualization5 from './views/visualization5'
+import Visualization6 from './views/visualization6'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -65,6 +66,7 @@ class Routing extends Component{
             <Route exact path="/visualization/3" component={Visualization3}/>
             <Route exact path="/visualization/4" component={Visualization4}/>
             <Route exact path="/visualization/5" component={Visualization5}/>
+            <Route exact path="/visualization/6" component={Visualization6}/>
           </Switch>
 
        </div>
@@ -125,6 +127,7 @@ class NavBar extends Component
         <NavDropdown.Divider />
         <NavDropdown.Item href="/visualization/4">Hot Zones of Facilities</NavDropdown.Item>
         <NavDropdown.Item href="/visualization/5">Popularity of Activities</NavDropdown.Item>
+        <NavDropdown.Item href="/visualization/6">Relationship on Population vs Activity Level</NavDropdown.Item>
       </NavDropdown>
           </li>
           <li>
